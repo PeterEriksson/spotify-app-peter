@@ -1,6 +1,7 @@
 import {
   ArrowLeftOnRectangleIcon,
   ArrowRightOnRectangleIcon,
+  PauseIcon,
   /* PlayIcon, */
 } from "@heroicons/react/24/solid";
 import { PlayIcon } from "@heroicons/react/24/outline";
@@ -17,6 +18,8 @@ function Body() {
 
   const spotifyApi = useSpotify();
   useEffect(() => {
+    //WebapiRegularError: An error occurred while communicating with Spotify's Web API.
+    //Details: No token provided. -> do a check:  if (spotifyApi.getAccessToken()) ...
     if (spotifyApi.getAccessToken()) {
       spotifyApi
         .getMyRecentlyPlayedTracks()
@@ -24,12 +27,12 @@ function Body() {
         .catch((err) => console.log(err));
     }
   }, []);
-  useEffect(() => {
-    console.log(recentSongs);
-  }, [recentSongs]);
 
-  //WebapiRegularError: An error occurred while communicating with Spotify's Web API.
-  //Details: No token provided. -> do a check:  if (spotifyApi.getAccessToken()) ...
+  //test ok..
+  /* useEffect(() => {
+    console.log(recentSongs);
+  }, [recentSongs]); */
+
   return (
     <div className=" w-screen bg-gray-800  overflow-y-scroll">
       {/* GITHUB + LOGOUT (make component?) */}
@@ -63,6 +66,7 @@ function Body() {
       </h1>
 
       {/* SONGS */}
+      {/* make into a component. Add isPlaying state */}
       <div className="space-y-3 mt-3 mx-3 grid grid-cols-1 lg:grid-cols-2  ">
         {recentSongs.map(({ track }, i) => (
           <div key={i} className="flex items-center space-x-3">
@@ -72,9 +76,15 @@ function Body() {
               alt="previously played img"
             />
             <h3 className="text-lg font-base text-gray-300">{track?.name}</h3>
-            <a target="_blank" href={track.preview_url}>
-              <PlayIcon className="h-6 w-6 text-white" />
-            </a>
+            <audio src={track?.preview_url} id={i} />
+            <PlayIcon
+              className="h-7 w-7 text-white cursor-pointer"
+              onClick={() => document.getElementById(i).play()}
+            />
+            <PauseIcon
+              className="h-7 w-7 text-white cursor-pointer"
+              onClick={() => document.getElementById(i).pause()}
+            />
           </div>
         ))}
       </div>
