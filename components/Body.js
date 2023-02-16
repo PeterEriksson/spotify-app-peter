@@ -9,10 +9,11 @@ import { signOut, useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import useSpotify from "../hooks/useSpotify";
+import Song from "./Song";
 
 function Body() {
   const { data: session } = useSession();
-  console.log(session);
+  //console.log(session);
 
   const [recentSongs, setRecentSongs] = useState([]);
 
@@ -66,26 +67,10 @@ function Body() {
       </h1>
 
       {/* SONGS */}
-      {/* make into a component. Add isPlaying state */}
+
       <div className="space-y-3 mt-3 mx-3 grid grid-cols-1 lg:grid-cols-2  ">
-        {recentSongs.map(({ track }, i) => (
-          <div key={i} className="flex items-center space-x-3">
-            <img
-              className="h-14 w-14 "
-              src={track.album.images[0]?.url}
-              alt="previously played img"
-            />
-            <h3 className="text-lg font-base text-gray-300">{track?.name}</h3>
-            <audio src={track?.preview_url} id={i} />
-            <PlayIcon
-              className="h-7 w-7 text-white cursor-pointer"
-              onClick={() => document.getElementById(i).play()}
-            />
-            <PauseIcon
-              className="h-7 w-7 text-white cursor-pointer"
-              onClick={() => document.getElementById(i).pause()}
-            />
-          </div>
+        {recentSongs?.slice(0, 10).map(({ track }, i) => (
+          <Song key={i} track={track} />
         ))}
       </div>
     </div>
