@@ -6,8 +6,11 @@ import {
   MagnifyingGlassIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/solid";
+import { useRouter } from "next/router";
 
 function Sidebar() {
+  const router = useRouter();
+  const { asPath } = useRouter();
   return (
     <div className="h-screen bg-spotifyBlack flex flex-col items-center pt-4  ">
       <img
@@ -20,19 +23,49 @@ function Sidebar() {
 
       <div className="w-48 space-y-3">
         {/* recently played */}
-        <div className="sidebarDiv">
-          <ArrowPathIcon className="sidebarIcon text-spotifyGreen" />
-          <p className="text-spotifyGreen">Recently Played</p>
+        <div className={`sidebarDiv  `} onClick={() => router.push("/")}>
+          <ArrowPathIcon
+            className={`sidebarIcon ${
+              asPath === "/" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          />
+          <p
+            className={`${
+              asPath === "/" ? "text-spotifyGreen" : "text-gray-400"
+            }`}
+          >
+            Recently Played
+          </p>
         </div>
         {/* top artists */}
-        <div className="sidebarDiv">
-          <MicrophoneIcon className="sidebarIcon" />
-          <p className="text-gray-400">Top Artists</p>
+        <div className="sidebarDiv" onClick={() => router.push("/artists")}>
+          <MicrophoneIcon
+            className={`sidebarIcon ${
+              asPath === "/artists" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          />
+          <p
+            className={` ${
+              asPath === "/artists" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          >
+            Top Artists
+          </p>
         </div>
         {/* top tracks */}
-        <div className="sidebarDiv">
-          <MusicalNoteIcon className="sidebarIcon" />
-          <p className="text-gray-400">Top Tracks</p>
+        <div className="sidebarDiv" onClick={() => router.push("/tracks")}>
+          <MusicalNoteIcon
+            className={`sidebarIcon ${
+              asPath === "/tracks" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          />
+          <p
+            className={`  ${
+              asPath === "/tracks" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          >
+            Top Tracks
+          </p>
         </div>
 
         {/* search */}
