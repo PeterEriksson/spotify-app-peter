@@ -37,21 +37,6 @@ function Sidebar() {
             Recently Played
           </p>
         </div>
-        {/* top artists */}
-        <div className="sidebarDiv" onClick={() => router.push("/artists")}>
-          <MicrophoneIcon
-            className={`sidebarIcon ${
-              asPath === "/artists" ? "text-spotifyGreen" : "text-gray-400"
-            } `}
-          />
-          <p
-            className={` ${
-              asPath === "/artists" ? "text-spotifyGreen" : "text-gray-400"
-            } `}
-          >
-            Top Artists
-          </p>
-        </div>
         {/* top tracks */}
         <div className="sidebarDiv" onClick={() => router.push("/tracks")}>
           <MusicalNoteIcon
@@ -65,6 +50,21 @@ function Sidebar() {
             } `}
           >
             Top Tracks
+          </p>
+        </div>
+        {/* top artists */}
+        <div className="sidebarDiv" onClick={() => router.push("/artists")}>
+          <MicrophoneIcon
+            className={`sidebarIcon ${
+              asPath === "/artists" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          />
+          <p
+            className={` ${
+              asPath === "/artists" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          >
+            Top Artists
           </p>
         </div>
 
