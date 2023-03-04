@@ -5,6 +5,7 @@ import {
   ArrowPathIcon,
   MagnifyingGlassIcon,
   GlobeAltIcon,
+  StarIcon,
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 
@@ -67,16 +68,21 @@ function Sidebar() {
             Top Artists
           </p>
         </div>
+        {/* discover */}
+        <div className="sidebarDiv">
+          <GlobeAltIcon className="sidebarIcon" />
+          <p className="text-gray-400">Discover</p>
+        </div>
+
+        <div className="sidebarDiv">
+          <StarIcon className="sidebarIcon" />
+          <p className="text-gray-400">Starred tracks</p>
+        </div>
 
         {/* search */}
         <div className="sidebarDiv">
           <MagnifyingGlassIcon className="sidebarIcon" />
           <p className="text-gray-400">Search</p>
-        </div>
-        {/* discover */}
-        <div className="sidebarDiv">
-          <GlobeAltIcon className="sidebarIcon" />
-          <p className="text-gray-400">Discover</p>
         </div>
       </div>
     </div>
