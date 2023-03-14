@@ -33,6 +33,21 @@ export default function tracks() {
     console.log(topTracks);
   }, [topTracks]); */
 
+  const tabsData = [
+    {
+      text: "Short Term",
+      label: "short_term",
+    },
+    {
+      text: "Medium Term",
+      label: "medium_term",
+    },
+    {
+      text: "Long Term",
+      label: "long_term",
+    },
+  ];
+
   return (
     <div className="flex h-screen bg-gray-800 ">
       <Sidebar />
@@ -68,36 +83,20 @@ export default function tracks() {
         <h3 className="text-3xl text-white text-center">
           Your most played songs
         </h3>
-        <div className="   flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
-          <h3
-            onClick={() => setTimePeriod("short_term")}
-            className={`cursor-pointer  border-b-2 ${
-              timePeriod == "short_term" ? "border-white" : "border-transparent"
-            } `}
-          >
-            short term
-          </h3>
-          <h3
-            onClick={() => setTimePeriod("medium_term")}
-            className={`cursor-pointer  border-b-2 ${
-              timePeriod == "medium_term"
-                ? "border-white"
-                : "border-transparent"
-            } `}
-          >
-            medium term
-          </h3>
-          <h3
-            onClick={() => setTimePeriod("long_term")}
-            className={`cursor-pointer  border-b-2 ${
-              timePeriod == "long_term" ? "border-white" : "border-transparent"
-            } `}
-          >
-            long term
-          </h3>
+
+        <div className=" flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
+          {tabsData.map((tab) => (
+            <h3
+              onClick={() => setTimePeriod(tab.label)}
+              className={`cursor-pointer  border-b-2 ${
+                timePeriod == tab.label ? "border-white" : "border-transparent"
+              } `}
+            >
+              {tab.text}
+            </h3>
+          ))}
         </div>
         {/* TOP TRACKS */}
-        {/* Research cool design */}
         {loading ? (
           /* Try using react loading library. Maybe use timeout to increase loading time */
           <h2>LOADING</h2>
