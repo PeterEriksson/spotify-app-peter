@@ -1,6 +1,6 @@
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { getSession, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import Sidebar from "../components/Sidebar";
 import useSpotify from "../hooks/useSpotify";
@@ -12,6 +12,24 @@ export default function tracks() {
   const [loading, setLoading] = useState(false);
 
   const { data: session } = useSession();
+
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
+  const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
+  const tabsRef = useRef([]);
+  useEffect(() => {
+    function setTabPosition() {
+      const currentTab = tabsRef.current[activeTabIndex];
+      console.log(currentTab?.offsetLeft, currentTab?.clientWidth);
+      setTabUnderlineLeft(currentTab?.offsetLeft ?? 0);
+      setTabUnderlineWidth(currentTab?.clientWidth ?? 0);
+    }
+
+    setTabPosition();
+    window.addEventListener("resize", setTabPosition);
+
+    return () => window.removeEventListener("resize", setTabPosition);
+  }, [activeTabIndex]);
 
   //https://github.com/thelinmichael/spotify-web-api-node/issues/440
   //getMyTopTracks({time_range: "short_term"}) - There are 3 time range options: short_term, long_term and medium_term.
@@ -26,7 +44,7 @@ export default function tracks() {
         .catch((err) => console.log(err));
     }
     //console.log("time changed"); ok
-  }, [timePeriod]); //trigger when user changes timePeriod
+  }, [activeTabIndex]); //trigger when user changes timePeriod/tabIndex
 
   //test ok..
   /* useEffect(() => {
@@ -71,30 +89,29 @@ export default function tracks() {
           </button>
         </div>
 
-        {/* <h1 className="text-3xl text-white flex justify-center items-center ">
-          Hello {session?.user.name}
-          <img
-            //src="https://user-images.githubusercontent.com/17027312/134349999-06919dce-11f2-42b9-9c0c-2b27d8dcce51.jpeg"
-            src={session?.user.image}
-            alt="profile dummy pic"
-            className="h-10 w-10 rounded-full ml-2"
-          />
-        </h1> */}
-        <h3 className="text-3xl text-white text-center">
-          Your most played songs
+        <h3 className="text-3xl text-white text-center uppercase tracking-wide">
+          most played songs
         </h3>
 
-        <div className=" flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
-          {tabsData.map((tab) => (
-            <h3
-              onClick={() => setTimePeriod(tab.label)}
-              className={`cursor-pointer  border-b-2 ${
-                timePeriod == tab.label ? "border-white" : "border-transparent"
-              } `}
-            >
-              {tab.text}
-            </h3>
-          ))}
+        <div>
+          <div className="relative">
+            <div className=" flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
+              {tabsData.map((tab, idx) => (
+                <button
+                  key={idx}
+                  ref={(el) => (tabsRef.current[idx] = el)}
+                  className="pt-2 pb-3"
+                  onClick={() => setActiveTabIndex(idx)}
+                >
+                  {tab.text}
+                </button>
+              ))}
+            </div>
+            <span
+              className="absolute bottom-0 block h-1 bg-teal-500 transition-all duration-300"
+              style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
+            />
+          </div>
         </div>
         {/* TOP TRACKS */}
         {loading ? (
