@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import Sidebar from "../components/Sidebar";
 import useSpotify from "../hooks/useSpotify";
+import { Waveform } from "@uiball/loaders";
 
 export default function tracks() {
   const spotifyApi = useSpotify();
@@ -34,22 +35,28 @@ export default function tracks() {
   //https://github.com/thelinmichael/spotify-web-api-node/issues/440
   //getMyTopTracks({time_range: "short_term"}) - There are 3 time range options: short_term, long_term and medium_term.
   //implement function for choosing short,medium or long_term
+
+  //increase loading-spinner time -> more ux friendly
+  const getTracks = () => {
+    spotifyApi
+      .getMyTopTracks({ time_range: timePeriod })
+      .then((data) => setTopTracks(data.body.items))
+      .then(() => setLoading(false))
+      .catch((err) => console.log(err));
+  };
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       setLoading(true);
-      spotifyApi
+      setTimeout(() => {
+        getTracks();
+      }, 500);
+      /* spotifyApi
         .getMyTopTracks({ time_range: timePeriod })
         .then((data) => setTopTracks(data.body.items))
         .then(() => setLoading(false))
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err)); */
     }
-    //console.log("time changed"); ok
   }, [activeTabIndex]); //trigger when user changes timePeriod/tabIndex
-
-  //test ok..
-  /* useEffect(() => {
-    console.log(topTracks);
-  }, [topTracks]); */
 
   const tabsData = [
     {
@@ -115,8 +122,11 @@ export default function tracks() {
         </div>
         {/* TOP TRACKS */}
         {loading ? (
-          /* Try using react loading library. Maybe use timeout to increase loading time */
-          <h2>LOADING</h2>
+          /* Try using react loading library (@uiball/loaders). Maybe use timeout to increase loading time */
+          /* <h2>LOADING</h2> */
+          <div className="flex justify-center mt-4">
+            <Waveform color="white" speed={0.8} />
+          </div>
         ) : (
           <div className="gap-3 my-3   grid grid-cols-2  md:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
             {topTracks?.slice(0, 10).map((topTrack, i) => (

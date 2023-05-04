@@ -17,6 +17,9 @@ export const favoritesSlice = createSlice({
       );
       state.items = newFavorites;
     },
+    emptyFavorites: (state) => {
+      state.items = [];
+    },
   },
 });
 
