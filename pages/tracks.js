@@ -53,15 +53,15 @@ export default function tracks() {
 
   const tabsData = [
     {
-      text: "Short Term",
+      text: "Short term",
       label: "short_term",
     },
     {
-      text: "Medium Term",
+      text: "Medium term",
       label: "medium_term",
     },
     {
-      text: "Long Term",
+      text: "Long term",
       label: "long_term",
     },
   ];

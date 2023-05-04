@@ -19,7 +19,7 @@ function Song({ track }) {
   return (
     <div className="flex items-center space-x-3">
       <img
-        className="h-14 w-14 "
+        className="h-14 w-14 rounded-md"
         src={track.album.images[0]?.url}
         alt="previously played img"
       />
