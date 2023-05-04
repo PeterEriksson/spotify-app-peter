@@ -14,6 +14,9 @@ module.exports = {
         spotifyGreen: "#1DB954",
         spotifyBlack: "#191414",
       },
+      maxWidth: {
+        readableSongTitle: "25ch",
+      },
     },
   },
   plugins: [],

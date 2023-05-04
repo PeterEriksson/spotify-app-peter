@@ -5,8 +5,6 @@ function Song({ track }) {
   const [audio] = useState(new Audio(track.preview_url));
   const [playing, setPlaying] = useState(false);
 
-  const toggle = () => setPlaying((prev) => !prev);
-
   useEffect(() => {
     playing ? audio.play() : audio.pause();
   }, [playing]);
@@ -25,16 +23,18 @@ function Song({ track }) {
         src={track.album.images[0]?.url}
         alt="previously played img"
       />
-      <h3 className="text-lg font-base text-gray-300">{track?.name}</h3>
+      <h3 className="text-lg font-base text-gray-300 max-w-readableSongTitle truncate ">
+        {track?.name}
+      </h3>
       {playing ? (
         <PauseIcon
           className="h-7 w-7 text-white cursor-pointer"
-          onClick={toggle}
+          onClick={() => setPlaying(false)}
         />
       ) : (
         <PlayIcon
           className="h-7 w-7 text-white cursor-pointer"
-          onClick={toggle}
+          onClick={() => setPlaying(true)}
         />
       )}
     </div>

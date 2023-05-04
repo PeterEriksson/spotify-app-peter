@@ -13,6 +13,8 @@ export default function tracks() {
 
   const { data: session } = useSession();
 
+  //sliding tabs
+  //guide: https://www.seancdavis.com/posts/animated-sliding-tabs-with-react-and-tailwind/
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
@@ -24,10 +26,8 @@ export default function tracks() {
       setTabUnderlineLeft(currentTab?.offsetLeft ?? 0);
       setTabUnderlineWidth(currentTab?.clientWidth ?? 0);
     }
-
     setTabPosition();
     window.addEventListener("resize", setTabPosition);
-
     return () => window.removeEventListener("resize", setTabPosition);
   }, [activeTabIndex]);
 
@@ -94,8 +94,8 @@ export default function tracks() {
         </h3>
 
         <div>
-          <div className="relative">
-            <div className=" flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
+          <div className="relative max-w-fit mx-auto">
+            <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
               {tabsData.map((tab, idx) => (
                 <button
                   key={idx}
