@@ -74,7 +74,7 @@ export default function Home() {
         </h3>
         {/* SONGS */}
         {/*  <div className="space-y-3 mt-3 mx-3 grid grid-cols-1 lg:grid-cols-2  "> */}
-        <div className="gap-3 my-3  xs:grid-cols-2 grid grid-cols-1  md:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
+        <div className="gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
           {recentSongs.slice(0, 10).map(({ track }, i) => (
             <Song key={i} track={track} />
           ))}

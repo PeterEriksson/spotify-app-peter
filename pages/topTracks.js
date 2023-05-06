@@ -5,6 +5,7 @@ import { SocialIcon } from "react-social-icons";
 import Sidebar from "../components/Sidebar";
 import useSpotify from "../hooks/useSpotify";
 import { Waveform } from "@uiball/loaders";
+import Song from "../components/Song";
 
 export default function tracks() {
   const spotifyApi = useSpotify();
@@ -23,7 +24,7 @@ export default function tracks() {
   useEffect(() => {
     function setTabPosition() {
       const currentTab = tabsRef.current[activeTabIndex];
-      console.log(currentTab?.offsetLeft, currentTab?.clientWidth);
+      //console.log(currentTab?.offsetLeft, currentTab?.clientWidth);
       setTabUnderlineLeft(currentTab?.offsetLeft ?? 0);
       setTabUnderlineWidth(currentTab?.clientWidth ?? 0);
     }
@@ -117,25 +118,13 @@ export default function tracks() {
         </div>
         {/* TOP TRACKS */}
         {loading ? (
-          /* Try using react loading library (@uiball/loaders). Maybe use timeout to increase loading time */
-          /* <h2>LOADING</h2> */
           <div className="flex justify-center mt-4">
             <Waveform color="white" speed={0.8} />
           </div>
         ) : (
-          <div className="gap-3 my-3   grid grid-cols-2  md:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
-            {topTracks?.slice(0, 10).map((topTrack, i) => (
-              <div
-                className="bg-gray-700 rounded-xl border border-black/70"
-                key={i}
-              >
-                <img
-                  className="h-40 w-full object-cover rounded-t-xl"
-                  src={topTrack.album.images[0]?.url}
-                  alt=""
-                />
-                <h2 className="text-bold text-white p-4">{topTrack.name}</h2>
-              </div>
+          <div className="gap-3 my-3  xs:grid-cols-2 grid grid-cols-1  md:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
+            {topTracks?.slice(0, 10).map((/* topTrack */ track, i) => (
+              <Song key={i} track={track} />
             ))}
           </div>
         )}

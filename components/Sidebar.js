@@ -13,7 +13,7 @@ function Sidebar() {
   const router = useRouter();
   const { asPath } = useRouter();
   return (
-    <div className="h-screen bg-spotifyBlack flex flex-col items-center pt-4  ">
+    <nav className="h-screen bg-spotifyBlack flex flex-col items-center pt-4  ">
       <img
         className="h-20 w-20 rounded-full bg-transparent"
         src="https://e7.pngegg.com/pngimages/158/639/png-clipart-spotify-streaming-media-logo-playlist-spotify-app-icon-logo-music-download-thumbnail.png"
@@ -85,7 +85,7 @@ function Sidebar() {
           <p className="text-gray-400">Search</p>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
 
