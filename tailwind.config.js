@@ -17,6 +17,9 @@ module.exports = {
       maxWidth: {
         readableSongTitle: "25ch",
       },
+      screens: {
+        xs: "585px",
+      },
     },
   },
   plugins: [],

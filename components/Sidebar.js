@@ -39,15 +39,15 @@ function Sidebar() {
           </p>
         </div>
         {/* top tracks */}
-        <div className="sidebarDiv" onClick={() => router.push("/tracks")}>
+        <div className="sidebarDiv" onClick={() => router.push("/topTracks")}>
           <MusicalNoteIcon
             className={`sidebarIcon ${
-              asPath === "/tracks" ? "text-spotifyGreen" : "text-gray-400"
+              asPath === "/topTracks" ? "text-spotifyGreen" : "text-gray-400"
             } `}
           />
           <p
             className={`  ${
-              asPath === "/tracks" ? "text-spotifyGreen" : "text-gray-400"
+              asPath === "/topTracks" ? "text-spotifyGreen" : "text-gray-400"
             } `}
           >
             Top Tracks

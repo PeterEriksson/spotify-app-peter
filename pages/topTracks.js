@@ -1,4 +1,4 @@
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftOnRectangleIcon, StarIcon } from "@heroicons/react/24/solid";
 import { getSession, useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 import { SocialIcon } from "react-social-icons";
@@ -36,7 +36,6 @@ export default function tracks() {
   //getMyTopTracks({time_range: "short_term"}) - There are 3 time range options: short_term, long_term and medium_term.
   //implement function for choosing short,medium or long_term
 
-  //increase loading-spinner time -> more ux friendly
   const getTracks = () => {
     spotifyApi
       .getMyTopTracks({ time_range: timePeriod })
@@ -47,14 +46,10 @@ export default function tracks() {
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       setLoading(true);
+      //increase loading-spinner time -> more ux friendly
       setTimeout(() => {
         getTracks();
       }, 500);
-      /* spotifyApi
-        .getMyTopTracks({ time_range: timePeriod })
-        .then((data) => setTopTracks(data.body.items))
-        .then(() => setLoading(false))
-        .catch((err) => console.log(err)); */
     }
   }, [activeTabIndex]); //trigger when user changes timePeriod/tabIndex
 
@@ -115,7 +110,7 @@ export default function tracks() {
               ))}
             </div>
             <span
-              className="absolute bottom-0 block h-1 bg-teal-500 transition-all duration-300"
+              className="absolute bottom-0 block h-1 bg-teal-500/// bg-spotifyGreen transition-all duration-300"
               style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
             />
           </div>
