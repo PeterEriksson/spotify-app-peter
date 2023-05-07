@@ -43,6 +43,7 @@ export default function tracks() {
       .getMyTopTracks({ time_range: timePeriod })
       .then((data) => setTopTracks(data.body.items))
       .then(() => setLoading(false))
+      .then((_tracks) => console.log(_tracks))
       .catch((err) => console.log(err));
   };
   useEffect(() => {
@@ -69,6 +70,11 @@ export default function tracks() {
       label: "long_term",
     },
   ];
+
+  const handleTimePeriodClick = (idx, tab) => {
+    setActiveTabIndex(idx);
+    setTimePeriod(tab.label);
+  };
 
   return (
     <div className="flex h-screen bg-gray-800 ">
@@ -111,7 +117,7 @@ export default function tracks() {
                   key={idx}
                   ref={(el) => (tabsRef.current[idx] = el)}
                   className="pt-2 pb-3"
-                  onClick={() => setActiveTabIndex(idx)}
+                  onClick={() => handleTimePeriodClick(idx, tab)}
                 >
                   {tab.text}
                 </button>
@@ -130,7 +136,7 @@ export default function tracks() {
           </div>
         ) : (
           <div className="gap-3 my-3  xs:grid-cols-2 grid grid-cols-1  md:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
-            {topTracks?.slice(0, 10).map((/* topTrack */ track, i) => (
+            {topTracks?.slice(0, 10).map((track, i) => (
               <Song key={i} track={track} />
             ))}
           </div>

@@ -76,7 +76,7 @@ function Sidebar() {
 
         <div className="sidebarDiv">
           <HeartIcon className="sidebarIcon" />
-          <p className="text-gray-400">Favorited tracks</p>
+          <p className="text-gray-400">Liked tracks</p>
         </div>
 
         {/* discover */}

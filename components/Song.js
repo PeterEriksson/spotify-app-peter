@@ -50,8 +50,12 @@ function Song({ track }) {
 
   const dispatch = useDispatch();
   const favoritedItems = useSelector(selectFavoritedItmes);
+  /* TEST TEMP */
+  const [triggerLikeEffect, setTriggerLikeEffect] = useState(false);
+  /* ---- */
 
   const handleLike = () => {
+    setTriggerLikeEffect(true);
     favoritedItems.every((item) => item.id !== track.id)
       ? dispatch(addToFavorites(track))
       : dispatch(removeFromFavorites(track.id));
@@ -83,10 +87,10 @@ function Song({ track }) {
         /* onClick={(prev) => setLiked(!prev)} */
         onClick={() => handleLike()}
         ref={starRef}
-        className={`  absolute  top-1 left-1        ${
+        className={`  absolute  top-0 left-0        ${
           liked() ? styles.heartRed : styles.heart
-        }  ${!liked() && styles.animateUnlike}        ${
-          liked() && styles.animate
+        }  ${!liked() && triggerLikeEffect && styles.animateUnlike}        ${
+          liked() && triggerLikeEffect && styles.animate
         }   `}
       />
       {playing ? (
