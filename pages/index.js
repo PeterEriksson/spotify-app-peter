@@ -27,9 +27,9 @@ export default function Home() {
   }, []);
 
   //test ok..
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(recentSongs);
-  }, [recentSongs]);
+  }, [recentSongs]); */
 
   return (
     <div className="flex h-screen ">

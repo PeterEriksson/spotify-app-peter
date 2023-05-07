@@ -5,13 +5,18 @@ import {
   ArrowPathIcon,
   MagnifyingGlassIcon,
   GlobeAltIcon,
-  StarIcon,
+  HeartIcon,
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
+import { selectItems as selectFavoritedItmes } from "../slices/favoritesSlice";
+import { useSelector } from "react-redux";
 
 function Sidebar() {
   const router = useRouter();
   const { asPath } = useRouter();
+
+  //display amount of favorited items in nice way.
+  const favoritedItems = useSelector(selectFavoritedItmes);
   return (
     <nav className="h-screen bg-spotifyBlack flex flex-col items-center pt-4  ">
       <img
@@ -68,15 +73,16 @@ function Sidebar() {
             Top Artists
           </p>
         </div>
+
+        <div className="sidebarDiv">
+          <HeartIcon className="sidebarIcon" />
+          <p className="text-gray-400">Favorited tracks</p>
+        </div>
+
         {/* discover */}
         <div className="sidebarDiv">
           <GlobeAltIcon className="sidebarIcon" />
           <p className="text-gray-400">Discover</p>
-        </div>
-
-        <div className="sidebarDiv">
-          <StarIcon className="sidebarIcon" />
-          <p className="text-gray-400">Starred tracks</p>
         </div>
 
         {/* search */}

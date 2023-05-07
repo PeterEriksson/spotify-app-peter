@@ -5,10 +5,18 @@ import {
 } from "@heroicons/react/24/solid";
 import { StarIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useRef, useState } from "react";
+import styles from "../styles/effects.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToFavorites,
+  removeFromFavorites,
+  selectItems as selectFavoritedItmes,
+} from "../slices/favoritesSlice";
 
 function Song({ track }) {
   const [audio] = useState(new Audio(track.preview_url));
   const [playing, setPlaying] = useState(false);
+  //console.log(track);
 
   useEffect(() => {
     playing ? audio.play() : audio.pause();
@@ -25,7 +33,11 @@ function Song({ track }) {
   /* when interacting with sidebar, song keeps on playing...solution ->  */
   const handleStopPlay = (e) => {
     //user has clicked StarIcon -> song should keep playing. although if we click another song starIcon it stops..
-    if (starRef.current && starRef.current.contains(e.target)) return;
+    //if (starRef.current && starRef.current.contains(e.target)) return;
+    //user has clicked a star of another song -> keep on playing (right now we only use aria-label on this component...)
+
+    /* ....enough with following line of code. Don't need to use ref to get the result we want. */
+    if (e.target.getAttribute("aria-label") === "star-icon-track") return;
     //else stop
     setPlaying(false);
   };
@@ -35,6 +47,21 @@ function Song({ track }) {
       document.removeEventListener("click", handleStopPlay, true);
     };
   }, []);
+
+  const dispatch = useDispatch();
+  const favoritedItems = useSelector(selectFavoritedItmes);
+
+  const handleLike = () => {
+    favoritedItems.every((item) => item.id !== track.id)
+      ? dispatch(addToFavorites(track))
+      : dispatch(removeFromFavorites(track.id));
+
+    console.log(favoritedItems);
+  };
+
+  const liked = () => {
+    return favoritedItems.some((item) => item.id === track.id);
+  };
 
   return (
     <div className="bg-gray-700 rounded-xl border border-black/70 relative group  ">
@@ -46,10 +73,21 @@ function Song({ track }) {
         alt=""
       />
       <h2 className="text-bold text-white p-4">{track.name}</h2>
-      <StarIcon
+      {/*  <StarIcon
+        aria-label="star-icon-track"
         ref={starRef}
-        //onClick={(e) => console.log(e.target.tagName.toLowerCase())}
         className="h-7 w-7 cursor-pointer absolute  top-1 left-1 text-white //text-spotifyGreen"
+      /> */}
+      <div
+        aria-label="star-icon-track"
+        /* onClick={(prev) => setLiked(!prev)} */
+        onClick={() => handleLike()}
+        ref={starRef}
+        className={`  absolute  top-1 left-1        ${
+          liked() ? styles.heartRed : styles.heart
+        }  ${!liked() && styles.animateUnlike}        ${
+          liked() && styles.animate
+        }   `}
       />
       {playing ? (
         <PauseIcon
