@@ -64,15 +64,27 @@ function Song({ track }) {
 
   return (
     <div className="bg-gray-700 rounded-xl border border-black/70 relative group  ">
-      <div></div>
-
-      <img
-        className={`h-40 w-full object-cover rounded-t-xl group-hover:opacity-40 transition duration-300 ease-in-out ${
-          playing && "opacity-40"
-        } `}
-        src={track.album.images[0]?.url}
-        alt=""
-      />
+      {/* DIV for centering play/pause */}
+      <div className="relative flex items-center justify-center  ">
+        <img
+          className={`h-40 w-full object-cover rounded-t-xl group-hover:opacity-40 transition duration-300 ease-in-out ${
+            playing && "opacity-40"
+          } `}
+          src={track.album.images[0]?.url}
+          alt=""
+        />
+        {playing ? (
+          <PauseIcon
+            className="h-14 w-14 text-white cursor-pointer   absolute "
+            onClick={() => setPlaying(false)}
+          />
+        ) : (
+          <PlayIcon
+            className="h-14 w-14 text-white cursor-pointer  absolute  mt-6   group-hover:-translate-y-4 group-hover:opacity-100   opacity-0  transition !duration-500 transform ease-in-out "
+            onClick={() => setPlaying(true)}
+          />
+        )}
+      </div>
       <h2 className="text-bold text-white p-4">{track.name}</h2>
       {/* HEART ICON DIV */}
       <div
@@ -85,17 +97,6 @@ function Song({ track }) {
           liked() && triggerLikeEffect && styles.animate
         }   `}
       />
-      {playing ? (
-        <PauseIcon
-          className="h-14 w-14 text-white cursor-pointer    absolute top-0 right-0 left-0  bottom-28 m-auto"
-          onClick={() => setPlaying(false)}
-        />
-      ) : (
-        <PlayIcon
-          className="h-14 w-14 text-white cursor-pointer //bg-red-400    absolute top-0 right-0 left-0 bottom-20 m-auto      group-hover:-translate-y-4 group-hover:opacity-100   opacity-0  transition !duration-500 transform ease-in-out "
-          onClick={() => setPlaying(true)}
-        />
-      )}
     </div>
   );
 }

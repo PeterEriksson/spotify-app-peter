@@ -73,13 +73,26 @@ function Sidebar() {
           </p>
         </div>
 
-        <div className="sidebarDiv relative">
-          <HeartIcon className="sidebarIcon" />
-          <p className="text-gray-400">Liked tracks</p>
+        <div
+          className={`sidebarDiv relative   `}
+          onClick={() => router.push("/likedTracks")}
+        >
+          <HeartIcon
+            className={`sidebarIcon ${
+              asPath === "/likedTracks" ? "text-spotifyGreen" : "text-gray-400"
+            }`}
+          />
+          <p
+            className={`text-gray-400 ${
+              asPath === "/likedTracks" ? "!text-spotifyGreen" : "text-gray-400"
+            }`}
+          >
+            Liked tracks
+          </p>
           <div
             className={`${
               favoritedItems == 0 && "hidden"
-            } absolute top-0.5 left-7 rounded-full bg-red-500 h-6 w-6 flex items-center justify-center  `}
+            } absolute top-0.5 left-7 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
           >
             <p className={`text-sm text-white/75  `}>{favoritedItems.length}</p>
           </div>
