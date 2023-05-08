@@ -1,9 +1,4 @@
-import {
-  PauseIcon,
-  PlayIcon,
-  StarIcon as StarIconSolid,
-} from "@heroicons/react/24/solid";
-import { StarIcon } from "@heroicons/react/24/outline";
+import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../styles/effects.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,15 +24,15 @@ function Song({ track }) {
     };
   }, []);
 
-  const starRef = useRef(null);
+  const heartRef = useRef(null);
   /* when interacting with sidebar, song keeps on playing...solution ->  */
   const handleStopPlay = (e) => {
     //user has clicked StarIcon -> song should keep playing. although if we click another song starIcon it stops..
-    //if (starRef.current && starRef.current.contains(e.target)) return;
+    //if (heartRef.current && heartRef.current.contains(e.target)) return;
     //user has clicked a star of another song -> keep on playing (right now we only use aria-label on this component...)
 
     /* ....enough with following line of code. Don't need to use ref to get the result we want. */
-    if (e.target.getAttribute("aria-label") === "star-icon-track") return;
+    if (e.target.getAttribute("aria-label") === "heart-icon-track") return;
     //else stop
     setPlaying(false);
   };
@@ -69,6 +64,8 @@ function Song({ track }) {
 
   return (
     <div className="bg-gray-700 rounded-xl border border-black/70 relative group  ">
+      <div></div>
+
       <img
         className={`h-40 w-full object-cover rounded-t-xl group-hover:opacity-40 transition duration-300 ease-in-out ${
           playing && "opacity-40"
@@ -77,19 +74,14 @@ function Song({ track }) {
         alt=""
       />
       <h2 className="text-bold text-white p-4">{track.name}</h2>
-      {/*  <StarIcon
-        aria-label="star-icon-track"
-        ref={starRef}
-        className="h-7 w-7 cursor-pointer absolute  top-1 left-1 text-white //text-spotifyGreen"
-      /> */}
+      {/* HEART ICON DIV */}
       <div
-        aria-label="star-icon-track"
-        /* onClick={(prev) => setLiked(!prev)} */
+        aria-label="heart-icon-track"
         onClick={() => handleLike()}
-        ref={starRef}
-        className={`  absolute  -top-1.5 -left-1.5        ${
+        ref={heartRef}
+        className={` absolute -top-1.5 -left-1.5  ${
           liked() ? styles.heartRed : styles.heart
-        }  ${!liked() && triggerLikeEffect && styles.animateUnlike}        ${
+        }  ${!liked() && triggerLikeEffect && styles.animateUnlike}  ${
           liked() && triggerLikeEffect && styles.animate
         }   `}
       />

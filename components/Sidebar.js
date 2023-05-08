@@ -79,9 +79,9 @@ function Sidebar() {
           <div
             className={`${
               favoritedItems == 0 && "hidden"
-            } absolute top-0.5 left-7 rounded-full bg-gray-400 border border-red-500  h-6 w-6 flex items-center justify-center  `}
+            } absolute top-0.5 left-7 rounded-full bg-red-500 h-6 w-6 flex items-center justify-center  `}
           >
-            <p className={`text-sm text-red-500`}>{favoritedItems.length}</p>
+            <p className={`text-sm text-white/75  `}>{favoritedItems.length}</p>
           </div>
         </div>
 
