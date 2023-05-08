@@ -87,7 +87,7 @@ function Song({ track }) {
         /* onClick={(prev) => setLiked(!prev)} */
         onClick={() => handleLike()}
         ref={starRef}
-        className={`  absolute  top-0 left-0        ${
+        className={`  absolute  -top-1.5 -left-1.5        ${
           liked() ? styles.heartRed : styles.heart
         }  ${!liked() && triggerLikeEffect && styles.animateUnlike}        ${
           liked() && triggerLikeEffect && styles.animate
@@ -95,12 +95,12 @@ function Song({ track }) {
       />
       {playing ? (
         <PauseIcon
-          className="h-14 w-14 text-white cursor-pointer    absolute top-0 right-0 left-0 bottom-24 md:bottom-28 m-auto"
+          className="h-14 w-14 text-white cursor-pointer    absolute top-0 right-0 left-0  bottom-28 m-auto"
           onClick={() => setPlaying(false)}
         />
       ) : (
         <PlayIcon
-          className="h-14 w-14 text-white cursor-pointer //bg-red-400    absolute top-0 right-0 left-0 bottom-16 md:bottom-20 m-auto      group-hover:-translate-y-4 group-hover:opacity-100   opacity-0  transition !duration-500 transform ease-in-out "
+          className="h-14 w-14 text-white cursor-pointer //bg-red-400    absolute top-0 right-0 left-0 bottom-20 m-auto      group-hover:-translate-y-4 group-hover:opacity-100   opacity-0  transition !duration-500 transform ease-in-out "
           onClick={() => setPlaying(true)}
         />
       )}

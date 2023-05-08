@@ -15,7 +15,6 @@ function Sidebar() {
   const router = useRouter();
   const { asPath } = useRouter();
 
-  //display amount of favorited items in nice way.
   const favoritedItems = useSelector(selectFavoritedItmes);
   return (
     <nav className="h-screen bg-spotifyBlack flex flex-col items-center pt-4  ">
@@ -74,9 +73,16 @@ function Sidebar() {
           </p>
         </div>
 
-        <div className="sidebarDiv">
+        <div className="sidebarDiv relative">
           <HeartIcon className="sidebarIcon" />
           <p className="text-gray-400">Liked tracks</p>
+          <div
+            className={`${
+              favoritedItems == 0 && "hidden"
+            } absolute top-0.5 left-7 rounded-full bg-gray-400 border border-red-500  h-6 w-6 flex items-center justify-center  `}
+          >
+            <p className={`text-sm text-red-500`}>{favoritedItems.length}</p>
+          </div>
         </div>
 
         {/* discover */}

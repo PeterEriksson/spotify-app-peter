@@ -43,13 +43,13 @@ export default function Home() {
 
       <div className=" w-screen bg-gray-800  overflow-y-scroll">
         {/* GITHUB + LOGOUT */}
-        <div className="flex justify-end  text-white space-x-3 py-2 mr-5">
+        <div className="flex justify-end  text-white space-x-2 py-2 mr-5">
           <SocialIcon
             target="_blank"
             url="https://github.com/PeterEriksson/spotify-app-peter"
             bgColor="transparent"
             fgColor="#ffffff"
-            className="!h-10 !w-10 transition duration-150 ease-in hover:opacity-50 hover:cursor-pointer"
+            className="!h-11 !w-11 transition duration-150 ease-in hover:opacity-50 hover:cursor-pointer"
           />
           <button
             onClick={() => signOut()}
