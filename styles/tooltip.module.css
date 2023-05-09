@@ -1,0 +1,5 @@
+.createPlaylist {
+  transition-duration: 500ms;
+  transition-timing-function: ease-in-out;
+  z-index: 30;
+}

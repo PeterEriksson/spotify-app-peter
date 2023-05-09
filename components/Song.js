@@ -7,11 +7,17 @@ import {
   removeFromFavorites,
   selectItems as selectFavoritedItmes,
 } from "../slices/favoritesSlice";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-function Song({ track }) {
-  const [audio] = useState(new Audio(track.preview_url));
+function Song({ track, noPlay }) {
+  const [audio, setAudio] = useState(new Audio(track?.preview_url));
   const [playing, setPlaying] = useState(false);
   //console.log(track);
+
+  const router = useRouter();
+  const currentPage = router.pathname;
+  //console.log(currentPage);
 
   useEffect(() => {
     playing ? audio.play() : audio.pause();
@@ -30,7 +36,6 @@ function Song({ track }) {
     //user has clicked StarIcon -> song should keep playing. although if we click another song starIcon it stops..
     //if (heartRef.current && heartRef.current.contains(e.target)) return;
     //user has clicked a star of another song -> keep on playing (right now we only use aria-label on this component...)
-
     /* ....enough with following line of code. Don't need to use ref to get the result we want. */
     if (e.target.getAttribute("aria-label") === "heart-icon-track") return;
     //else stop
@@ -45,17 +50,16 @@ function Song({ track }) {
 
   const dispatch = useDispatch();
   const favoritedItems = useSelector(selectFavoritedItmes);
-  /* TEST TEMP */
+
   const [triggerLikeEffect, setTriggerLikeEffect] = useState(false);
-  /* ---- */
 
   const handleLike = () => {
-    setTriggerLikeEffect(true);
+    //when in /likedTracks, animation retriggers when removing a like, solution: currentPage !== "/likedTracks" &&  ->
+    currentPage !== "/likedTracks" && setTriggerLikeEffect(true);
     favoritedItems.every((item) => item.id !== track.id)
       ? dispatch(addToFavorites(track))
       : dispatch(removeFromFavorites(track.id));
-
-    console.log(favoritedItems);
+    //console.log(favoritedItems);
   };
 
   const liked = () => {
@@ -65,15 +69,39 @@ function Song({ track }) {
   return (
     <div className="bg-gray-700 rounded-xl border border-black/70 relative group  ">
       {/* DIV for centering play/pause */}
-      <div className="relative flex items-center justify-center  ">
-        <img
+      <div className="relative flex items-center justify-center    h-40 w-full ">
+        {/* <img
           className={`h-40 w-full object-cover rounded-t-xl group-hover:opacity-40 transition duration-300 ease-in-out ${
             playing && "opacity-40"
           } `}
-          src={track.album.images[0]?.url}
+          src={track?.album?.images[0]?.url}
           alt=""
+        /> */}
+        <Image
+          className={`h-40// //w-full object-cover rounded-t-xl group-hover:opacity-40 transition duration-300 ease-in-out ${
+            playing && "opacity-40"
+          }  `}
+          src={track?.album?.images[0]?.url}
+          alt="song-image"
+          layout="fill"
         />
         {playing ? (
+          <PauseIcon
+            className={`h-14 w-14 text-white cursor-pointer   absolute ${
+              noPlay && "hidden"
+            } `}
+            onClick={() => setPlaying(false)}
+          />
+        ) : (
+          <PlayIcon
+            className={`h-14 w-14 text-white cursor-pointer  absolute  mt-6   group-hover:-translate-y-4 group-hover:opacity-100   opacity-0  transition !duration-500 transform ease-in-out ${
+              noPlay && "hidden"
+            } `}
+            onClick={() => setPlaying(true)}
+          />
+        )}
+
+        {/* {playing ? (
           <PauseIcon
             className="h-14 w-14 text-white cursor-pointer   absolute "
             onClick={() => setPlaying(false)}
@@ -83,9 +111,9 @@ function Song({ track }) {
             className="h-14 w-14 text-white cursor-pointer  absolute  mt-6   group-hover:-translate-y-4 group-hover:opacity-100   opacity-0  transition !duration-500 transform ease-in-out "
             onClick={() => setPlaying(true)}
           />
-        )}
+        )} */}
       </div>
-      <h2 className="text-bold text-white p-4">{track.name}</h2>
+      <h2 className="text-bold text-white p-4">{track?.name}</h2>
       {/* HEART ICON DIV */}
       <div
         aria-label="heart-icon-track"
