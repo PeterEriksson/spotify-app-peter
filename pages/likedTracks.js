@@ -1,4 +1,8 @@
-import { ArrowLeftOnRectangleIcon, PlusIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowLeftOnRectangleIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
 import Head from "next/head";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
@@ -8,15 +12,21 @@ import "react-tooltip/dist/react-tooltip.css";
 import styles from "../styles/tooltip.module.css";
 import Header from "../components/Header";
 import Song from "../components/Song";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectItems as selectFavoritedItmes } from "../slices/favoritesSlice";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { emptyFavorites } from "../slices/favoritesSlice";
 
 function likedTracks() {
   const { data: session } = useSession();
 
   const favoritedItems = useSelector(selectFavoritedItmes);
+
+  const dispatch = useDispatch();
+  const clearFavorites = () => {
+    dispatch(emptyFavorites());
+  };
 
   return (
     <div className="flex h-screen bg-gray-800">
@@ -41,16 +51,28 @@ function likedTracks() {
               ? "Add songs & create a playlist!"
               : "Create playlist with liked songs"
           } `}
-          className="connectingToTooltip: create      absolute z-20 bottom-4 right-4 rounded-full p-4 bg-spotifyGreen transform transition duration-200 hover:scale-105 ease-in"
+          className={`connectingToTooltip: create ${
+            favoritedItems.length > 0 && "hover:scale-105"
+          } 
+             absolute z-20 bottom-4 right-4 rounded-full p-4 bg-spotifyGreen transform transition duration-200 ease-in  `}
         >
           <PlusIcon className="h-9 w-9 text-white" />
         </button>
-
         <Tooltip
-          className={`${styles.createPlaylist} `}
+          className={`${styles.bottomButton} `}
           anchorSelect=".create"
           place="top"
         />
+
+        <TrashIcon
+          onClick={() => dispatch(emptyFavorites())}
+          data-tooltip-content={`Clear all songs`}
+          data-tooltip-id="trash"
+          className={` trash ${
+            favoritedItems == 0 && "hidden"
+          }  h-8 w-8 absolute cursor-pointer z-30 bottom-7 ml-3 text-white/80 transform transition duration-200 ease-in hover:scale-105`}
+        />
+        <Tooltip className={`${styles.bottomButton}`} anchorSelect=".trash" />
 
         <div className="gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
           {favoritedItems.map((track, i) => (
