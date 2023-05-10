@@ -8,7 +8,6 @@ import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { Tooltip } from "react-tooltip";
 import Sidebar from "../components/Sidebar";
-import "react-tooltip/dist/react-tooltip.css";
 import styles from "../styles/tooltip.module.css";
 import Header from "../components/Header";
 import Song from "../components/Song";
@@ -70,7 +69,7 @@ function likedTracks() {
           data-tooltip-id="trash"
           className={` trash ${
             favoritedItems == 0 && "hidden"
-          }  h-8 w-8 absolute cursor-pointer z-30 bottom-7 ml-3 text-white/80 transform transition duration-200 ease-in hover:scale-105`}
+          }  h-8 w-8 absolute cursor-pointer z-30 bottom-7 ml-3 text-white transform transition duration-200 ease-in hover:scale-105`}
         />
         <Tooltip className={`${styles.bottomButton}`} anchorSelect=".trash" />
 

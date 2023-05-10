@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+
 @layer components {
   .sidebarDiv {
     @apply flex items-center py-2 pl-5   space-x-2 hover:bg-gray-900  hover:cursor-pointer transition duration-100 ease-in;

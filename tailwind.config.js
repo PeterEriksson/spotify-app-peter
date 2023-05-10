@@ -20,6 +20,9 @@ module.exports = {
       screens: {
         xs: "585px",
       },
+      fontFamily: {
+        dancing: ["Dancing Script", "cursive"],
+      },
     },
   },
   plugins: [],
