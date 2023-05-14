@@ -7,10 +7,10 @@ import "react-tooltip/dist/react-tooltip.css";
 
 function Header() {
   return (
-    <div className="flex items-center justify-between  text-white py-2 mx-5  ">
+    <div className="flex items-center justify-between  text-white py-2 px-5  ">
       <div className="flex flex-col items-center font-dancing">
-        <h1 className=" text-lg font-bold">Spotify Stats</h1>
-        <h3 className="font-extralight text-sm">by Pete</h3>
+        <h1 className=" text-lg font-bold ">Spotify Stats</h1>
+        <h3 className="font-extralight text-sm">by Peter</h3>
       </div>
 
       <div className="space-x-2 flex items-center">

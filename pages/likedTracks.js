@@ -16,6 +16,7 @@ import { selectItems as selectFavoritedItmes } from "../slices/favoritesSlice";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { emptyFavorites } from "../slices/favoritesSlice";
+import useSpotify from "../hooks/useSpotify";
 
 function likedTracks() {
   const { data: session } = useSession();
@@ -45,11 +46,6 @@ function likedTracks() {
 
         <button
           data-tooltip-id="create"
-          data-tooltip-content={`${
-            favoritedItems.length == 0
-              ? "Add songs & create a playlist!"
-              : "Create playlist with liked songs"
-          } `}
           className={`connectingToTooltip: create ${
             favoritedItems.length > 0 && "hover:scale-105"
           } 
@@ -58,26 +54,37 @@ function likedTracks() {
           <PlusIcon className="h-9 w-9 text-white" />
         </button>
         <Tooltip
+          content={`${
+            favoritedItems.length == 0
+              ? "Like songs & create a playlist!"
+              : "Create playlist with liked songs"
+          } `}
           className={`${styles.bottomButton} `}
+          delayShow={450}
           anchorSelect=".create"
           place="top"
         />
 
         <TrashIcon
           onClick={() => dispatch(emptyFavorites())}
-          data-tooltip-content={`Clear all songs`}
           data-tooltip-id="trash"
           className={` trash ${
             favoritedItems == 0 && "hidden"
-          }  h-8 w-8 absolute cursor-pointer z-30 bottom-7 ml-3 text-white transform transition duration-200 ease-in hover:scale-105`}
+          } //bg-spotifyBlack //rounded-full  h-8 w-8 absolute cursor-pointer z-30 bottom-7 ml-3 text-white transform transition duration-200 ease-in hover:scale-105`}
         />
-        <Tooltip className={`${styles.bottomButton}`} anchorSelect=".trash" />
+        <Tooltip
+          content="Clear all songs"
+          className={`${styles.bottomButton}`}
+          anchorSelect=".trash"
+          delayShow={300}
+        />
 
-        <div className="gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
+        <div className="gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
           {favoritedItems.map((track, i) => (
             <Song key={i} track={track} noPlay />
           ))}
         </div>
+        {/* IF user hasn't liked any songs -> display message...? */}
       </div>
     </div>
   );

@@ -19,6 +19,7 @@ module.exports = {
       },
       screens: {
         xs: "585px",
+        mdlg: "900px",
       },
       fontFamily: {
         dancing: ["Dancing Script", "cursive"],
