@@ -60,7 +60,7 @@ function likedTracks() {
               : "Create playlist with liked songs"
           } `}
           className={`${styles.bottomButton} `}
-          delayShow={450}
+          delayShow={favoritedItems.length > 0 ? 400 : 150}
           anchorSelect=".create"
           place="top"
         />

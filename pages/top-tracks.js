@@ -44,7 +44,6 @@ export default function tracks() {
       .getMyTopTracks({ time_range: timePeriod })
       .then((data) => setTopTracks(data.body.items))
       .then(() => setLoading(false))
-      //.then((_tracks) => console.log(_tracks))
       .catch((err) => console.log(err));
   };
   useEffect(() => {

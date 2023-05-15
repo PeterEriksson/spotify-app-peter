@@ -4,7 +4,7 @@ import {
   PauseIcon,
   PlayIcon,
 } from "@heroicons/react/24/solid";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/effects.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,7 +13,6 @@ import {
   selectItems as selectFavoritedItmes,
 } from "../slices/favoritesSlice";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import useSpotify from "../hooks/useSpotify";
 
 import { Audio as AudioPlayAnimation } from "react-loader-spinner";
@@ -22,10 +21,6 @@ function Song({ track, noPlay }) {
   const [audio, setAudio] = useState(new Audio(track?.preview_url));
   const [playing, setPlaying] = useState(false);
   //console.log(track);
-
-  const router = useRouter();
-  const currentPage = router.pathname;
-  //console.log(currentPage);
 
   useEffect(() => {
     playing ? audio.play() : audio.pause();
@@ -38,12 +33,9 @@ function Song({ track, noPlay }) {
     };
   }, []);
 
-  const heartRef = useRef(null);
   /* when interacting with sidebar, song keeps on playing...solution ->  */
   const handleStopPlay = (e) => {
-    //user has clicked StarIcon -> song should keep playing. although if we click another song starIcon it stops..
-    //if (heartRef.current && heartRef.current.contains(e.target)) return;
-    //user has clicked a star of another song -> keep on playing (right now we only use aria-label on this component...)
+    //user has clicked a star of another song -> keep on playing
     /* ....enough with following line of code. Don't need to use ref to get the result we want. */
     if (e.target.getAttribute("aria-label") === "ignore-pause") return;
     //else stop
@@ -87,9 +79,8 @@ function Song({ track, noPlay }) {
   }, []); */
 
   const handleLike = () => {
-    //when in /likedTracks, animation retriggers when removing a like, solution: currentPage !== "/likedTracks" &&  ->
-    //note: can also use noPlay props ..cleaner.
-    currentPage !== "/likedTracks" && setTriggerLikeEffect(true);
+    //when in /likedTracks, animation retriggers when removing a like,
+    !noPlay && setTriggerLikeEffect(true);
     favoritedItems.every((item) => item.id !== track.id)
       ? dispatch(addToFavorites(track))
       : dispatch(removeFromFavorites(track.id));
@@ -121,12 +112,24 @@ function Song({ track, noPlay }) {
           />
         )}
         {playing ? (
-          <PauseIcon
-            className={`h-14 w-14 text-white cursor-pointer   absolute ${
-              noPlay && "hidden"
-            } `}
-            onClick={() => setPlaying(false)}
-          />
+          <>
+            <PauseIcon
+              className={`h-14 w-14 text-white cursor-pointer   absolute ${
+                noPlay && "hidden"
+              } `}
+              onClick={() => setPlaying(false)}
+            />
+            <div className="mt-auto ">
+              <AudioPlayAnimation
+                height="40"
+                width="40"
+                radius="9"
+                color="gray"
+                ariaLabel="play-animation"
+                wrapperStyle
+              />
+            </div>
+          </>
         ) : (
           <PlayIcon
             className={`h-14 w-14 text-white cursor-pointer  absolute  mt-6   group-hover:-translate-y-4 group-hover:opacity-100   opacity-0  transition !duration-500 transform ease-in-out ${
@@ -135,24 +138,11 @@ function Song({ track, noPlay }) {
             onClick={() => setPlaying(true)}
           />
         )}
-        {playing && (
-          <div className="mt-auto ">
-            <AudioPlayAnimation
-              height="40"
-              width="40"
-              radius="9"
-              color="gray"
-              ariaLabel="play-animation"
-              wrapperStyle
-              wrapperClass
-            />
-          </div>
-        )}
       </div>
 
       <h2 className="text-bold text-white p-4">{track?.name}</h2>
 
-      {/* gray line? + arrow plus additional info (likedTracks..) */}
+      {/* gray line? + arrow? plus additional info (if noPlay..) */}
       <hr
         className={`-mt-2.5 mb-1 ${
           noPlay && showAdditionalInfo && "border-gray-600  mx-3"
@@ -182,8 +172,7 @@ function Song({ track, noPlay }) {
       {/* HEART ICON DIV */}
       <div
         aria-label="ignore-pause"
-        onClick={() => handleLike()}
-        ref={heartRef}
+        onClick={handleLike}
         className={` absolute -top-1.5 -left-1.5  ${
           liked() ? styles.heartRed : styles.heart
         }  ${!liked() && triggerLikeEffect && styles.animateUnlike}  ${

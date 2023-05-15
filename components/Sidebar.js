@@ -26,14 +26,14 @@ function Sidebar() {
     <nav className="h-screen bg-spotifyBlack flex flex-col items-center pt-4  ">
       {/* <img
         className="rounded-full absolute object-cover z-10  h-9 w-9 left-28 top-6"
-        src={session?.user.image}
+        src={session?.user?.image}
         alt="user-img"
       /> */}
       <div className="relative h-[88px] w-[88px] rounded-full -mt-2.5">
         <Image
           layout="fill"
           className="h-20/ /w-20 rounded-full "
-          /* src="https://e7.pngegg.com/pngimages/158/639/png-clipart-spotify-streaming-media-logo-playlist-spotify-app-icon-logo-music-download-thumbnail.png" */
+          // src="https://e7.pngegg.com/pngimages/158/639/png-clipart-spotify-streaming-media-logo-playlist-spotify-app-icon-logo-music-download-thumbnail.png"
           src="https://baypark.ca/wp-content/uploads/2020/02/spotify-logo-png-spotify-music-app-icon-1024.jpg"
           alt="spotify-logo"
         />
@@ -70,20 +70,48 @@ function Sidebar() {
           </p>
         </div>
         {/* top tracks */}
-        <div className="sidebarDiv" onClick={() => router.push("/topTracks")}>
+        <div className="sidebarDiv" onClick={() => router.push("/top-tracks")}>
           <MusicalNoteIcon
             className={`sidebarIcon ${
-              asPath === "/topTracks" ? "text-spotifyGreen" : "text-gray-400"
+              asPath === "/top-tracks" ? "text-spotifyGreen" : "text-gray-400"
             } `}
           />
           <p
             className={`  ${
-              asPath === "/topTracks" ? "text-spotifyGreen" : "text-gray-400"
+              asPath === "/top-tracks" ? "text-spotifyGreen" : "text-gray-400"
             } `}
           >
             Top Tracks
           </p>
         </div>
+        {/* liked tracks */}
+        <div
+          className={`sidebarDiv relative   `}
+          onClick={() => router.push("/liked-tracks")}
+        >
+          <HeartIcon
+            className={`sidebarIcon ${
+              asPath === "/liked-tracks" ? "text-spotifyGreen" : "text-gray-400"
+            }`}
+          />
+          <p
+            className={`text-gray-400 ${
+              asPath === "/liked-tracks"
+                ? "!text-spotifyGreen"
+                : "text-gray-400"
+            }`}
+          >
+            Liked tracks
+          </p>
+          <div
+            className={`${
+              favoritedItems == 0 && "hidden"
+            } absolute top-0.5 left-7 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
+          >
+            <p className={`text-sm text-white/75  `}>{favoritedItems.length}</p>
+          </div>
+        </div>
+
         {/* top artists */}
         <div className="sidebarDiv" onClick={() => router.push("/artists")}>
           <MicrophoneIcon
@@ -100,31 +128,6 @@ function Sidebar() {
           </p>
         </div>
 
-        <div
-          className={`sidebarDiv relative   `}
-          onClick={() => router.push("/likedTracks")}
-        >
-          <HeartIcon
-            className={`sidebarIcon ${
-              asPath === "/likedTracks" ? "text-spotifyGreen" : "text-gray-400"
-            }`}
-          />
-          <p
-            className={`text-gray-400 ${
-              asPath === "/likedTracks" ? "!text-spotifyGreen" : "text-gray-400"
-            }`}
-          >
-            Liked tracks
-          </p>
-          <div
-            className={`${
-              favoritedItems == 0 && "hidden"
-            } absolute top-0.5 left-7 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
-          >
-            <p className={`text-sm text-white/75  `}>{favoritedItems.length}</p>
-          </div>
-        </div>
-
         {/* discover */}
         <div className="sidebarDiv">
           <GlobeAltIcon className="sidebarIcon" />
@@ -132,10 +135,10 @@ function Sidebar() {
         </div>
 
         {/* search */}
-        <div className="sidebarDiv">
+        {/* <div className="sidebarDiv">
           <MagnifyingGlassIcon className="sidebarIcon" />
           <p className="text-gray-400">Search</p>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
