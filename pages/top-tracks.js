@@ -108,7 +108,7 @@ export default function tracks() {
               ))}
             </div>
             <span
-              className="absolute bottom-0 block h-1 bg-teal-500/// bg-spotifyGreen transition-all duration-300"
+              className="absolute bottom-0 block h-1  bg-spotifyGreen/// bg-white/80 transition-all duration-300"
               style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
             />
           </div>

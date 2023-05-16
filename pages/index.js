@@ -48,12 +48,12 @@ export default function Home() {
 
         <h1 className="text-3xl text-white flex justify-center items-center ">
           Hello {session?.user.name}
-          <img
+          {/* <img
             //src="https://user-images.githubusercontent.com/17027312/134349999-06919dce-11f2-42b9-9c0c-2b27d8dcce51.jpeg"
             src={session?.user.image}
-            alt="profile dummy pic"
+            alt="profile pic"
             className="h-10 w-10 rounded-full ml-2"
-          />
+          /> */}
         </h1>
         <h3 className="text-lg text-white text-center">Recently played</h3>
         {/* SONGS */}

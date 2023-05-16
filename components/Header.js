@@ -1,16 +1,28 @@
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
-function Header() {
+function Header({ backArrow }) {
+  const router = useRouter();
   return (
     <div className="flex items-center justify-between  text-white py-2 px-5  ">
       <div className="flex flex-col items-center font-dancing">
-        <h1 className=" text-lg font-bold ">Spotify Stats</h1>
-        <h3 className="font-extralight text-sm">by Peter</h3>
+        <ArrowLeftIcon
+          onClick={() => router.back()}
+          className={`${
+            !backArrow && "hidden"
+          } cursor-pointer text-white mr-2 h-8 w-8 hover:opacity-70 transition duration-200 ease-in`}
+        />
+        <h1 className={`${backArrow && "hidden"} text-lg font-bold`}>
+          Spotify Stats
+        </h1>
+        <h3 className={`${backArrow && "hidden"} font-extralight text-sm`}>
+          by Peter
+        </h3>
       </div>
 
       <div className="space-x-2 flex items-center">
