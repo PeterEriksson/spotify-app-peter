@@ -3,3 +3,8 @@
   transition-timing-function: ease-in-out;
   z-index: 30;
 }
+
+.header {
+  z-index: 30;
+  opacity: 100;
+}

@@ -22,7 +22,7 @@ export default function Home() {
     //Details: No token provided. -> do a check:  if (spotifyApi.getAccessToken()) ...
     if (spotifyApi.getAccessToken()) {
       spotifyApi
-        .getMyRecentlyPlayedTracks()
+        .getMyRecentlyPlayedTracks({ limit: 10 })
         .then((data) => setRecentSongs(data.body.items))
         .catch((err) => console.log(err));
     }
@@ -58,7 +58,7 @@ export default function Home() {
         <h3 className="text-lg text-white text-center">Recently played</h3>
         {/* SONGS */}
         <div className="gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
-          {recentSongs.slice(0, 10).map(({ track }, i) => (
+          {recentSongs?.map(({ track }, i) => (
             <Song key={i} track={track} />
           ))}
         </div>

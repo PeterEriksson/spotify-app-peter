@@ -1,10 +1,14 @@
-import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowLeftIcon,
+  ArrowLeftOnRectangleIcon,
+} from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import styles from "../styles/tooltip.module.css";
 
 function Header({ backArrow }) {
   const router = useRouter();
@@ -31,12 +35,11 @@ function Header({ backArrow }) {
           url="https://github.com/PeterEriksson/spotify-app-peter"
           bgColor="transparent"
           fgColor="#ffffff"
-          /* data-tooltip-content="Github" */
           data-tooltip-id="github"
           className="github     !h-11 !w-11 transition duration-150 ease-in hover:opacity-50 hover:cursor-pointer    "
         />
         <Tooltip
-          className={` `}
+          className={styles.header}
           anchorSelect=".github"
           content="Github"
           delayShow={400}
@@ -51,7 +54,7 @@ function Header({ backArrow }) {
         </button>
         <Tooltip
           delayShow={400}
-          className={` `}
+          className={styles.header}
           anchorSelect=".logOut"
           content="Log out"
         />

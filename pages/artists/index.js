@@ -35,7 +35,7 @@ export default function Home() {
 
   const getArtists = () => {
     spotifyApi
-      .getMyTopArtists({ time_range: timePeriod })
+      .getMyTopArtists({ limit: 10, time_range: timePeriod })
       .then((data) => setTopArtists(data.body.items))
       .then(() => setLoading(false))
       .catch((err) => console.log(err));
@@ -114,7 +114,7 @@ export default function Home() {
           </div>
         ) : (
           <div className="gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
-            {topArtists?.slice(0, 10).map((_artist, i) => (
+            {topArtists?.map((_artist, i) => (
               <Artist key={i} artist={_artist} />
             ))}
           </div>

@@ -1,4 +1,6 @@
+import { Waveform } from "@uiball/loaders";
 import Head from "next/head";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
@@ -6,7 +8,7 @@ import useSpotify from "../../hooks/useSpotify";
 
 export default function artistDetails({ artistId }) {
   const [artist, setArtist] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [artistTopSongs, setArtistTopSongs] = useState([]);
 
   const spotifyApi = useSpotify();
@@ -52,12 +54,49 @@ export default function artistDetails({ artistId }) {
         {/* Pass down backArrow as prop? */}
         <Header backArrow />
 
-        <div className="text-center text-white font-bold">
-          <h1>{artist?.name}</h1>
-          <h2>{artist?.popularity}</h2>
+        {loading ? (
+          <div className="flex justify-center">
+            <Waveform color="white" speed={0.8} />
+          </div>
+        ) : (
+          <div className="mx-5 ">
+            <div className=" relative justify-start items-center w-full h-72 flex  rounded-xl ">
+              <Image
+                src={artist?.images[0]?.url}
+                className="object-cover opacity-70  rounded-xl"
+                layout="fill"
+              />
+              <div className="absolute text-white opacity-100 ml-3">
+                <h1 className="text-4xl font-bold">{artist?.name}</h1>
 
-          <h3>{loading && "LOADING"}</h3>
-        </div>
+                <div className="flex items-center space-x-1.5">
+                  <h4 className="font-bold text-lg"> {artist?.popularity}%</h4>
+                  <p className="text-sm font-light">popularity</p>
+                </div>
+
+                <div className="flex items-center space-x-1.5">
+                  <h4 className="font-bold text-lg">
+                    {artist?.followers?.total.toLocaleString("en-US", {
+                      minimumFractionDigits: 0,
+                    })}
+                  </h4>
+                  <p className="text-sm font-light">followers</p>
+                </div>
+                <div className="flex space-x-1">
+                  {artist?.genres?.map((genre, i) => (
+                    <h4 key={i} className="text-sm italic ">
+                      {genre}
+                      {i !== artist?.genres?.length - 1 && ","}
+                    </h4>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <h1 className="text-white text-center mt-3 text-xl">
+              Popular Songs
+            </h1>
+          </div>
+        )}
       </div>
     </div>
   );

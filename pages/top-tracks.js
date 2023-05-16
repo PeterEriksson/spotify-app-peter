@@ -41,7 +41,7 @@ export default function tracks() {
 
   const getTracks = () => {
     spotifyApi
-      .getMyTopTracks({ time_range: timePeriod })
+      .getMyTopTracks({ limit: 10, time_range: timePeriod })
       .then((data) => setTopTracks(data.body.items))
       .then(() => setLoading(false))
       .catch((err) => console.log(err));
@@ -120,7 +120,7 @@ export default function tracks() {
           </div>
         ) : (
           <div className="gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">
-            {topTracks?.slice(0, 10).map((track, i) => (
+            {topTracks?.map((track, i) => (
               <Song key={i} track={track} />
             ))}
           </div>
