@@ -2,6 +2,7 @@
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
   z-index: 30;
+  opacity: 100;
 }
 
 .header {

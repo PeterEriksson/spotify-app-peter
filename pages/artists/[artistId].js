@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import Song from "../../components/Song";
 import useSpotify from "../../hooks/useSpotify";
 
 export default function artistDetails({ artistId }) {
@@ -21,14 +22,12 @@ export default function artistDetails({ artistId }) {
   };
 
   useEffect(() => {
-    setLoading(true);
     //ux friendly - display loading indicator a bit longer
     setTimeout(() => {
       getArtistInfo();
     }, 1200);
   }, []);
 
-  /* Keep artist top songs?? */
   const getArtistTracks = () => {
     spotifyApi
       .getArtistTopTracks(artistId, "GB")
@@ -36,12 +35,12 @@ export default function artistDetails({ artistId }) {
       .catch((err) => console.log(err));
   };
   useEffect(() => {
-    getArtistTracks();
+    return getArtistTracks();
   }, []);
 
   return (
     <div
-      onClick={() => console.log(artist)}
+      onClick={() => console.log(artistTopSongs)}
       className="flex h-screen bg-gray-800 "
     >
       <Head>
@@ -51,7 +50,6 @@ export default function artistDetails({ artistId }) {
       </Head>
       <Sidebar />
       <div className=" w-screen bg-gray-800  overflow-y-scroll">
-        {/* Pass down backArrow as prop? */}
         <Header backArrow />
 
         {loading ? (
@@ -92,9 +90,13 @@ export default function artistDetails({ artistId }) {
                 </div>
               </div>
             </div>
-            <h1 className="text-white text-center mt-3 text-xl">
-              Popular Songs
-            </h1>
+            {/* SONGS (artist top) */}
+            <h1 className="text-white text-cente/r mt-3 text-xl">Popular</h1>
+
+            {artistTopSongs?.tracks.slice(0, 5).map((_song, i) => (
+              <Song key={i} nr={i + 1} artistSong={_song} />
+              //<h1>hej</h1>
+            ))}
           </div>
         )}
       </div>

@@ -16,6 +16,7 @@ module.exports = {
       },
       maxWidth: {
         readableSongTitle: "25ch",
+        artistTopTrack: "15ch",
       },
       screens: {
         xs: "585px",
