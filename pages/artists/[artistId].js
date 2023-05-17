@@ -1,4 +1,4 @@
-import { Waveform } from "@uiball/loaders";
+import { Waveform, RaceBy } from "@uiball/loaders";
 import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -50,14 +50,14 @@ export default function artistDetails({ artistId }) {
         <Header backArrow />
 
         {loading ? (
-          <div className="flex justify-center">
-            <Waveform color="white" speed={0.8} />
+          <div className="flex justify-center   mt-32">
+            <RaceBy color="white" speed={1.5} size={150} lineWeight={4} />
           </div>
         ) : (
           <div className="mx-5 ">
             <div className=" relative justify-start items-center w-full h-72 flex  rounded-xl ">
               <Image
-                //onClick={() => console.log(artistTopSongs)}
+                onClick={() => console.log(artistTopSongs)}
                 src={artist?.images[0]?.url}
                 className="object-cover opacity-70  rounded-xl"
                 layout="fill"

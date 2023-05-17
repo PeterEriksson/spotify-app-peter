@@ -1,4 +1,4 @@
-import { Waveform } from "@uiball/loaders";
+import { RaceBy } from "@uiball/loaders";
 import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
@@ -109,8 +109,8 @@ export default function Home() {
         </div>
 
         {loading ? (
-          <div className="flex justify-center mt-4">
-            <Waveform color="white" speed={0.8} />
+          <div className="flex justify-center   mt-24">
+            <RaceBy color="white" speed={1.2} size={150} lineWeight={4} />
           </div>
         ) : (
           <div className="gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl mx-3 ">

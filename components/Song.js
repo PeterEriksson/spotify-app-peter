@@ -1,8 +1,11 @@
 import {
+  CalendarDaysIcon,
   ChevronDownIcon,
+  ClockIcon,
   InformationCircleIcon,
   PauseIcon,
   PlayIcon,
+  SparklesIcon,
 } from "@heroicons/react/24/solid";
 import React, { useEffect, useState } from "react";
 import styles from "../styles/effects.module.css";
@@ -89,44 +92,70 @@ function Song({ track, noPlay, artistSong, nr }) {
     return favoritedItems.some((item) => item.id === track.id);
   };
 
-  //move to helper functions folder?
-  /* function convertMsToMinuteSecond(durationInMs) {
-    const minutes = Math.floor(durationInMs / 60000);
-    const seconds = Math.floor((durationInMs % 60000) / 1000);
-
-    const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
-    const formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
-
-    return formattedMinutes + ":" + formattedSeconds;
-  } */
-
   //return a "different" Song design
   if (artistSong) {
     return (
-      <div className="text-white py-3 flex items-center justify-between //bg-red-400">
+      <div className="text-white py-2 flex items-center justify-between //bg-red-400">
         <div className="flex items-center space-x-2">
           <p className="mr-1 ">{nr}</p>
           <img
-            className="h-10 w-10 rounded-lg object-cover"
+            className="h-9 w-9 rounded-lg object-cover"
             src={track?.album?.images[0]?.url}
             alt=""
           />
           <h1 className="max-w-artistTopTrack truncate ">{track?.name}</h1>
-          <p onClick={() => setPlaying(true)} className=" ">
+          {/*  <p onClick={() => setPlaying(true)} className=" ">
             play
-          </p>
+          </p> */}
+          {playing ? (
+            <PauseIcon
+              className={`h-6 w-6 text-white/80 cursor-pointer    `}
+              onClick={() => setPlaying(false)}
+            />
+          ) : (
+            <PlayIcon
+              className={`h-6 w-6 text-white/80 cursor-pointer   `}
+              onClick={() => setPlaying(true)}
+            />
+          )}
+
+          <div className={`${!playing && "hidden"}  ml-2 mb-1.5`}>
+            <AudioPlayAnimation
+              height="20"
+              width="30"
+              radius="9"
+              color="gray"
+              ariaLabel="play-animation"
+              wrapperStyle
+            />
+          </div>
         </div>
 
-        <div className="flex space-x-4">
-          <p> {convertMsToMinuteSecond(track?.duration_ms)} </p>
-          <p className=" ">{track?.popularity}%</p>
-          <p>heart</p>
+        <div className="flex  items-center">
+          <CalendarDaysIcon className="h-5 w-5 text-gray-300 hidden md:inline mr-1.5" />
+          <p className="text-sm mr-3  hidden md:inline">
+            {track?.album?.release_date}
+          </p>
+
+          <ClockIcon className="h-5 w-5 mr-1.5 text-gray-300 hidden lg:inline" />
+          <p className="text-sm mr-3 lg:inline hidden">
+            {convertMsToMinuteSecond(track?.duration_ms)}{" "}
+          </p>
+          <SparklesIcon className="h-5 w-5 text-gray-200 mr-1.5 " />
+          <p className="text-sm ">{track?.popularity}%</p>
+          <div
+            aria-label="ignore-pause"
+            onClick={handleLike}
+            className={` ${liked() ? styles.heartRed : styles.heart}  ${
+              !liked() && triggerLikeEffect && styles.animateUnlike
+            }  ${liked() && triggerLikeEffect && styles.animate}  !-mr-4 `}
+          />
         </div>
       </div>
     );
   } else {
+    //if we don't recieve artistSong in props, return "normal" Song design
     return (
-      //if we don't recieve artistSong in props, return "normal" Song design
       <div className="bg-gray-700 rounded-xl border border-black/70 relative group  ">
         {/* DIV for centering play/pause */}
         <div className="relative flex items-center justify-center    h-40 w-full ">
@@ -181,15 +210,7 @@ function Song({ track, noPlay, artistSong, nr }) {
             noPlay && showAdditionalInfo && "border-gray-600  mx-3"
           } ${!showAdditionalInfo && "hidden"} ${!noPlay && "hidden"}`}
         />
-        {/* <div
-        className={`absolute   bottom-0  
-         w-full  ${!noPlay && "hidden"} ${showAdditionalInfo && "hidden"} `}
-      >
-        <ChevronDownIcon
-          onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className={`h-4 w-4 text-white cursor-pointer   mx-auto  opacity-0 group-hover:opacity-80 transition duration-300 ease-in   `}
-        />
-      </div> */}
+
         <h3
           className={`text-sm px-4 text-white ${
             !showAdditionalInfo && "hidden"
