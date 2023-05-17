@@ -14,13 +14,14 @@ import {
 } from "../slices/favoritesSlice";
 import Image from "next/image";
 import useSpotify from "../hooks/useSpotify";
-
 import { Audio as AudioPlayAnimation } from "react-loader-spinner";
+import { convertMsToMinuteSecond } from "../utils/timeUtils.js";
 
 function Song({ track, noPlay, artistSong, nr }) {
   const [audio, setAudio] = useState(new Audio(track?.preview_url));
   const [playing, setPlaying] = useState(false);
-  //console.log(track);
+  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+  const [triggerLikeEffect, setTriggerLikeEffect] = useState(false);
 
   useEffect(() => {
     playing ? audio.play() : audio.pause();
@@ -33,7 +34,6 @@ function Song({ track, noPlay, artistSong, nr }) {
     };
   }, []);
 
-  /* when interacting with sidebar, song keeps on playing...solution ->  */
   const handleStopPlay = (e) => {
     //user has clicked a star of another song -> keep on playing
     /* ....enough with following line of code. Don't need to use ref to get the result we want. */
@@ -50,8 +50,6 @@ function Song({ track, noPlay, artistSong, nr }) {
 
   const dispatch = useDispatch();
   const favoritedItems = useSelector(selectFavoritedItmes);
-
-  const [triggerLikeEffect, setTriggerLikeEffect] = useState(false);
 
   //test temp
   /* const spotifyApi = useSpotify();
@@ -79,7 +77,7 @@ function Song({ track, noPlay, artistSong, nr }) {
   }, []); */
 
   const handleLike = () => {
-    //when in /likedTracks, animation retriggers when removing a like,
+    //when in /likedTracks, animation retriggers when removing a like, -> solution->
     !noPlay && setTriggerLikeEffect(true);
     favoritedItems.every((item) => item.id !== track.id)
       ? dispatch(addToFavorites(track))
@@ -91,9 +89,8 @@ function Song({ track, noPlay, artistSong, nr }) {
     return favoritedItems.some((item) => item.id === track.id);
   };
 
-  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
-
-  function convertMsToMinuteSecond(durationInMs) {
+  //move to helper functions folder?
+  /* function convertMsToMinuteSecond(durationInMs) {
     const minutes = Math.floor(durationInMs / 60000);
     const seconds = Math.floor((durationInMs % 60000) / 1000);
 
@@ -101,9 +98,9 @@ function Song({ track, noPlay, artistSong, nr }) {
     const formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
 
     return formattedMinutes + ":" + formattedSeconds;
-  }
+  } */
 
-  //when in artistId page we return a different design (we have recieved artistSong as prop)
+  //return a "different" Song design
   if (artistSong) {
     return (
       <div className="text-white py-3 flex items-center justify-between //bg-red-400">
@@ -111,23 +108,25 @@ function Song({ track, noPlay, artistSong, nr }) {
           <p className="mr-1 ">{nr}</p>
           <img
             className="h-10 w-10 rounded-lg object-cover"
-            src={artistSong?.album?.images[0]?.url}
+            src={track?.album?.images[0]?.url}
             alt=""
           />
-          <h1 className="max-w-artistTopTrack truncate ">{artistSong?.name}</h1>
-          <p className=" ">play</p>
+          <h1 className="max-w-artistTopTrack truncate ">{track?.name}</h1>
+          <p onClick={() => setPlaying(true)} className=" ">
+            play
+          </p>
         </div>
 
         <div className="flex space-x-4">
-          <p> {convertMsToMinuteSecond(artistSong?.duration_ms)} </p>
-          <p className=" ">{artistSong?.popularity}%</p>
+          <p> {convertMsToMinuteSecond(track?.duration_ms)} </p>
+          <p className=" ">{track?.popularity}%</p>
           <p>heart</p>
         </div>
       </div>
     );
   } else {
     return (
-      //if we don't recieve artistSong in props, return the "normal" design
+      //if we don't recieve artistSong in props, return "normal" Song design
       <div className="bg-gray-700 rounded-xl border border-black/70 relative group  ">
         {/* DIV for centering play/pause */}
         <div className="relative flex items-center justify-center    h-40 w-full ">
