@@ -19,6 +19,7 @@ export default function artistDetails({ artistId }) {
       .then((data) => setArtist(data.body))
       .then(() => setLoading(false))
       .catch((err) => console.log(err));
+    //if err -> display error msg on page???
   };
 
   useEffect(() => {

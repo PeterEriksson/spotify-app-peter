@@ -1,11 +1,12 @@
 .bottomButton {
-  transition-duration: 300ms;
-  transition-timing-function: ease-in-out;
-  z-index: 30;
+  /* transition-duration: 300ms !important;
+  transition-timing-function: ease-in-out !important; */
+
   opacity: 100;
+  z-index: 30;
 }
 
 .header {
-  z-index: 30;
   opacity: 100;
+  z-index: 30;
 }

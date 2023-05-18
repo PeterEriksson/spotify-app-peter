@@ -89,9 +89,9 @@ export default function tracks() {
       <div className=" w-screen bg-gray-800  overflow-y-scroll">
         <Header />
 
-        <h3 className="text-3xl text-white text-center uppercase tracking-wide">
+        <h1 className="text-3xl text-white text-center uppercase tracking-wide">
           most played songs
-        </h3>
+        </h1>
 
         <div>
           <div className="relative max-w-fit mx-auto">

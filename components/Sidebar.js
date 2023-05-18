@@ -6,6 +6,7 @@ import {
   MagnifyingGlassIcon,
   GlobeAltIcon,
   HeartIcon,
+  UserIcon,
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import { selectItems as selectFavoritedItmes } from "../slices/favoritesSlice";
@@ -22,6 +23,7 @@ function Sidebar() {
   const { data: session } = useSession();
 
   const favoritedItems = useSelector(selectFavoritedItmes);
+
   return (
     <nav className="h-screen bg-spotifyBlack flex flex-col items-center pt-4  ">
       {/* <img
@@ -38,6 +40,7 @@ function Sidebar() {
           alt="spotify-logo"
         />
         <img
+          onClick={() => router.push("/profile")}
           className="profile-img-tooltip cursor-pointer  rounded-full absolute object-cover z-10  h-9 w-9  top-3.5 -right-2 filter brightness-75 "
           src={session?.user?.image}
           alt="user-img"
@@ -128,7 +131,21 @@ function Sidebar() {
           </p>
         </div>
 
-        {/* discover */}
+        <div onClick={() => router.push(`/profile`)} className="sidebarDiv">
+          <UserIcon
+            className={`sidebarIcon ${
+              asPath === "/profile" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          />
+          <p
+            className={` ${
+              asPath === "/profile" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          >
+            Profile
+          </p>
+        </div>
+
         <div className="sidebarDiv">
           <GlobeAltIcon className="sidebarIcon" />
           <p className="text-gray-400">Discover</p>

@@ -85,76 +85,79 @@ function Song({ track, noPlay, artistSong, nr }) {
     favoritedItems.every((item) => item.id !== track.id)
       ? dispatch(addToFavorites(track))
       : dispatch(removeFromFavorites(track.id));
-    //console.log(favoritedItems);
   };
 
   const liked = () => {
     return favoritedItems.some((item) => item.id === track.id);
   };
 
-  //return a "different" Song design
+  //return a "different" Song design (artistTrack)
   if (artistSong) {
     return (
-      <div className="text-white py-2 flex items-center justify-between //bg-red-400">
-        <div className="flex items-center space-x-2">
-          <p className="mr-1 ">{nr}</p>
-          <img
-            className="h-9 w-9 rounded-lg object-cover"
-            src={track?.album?.images[0]?.url}
-            alt=""
-          />
-          <h1 className="max-w-artistTopTrack truncate ">{track?.name}</h1>
-          {/*  <p onClick={() => setPlaying(true)} className=" ">
-            play
-          </p> */}
-          {playing ? (
-            <PauseIcon
-              className={`h-6 w-6 text-white/80 cursor-pointer    `}
-              onClick={() => setPlaying(false)}
+      <>
+        <div className="text-white py-1.5 flex items-center justify-between //bg-red-400">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 mdlg:space-x-4 lg:space-x-5">
+            <p className="mr-1 ">{nr}</p>
+            <img
+              className="h-9 w-9 rounded-lg object-cover"
+              src={track?.album?.images[0]?.url}
+              alt=""
             />
-          ) : (
-            <PlayIcon
-              className={`h-6 w-6 text-white/80 cursor-pointer   `}
-              onClick={() => setPlaying(true)}
-            />
-          )}
+            <h1 className="max-w-[14ch] sm:max-w-[15ch] mdlg:max-w-[22ch] lg:max-w-[35ch] truncate font-semibold ">
+              {track?.name}
+            </h1>
+            {playing ? (
+              <PauseIcon
+                className={`h-6 w-6 text-white/80 cursor-pointer    `}
+                onClick={() => setPlaying(false)}
+              />
+            ) : (
+              <PlayIcon
+                className={`h-6 w-6 text-white/80 cursor-pointer   `}
+                onClick={() => setPlaying(true)}
+              />
+            )}
 
-          <div className={`${!playing && "hidden"}  ml-2 mb-1.5`}>
-            <AudioPlayAnimation
-              height="20"
-              width="30"
-              radius="9"
-              color="gray"
-              ariaLabel="play-animation"
-              wrapperStyle
+            <div className={`${!playing && "hidden"}  mb-1.5`}>
+              <AudioPlayAnimation
+                height="20"
+                width="30"
+                radius="9"
+                color="gray"
+                ariaLabel="play-animation"
+                wrapperStyle
+              />
+            </div>
+          </div>
+
+          <div className="flex  items-center">
+            <CalendarDaysIcon className="h-5 w-5 text-gray-300 hidden md:inline mr-1.5" />
+            <p className="text-sm font-light mr-3  hidden md:inline">
+              {track?.album?.release_date.substring(0, 4)}
+            </p>
+
+            <ClockIcon className="h-5 w-5 mr-1.5 text-gray-300 hidden md:inline" />
+            <p className="font-light text-sm mr-3 md:inline hidden">
+              {convertMsToMinuteSecond(track?.duration_ms)}{" "}
+            </p>
+            <SparklesIcon className="h-5 w-5 text-gray-200 mr-1.5 hidden xs:inline" />
+            <p className="text-sm font-light hidden xs:inline">
+              {track?.popularity}%
+            </p>
+            <div
+              aria-label="ignore-pause"
+              onClick={handleLike}
+              className={` ${liked() ? styles.heartRed : styles.heart}  ${
+                !liked() && triggerLikeEffect && styles.animateUnlike
+              }  ${liked() && triggerLikeEffect && styles.animate}  !-mr-4 `}
             />
           </div>
         </div>
-
-        <div className="flex  items-center">
-          <CalendarDaysIcon className="h-5 w-5 text-gray-300 hidden md:inline mr-1.5" />
-          <p className="text-sm mr-3  hidden md:inline">
-            {track?.album?.release_date}
-          </p>
-
-          <ClockIcon className="h-5 w-5 mr-1.5 text-gray-300 hidden lg:inline" />
-          <p className="text-sm mr-3 lg:inline hidden">
-            {convertMsToMinuteSecond(track?.duration_ms)}{" "}
-          </p>
-          <SparklesIcon className="h-5 w-5 text-gray-200 mr-1.5 " />
-          <p className="text-sm ">{track?.popularity}%</p>
-          <div
-            aria-label="ignore-pause"
-            onClick={handleLike}
-            className={` ${liked() ? styles.heartRed : styles.heart}  ${
-              !liked() && triggerLikeEffect && styles.animateUnlike
-            }  ${liked() && triggerLikeEffect && styles.animate}  !-mr-4 `}
-          />
-        </div>
-      </div>
+        <hr className=" border-gray-600 w-full " />
+      </>
     );
   } else {
-    //if we don't recieve artistSong in props, return "normal" Song design
+    //return "normal" Song design,  we don't recieve artistSong in props.
     return (
       <div className="bg-gray-700 rounded-xl border border-black/70 relative group  ">
         {/* DIV for centering play/pause */}

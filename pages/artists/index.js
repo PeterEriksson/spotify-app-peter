@@ -80,12 +80,12 @@ export default function Home() {
       <div className=" w-screen bg-gray-800  overflow-y-scroll   ">
         <Header />
 
-        <h3
+        <h1
           onClick={testFcn}
           className="text-3xl text-white text-center uppercase tracking-wide"
         >
           Most Played Artists console.log obj..
-        </h3>
+        </h1>
 
         <div>
           <div className="relative max-w-fit mx-auto">
