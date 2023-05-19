@@ -90,7 +90,7 @@ export default function artistDetails({ artistId }) {
               </div>
             </div>
             {/* popular songs */}
-            <h1 className="text-white text-cente/r mt-3 text-xl">Popular</h1>
+            <h2 className="text-white mt-3 text-xl">Popular</h2>
             {artistTopSongs?.tracks.slice(0, 5).map((track, i) => (
               <Song key={i} nr={i + 1} artistSong track={track} />
             ))}

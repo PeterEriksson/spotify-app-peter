@@ -11,6 +11,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
     "@uiball/loaders": "^1.2.6",
+    "country-data": "^0.0.31",
     "next": "12.1.6",
     "next-auth": "4.2.1",
     "react": "17.0.2",

@@ -91,7 +91,7 @@ function Song({ track, noPlay, artistSong, nr }) {
     return favoritedItems.some((item) => item.id === track.id);
   };
 
-  //return a "different" Song design (artistTrack)
+  //return a "different" Song design (artistTrack/Profile:recentlyPlayed)
   if (artistSong) {
     return (
       <>
@@ -113,7 +113,7 @@ function Song({ track, noPlay, artistSong, nr }) {
               />
             ) : (
               <PlayIcon
-                className={`h-6 w-6 text-white/80 cursor-pointer   `}
+                className={`h-6 w-6 text-white/90 cursor-pointer   `}
                 onClick={() => setPlaying(true)}
               />
             )}
@@ -123,7 +123,8 @@ function Song({ track, noPlay, artistSong, nr }) {
                 height="20"
                 width="30"
                 radius="9"
-                color="gray"
+                /*  color="gray" */
+                color="#1DB954"
                 ariaLabel="play-animation"
                 wrapperStyle
               />
@@ -207,7 +208,6 @@ function Song({ track, noPlay, artistSong, nr }) {
 
         <h2 className="text-bold text-white p-4">{track?.name}</h2>
 
-        {/* gray line? + arrow? plus additional info (if noPlay..) */}
         <hr
           className={`-mt-2.5 mb-1 ${
             noPlay && showAdditionalInfo && "border-gray-600  mx-3"

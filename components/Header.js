@@ -13,8 +13,8 @@ import styles from "../styles/tooltip.module.css";
 function Header({ backArrow }) {
   const router = useRouter();
   return (
-    <div className="flex items-center justify-between  text-white py-2 px-5  ">
-      <div className="flex flex-col items-center font-dancing">
+    <div className="flex items-center justify-between  text-white py-2 px-5   test:-> z-50 sticky top-0 bg-gray-800 ///drop-shadow-2xl ">
+      <div className="flex flex-col items-center font-dancing ">
         <ArrowLeftIcon
           onClick={() => router.back()}
           className={`${

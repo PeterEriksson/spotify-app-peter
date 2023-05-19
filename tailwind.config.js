@@ -20,6 +20,7 @@ module.exports = {
       },
       screens: {
         xs: "585px",
+        smmd: "700px",
         mdlg: "900px",
       },
       fontFamily: {

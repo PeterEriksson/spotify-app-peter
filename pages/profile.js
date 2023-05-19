@@ -1,21 +1,17 @@
 import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import useSpotify from "../hooks/useSpotify";
 
+import { countries } from "country-data";
+import Song from "../components/Song";
+
 export default function profile() {
   const [profile, setProfile] = useState({});
-
-  /* data to show... inspiration...->
-  getUserPlaylists. "13 public playlists"
-  getFollowedArtists 
-  getRecommendations -> In Profile or Discover?
-
-  Followers
-  button below: View Spotify profile (external_urls?.spotify)
-  */
+  const [recentSongs, setRecentSongs] = useState([]);
 
   const { data: session } = useSession();
   const spotifyApi = useSpotify();
@@ -24,12 +20,37 @@ export default function profile() {
     spotifyApi
       .getMe()
       .then((data) => setProfile(data.body))
-
       .catch((err) => console.log(err));
   };
   useEffect(() => {
     getProfileInfo();
   }, []);
+
+  const getRecentSongs = () => {
+    spotifyApi
+      .getMyRecentlyPlayedTracks({ limit: 5 })
+      .then((data) => setRecentSongs(data.body.items))
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    //WebapiRegularError: An error occurred while communicating with Spotify's Web API.
+    //Details: No token provided. -> do a check:  if (spotifyApi.getAccessToken()) ...
+    /*  if (spotifyApi.getAccessToken()) { */
+    getRecentSongs();
+    /*  } */
+  }, []);
+
+  const [playlists, setPlaylists] = useState([]);
+  const getMyPlaylists = () => {
+    spotifyApi
+      .getUserPlaylists(session?.user?.name)
+      .then((data) => setPlaylists(data.body.items))
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    getMyPlaylists();
+  }, []);
+
   return (
     <div className="flex h-screen ">
       <Head>
@@ -40,15 +61,65 @@ export default function profile() {
 
       <Sidebar />
 
-      <div className=" w-screen bg-gray-800  overflow-y-scroll">
+      <div className=" w-screen bg-gray-800  overflow-y-scroll  ">
         <Header />
 
-        <h1
-          onClick={() => console.log(profile)}
-          className="text-3xl text-white text-center  tracking-wide"
+        <div className="flex justify-between mx-5 bg-r mt-6 text-white items-center   ">
+          <div className="flex items-center">
+            <div className="relative h-[200px] w-[200px] rounded-full ">
+              <Image
+                layout="fill"
+                className="h-20/ /w-20 rounded-full "
+                src={session?.user?.image}
+                //src="https://baypark.ca/wp-content/uploads/2020/02/spotify-logo-png-spotify-music-app-icon-1024.jpg"
+                alt="spotify-logo"
+              />
+            </div>
+            <div className="ml-6 ">
+              <p className="text-sm  ">Profile</p>
+              <h1
+                onClick={() => console.log(profile)}
+                className="text-4xl sm:text-5xl md:text-7xl font-bold  //mt-4"
+              >
+                {session?.user?.name}
+              </h1>
+              <p className="mt-2.5 text-sm">{profile?.product} user</p>
+
+              <button
+                className="p-2 sm:p-2.5 flex items-center border border-white rounded-lg mt-3 group relative transform transition duration-200 ease-in hover:scale-105"
+                onClick={() => window.open(profile?.external_urls?.spotify)}
+              >
+                View Spotify
+              </button>
+            </div>
+          </div>
+          <div className="text-sm font-semibold   hidden md:inline">
+            <p className="text-sm ">
+              {/*   {profile && countries[profile?.country]?.name} */}
+              {countries[profile?.country]?.name}
+            </p>
+            <p className="">
+              {profile?.followers?.total}{" "}
+              {profile?.followers?.total == 1 ? "follower" : "followers"}
+            </p>
+            <p onClick={() => console.log(playlists)}>
+              {playlists?.length} playlists
+            </p>
+          </div>
+        </div>
+        {/* GRAY LINE */}
+        <hr className="border-[1.5px] border-gray-600  mx-5 my-4  " />
+        <h2
+          onClick={() => console.log(recentSongs)}
+          className="text-white text-xl ml-5 mb-1"
         >
-          {session?.user?.name} test obj..
-        </h1>
+          Recently Played
+        </h2>
+        <div className="mx-5">
+          {recentSongs?.map(({ track }, i) => (
+            <Song key={i} nr={i + 1} artistSong track={track} />
+          ))}
+        </div>
       </div>
     </div>
   );
