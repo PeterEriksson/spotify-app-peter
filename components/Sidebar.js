@@ -58,22 +58,25 @@ function Sidebar() {
 
       <div className="w-48 space-y-3">
         {/* recently played */}
-        <div className={`sidebarDiv  `} onClick={() => router.push("/")}>
+        <div className={`sidebarDiv  group`} onClick={() => router.push("/")}>
           <ArrowPathIcon
             className={`sidebarIcon ${
               asPath === "/" ? "text-spotifyGreen" : "text-gray-400"
-            } `}
+            }  `}
           />
           <p
             className={`${
               asPath === "/" ? "text-spotifyGreen" : "text-gray-400"
-            }`}
+            }   hoverStyling `}
           >
             Recently Played
           </p>
         </div>
         {/* top tracks */}
-        <div className="sidebarDiv" onClick={() => router.push("/top-tracks")}>
+        <div
+          className="sidebarDiv group"
+          onClick={() => router.push("/top-tracks")}
+        >
           <MusicalNoteIcon
             className={`sidebarIcon ${
               asPath === "/top-tracks" ? "text-spotifyGreen" : "text-gray-400"
@@ -82,14 +85,14 @@ function Sidebar() {
           <p
             className={`  ${
               asPath === "/top-tracks" ? "text-spotifyGreen" : "text-gray-400"
-            } `}
+            } hoverStyling `}
           >
             Top Tracks
           </p>
         </div>
         {/* liked tracks */}
         <div
-          className={`sidebarDiv relative   `}
+          className={`sidebarDiv relative group  `}
           onClick={() => router.push("/liked-tracks")}
         >
           <HeartIcon
@@ -102,7 +105,7 @@ function Sidebar() {
               asPath === "/liked-tracks"
                 ? "!text-spotifyGreen"
                 : "text-gray-400"
-            }`}
+            }  hoverStyling`}
           >
             Liked tracks
           </p>
@@ -116,7 +119,10 @@ function Sidebar() {
         </div>
 
         {/* top artists */}
-        <div className="sidebarDiv" onClick={() => router.push("/artists")}>
+        <div
+          className="sidebarDiv group"
+          onClick={() => router.push("/artists")}
+        >
           <MicrophoneIcon
             className={`sidebarIcon ${
               asPath === "/artists" ? "text-spotifyGreen" : "text-gray-400"
@@ -125,22 +131,25 @@ function Sidebar() {
           <p
             className={` ${
               asPath === "/artists" ? "text-spotifyGreen" : "text-gray-400"
-            } `}
+            } hoverStyling `}
           >
             Top Artists
           </p>
         </div>
 
-        <div onClick={() => router.push(`/profile`)} className="sidebarDiv">
+        <div
+          onClick={() => router.push(`/profile`)}
+          className="sidebarDiv group"
+        >
           <UserIcon
             className={`sidebarIcon ${
               asPath === "/profile" ? "text-spotifyGreen" : "text-gray-400"
-            } `}
+            }  `}
           />
           <p
             className={` ${
               asPath === "/profile" ? "text-spotifyGreen" : "text-gray-400"
-            } `}
+            } hoverStyling `}
           >
             Profile
           </p>

@@ -6,9 +6,12 @@
 
 @layer components {
   .sidebarDiv {
-    @apply flex items-center py-2 pl-5   space-x-2 hover:bg-gray-900  hover:cursor-pointer transition duration-100 ease-in;
+    @apply flex items-center py-2 pl-5   space-x-2     hover:cursor-pointer;
   }
   .sidebarIcon {
-    @apply h-7 w-7 text-gray-400;
+    @apply h-7 w-7 text-gray-400 group-hover:text-spotifyGreen group-hover:cursor-pointer transition duration-200 ease-in;
+  }
+  .hoverStyling {
+    @apply group-hover:text-spotifyGreen group-hover:cursor-pointer transition duration-200 ease-in;
   }
 }
