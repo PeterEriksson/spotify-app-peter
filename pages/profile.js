@@ -35,9 +35,9 @@ export default function profile() {
   useEffect(() => {
     //WebapiRegularError: An error occurred while communicating with Spotify's Web API.
     //Details: No token provided. -> do a check:  if (spotifyApi.getAccessToken()) ...
-    /*  if (spotifyApi.getAccessToken()) { */
+    //  if (spotifyApi.getAccessToken()) {
     getRecentSongs();
-    /*  } */
+    //  }
   }, []);
 
   const [playlists, setPlaylists] = useState([]);
@@ -61,7 +61,7 @@ export default function profile() {
 
       <Sidebar />
 
-      <div className=" w-screen bg-gray-800  overflow-y-scroll  ">
+      <div className=" w-screen   overflow-y-scroll  !bg-bodyBackground">
         <Header />
 
         <div className="flex justify-between mx-5 bg-r mt-6 text-white items-center   ">
@@ -94,10 +94,7 @@ export default function profile() {
             </div>
           </div>
           <div className="text-sm font-semibold   hidden md:inline">
-            <p className="text-sm ">
-              {/*   {profile && countries[profile?.country]?.name} */}
-              {countries[profile?.country]?.name}
-            </p>
+            <p className="text-sm ">{countries[profile?.country]?.name}</p>
             <p className="">
               {profile?.followers?.total}{" "}
               {profile?.followers?.total == 1 ? "follower" : "followers"}
@@ -107,7 +104,7 @@ export default function profile() {
             </p>
           </div>
         </div>
-        {/* GRAY LINE */}
+
         <hr className="border-[1.5px] border-gray-600  mx-5 my-4  " />
         <h2
           onClick={() => console.log(recentSongs)}

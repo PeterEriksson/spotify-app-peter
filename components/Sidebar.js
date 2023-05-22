@@ -25,7 +25,7 @@ function Sidebar() {
   const favoritedItems = useSelector(selectFavoritedItmes);
 
   return (
-    <nav className="h-screen bg-spotifyBlack flex flex-col items-center pt-4  ">
+    <nav className="h-screen bg-spotifyBlack flex flex-col items-center pt-4 border-r border-gray-600  ">
       {/* <img
         className="rounded-full absolute object-cover z-10  h-9 w-9 left-28 top-6"
         src={session?.user?.image}
@@ -57,9 +57,9 @@ function Sidebar() {
       <hr className=" border-gray-600 w-full mt-2 mb-3 " />
 
       <div className="w-48 space-y-3">
-        {/* recently played */}
+        {/* profile (home) */}
         <div className={`sidebarDiv  group`} onClick={() => router.push("/")}>
-          <ArrowPathIcon
+          <UserIcon
             className={`sidebarIcon ${
               asPath === "/" ? "text-spotifyGreen" : "text-gray-400"
             }  `}
@@ -69,7 +69,7 @@ function Sidebar() {
               asPath === "/" ? "text-spotifyGreen" : "text-gray-400"
             }   hoverStyling `}
           >
-            Recently Played
+            Profile
           </p>
         </div>
         {/* top tracks */}
@@ -137,7 +137,7 @@ function Sidebar() {
           </p>
         </div>
 
-        <div
+        {/*  <div
           onClick={() => router.push(`/profile`)}
           className="sidebarDiv group"
         >
@@ -153,7 +153,7 @@ function Sidebar() {
           >
             Profile
           </p>
-        </div>
+        </div> */}
 
         <div className="sidebarDiv">
           <GlobeAltIcon className="sidebarIcon" />

@@ -7,7 +7,7 @@ function Artist({ artist }) {
 
   return (
     <div
-      className="bg-gray-700 rounded-xl border border-black/70  group cursor-pointer      overflow-hidden "
+      className="bg-gray-800 rounded-xl border border-black/70  group cursor-pointer      overflow-hidden "
       onClick={() => router.push("/artists/" + artist?.id)}
     >
       <div className="relative flex items-center justify-center  h-40 w-full       ">

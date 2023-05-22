@@ -75,9 +75,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-800 ">
+    <div className="flex h-screen  ">
       <Sidebar />
-      <div className=" w-screen bg-gray-800  overflow-y-scroll   ">
+      <div className=" w-screen bg-bodyBackground overflow-y-scroll   ">
         <Header />
 
         <h1

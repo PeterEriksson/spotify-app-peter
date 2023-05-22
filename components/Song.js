@@ -58,7 +58,7 @@ function Song({ track, noPlay, artistSong, nr }) {
   /* const spotifyApi = useSpotify();
   useEffect(() => {
     //works. Removes tracks that are already in Spotify saved songs. Use this later maybe.
-    const unsub = () => {
+ 
       spotifyApi.containsMySavedTracks([track.id]).then(
         function (data) {
           // An array is returned, where the first element corresponds to the first track ID in the query
@@ -76,11 +76,11 @@ function Song({ track, noPlay, artistSong, nr }) {
         }
       );
     };
-    return unsub;
+ 
   }, []); */
 
   const handleLike = () => {
-    //when in /likedTracks, animation retriggers when removing a like, -> solution->
+    //when  in /likedTracks, animation retriggers when removing a like, -> solution->
     !noPlay && setTriggerLikeEffect(true);
     favoritedItems.every((item) => item.id !== track.id)
       ? dispatch(addToFavorites(track))
@@ -160,7 +160,7 @@ function Song({ track, noPlay, artistSong, nr }) {
   } else {
     //return "normal" Song design,  we don't recieve artistSong in props.
     return (
-      <div className="bg-gray-700 rounded-xl border border-black/70 relative group  ">
+      <div className="bg-gray-800 rounded-xl border border-black/70 relative group  ">
         {/* DIV for centering play/pause */}
         <div className="relative flex items-center justify-center    h-40 w-full ">
           <Image
