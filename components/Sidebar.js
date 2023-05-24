@@ -39,13 +39,13 @@ function Sidebar() {
           src="https://baypark.ca/wp-content/uploads/2020/02/spotify-logo-png-spotify-music-app-icon-1024.jpg"
           alt="spotify-logo"
         />
-        <img
-          onClick={() => router.push("/profile")}
+        {/*  <img
+          onClick={() => router.push("/")}
           className="profile-img-tooltip cursor-pointer  rounded-full absolute object-cover z-10  h-9 w-9  top-3.5 -right-2 filter brightness-75 "
           src={session?.user?.image}
           alt="user-img"
           data-tooltip-id="user-img"
-        />
+        /> */}
         <Tooltip
           anchorSelect=".profile-img-tooltip"
           content={session?.user?.name}

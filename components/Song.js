@@ -20,7 +20,7 @@ import useSpotify from "../hooks/useSpotify";
 import { Audio as AudioPlayAnimation } from "react-loader-spinner";
 import { convertMsToMinuteSecond } from "../utils/timeUtils.js";
 
-function Song({ track, noPlay, artistSong, nr }) {
+function Song({ track, noPlay, wideDesign, nr }) {
   const [audio, setAudio] = useState(new Audio(track?.preview_url));
   const [playing, setPlaying] = useState(false);
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
@@ -91,8 +91,8 @@ function Song({ track, noPlay, artistSong, nr }) {
     return favoritedItems.some((item) => item.id === track.id);
   };
 
-  //return a "different" Song design (artistTrack/Profile:recentlyPlayed)
-  if (artistSong) {
+  //return a "different" Song design (wideDesign/Profile:recentlyPlayed)
+  if (wideDesign) {
     return (
       <>
         <div className="text-white py-1.5 flex items-center justify-between //bg-red-400">
@@ -158,7 +158,7 @@ function Song({ track, noPlay, artistSong, nr }) {
       </>
     );
   } else {
-    //return "normal" Song design,  we don't recieve artistSong in props.
+    //return "normal" Song design,  we don't recieve wideDesign in props.
     return (
       <div className="bg-gray-800 rounded-xl border border-black/70 relative group  ">
         {/* DIV for centering play/pause */}

@@ -4,7 +4,7 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/solid";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { SocialIcon } from "react-social-icons";
 import { Tooltip } from "react-tooltip";
 import Sidebar from "../components/Sidebar";
@@ -17,28 +17,62 @@ import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { emptyFavorites } from "../slices/favoritesSlice";
 import useSpotify from "../hooks/useSpotify";
-import spotifyApi from "../lib/spotify";
+
+import { Dialog, Transition } from "@headlessui/react";
 
 function likedTracks() {
   const { data: session } = useSession();
+  const spotifyApi = useSpotify();
 
   const favoritedItems = useSelector(selectFavoritedItmes);
-  let favoritedIds = favoritedItems.map((item) => item.id);
 
   const dispatch = useDispatch();
   const clearFavorites = () => {
     dispatch(emptyFavorites());
   };
 
-  //works. use modal, plus add some options..
-  const handlePlusClickTest = () => {
-    /* spotifyApi
-      .addToMySavedTracks(favoritedIds)
-      .then(dispatch(emptyFavorites()))
-      .catch((err) => console.log(err)); */
-    console.log(favoritedIds);
+  //AFTER testing: not an issue. If song already exists, it get moved to the top. In Modal, give user
+  //option to either add to liked songs OR create a new playlist
+  //TEST TEMP filteredIds (filter out tracks that are in real spotify liked tracks)
+  //works, but bug if we remove an item/s ..
+  //need to update value every time we remove item/s.  -> call testing() every time we use remove??
+  /* const [idsFiltered, setIdsFiltered] = useState([]);
+  const updateFiltered = async () => {
+    let idsFiltered = await favoritedItems
+      .map((item) => item.id)
+      .map((itemId) => {
+        spotifyApi.containsMySavedTracks([itemId]).then(
+          function (data) {
+            // An array is returned, where the first element corresponds to the first track ID in the query
+            var trackIsInYourMusic = data.body[0];
+
+            if (trackIsInYourMusic) {
+              //console.log("Track was found in the user's Your Music library");
+              //setIdsFiltered((prev) => [...prev, itemId]);
+              return null;
+            } else {
+              setIdsFiltered((prev) => [...prev, itemId]);
+            }
+          },
+          function (err) {
+            console.log("Something went wrong!", err);
+          }
+        );
+      });
+  }; */
+
+  //ok.
+  //1. remove songs when method is completed.
+  //2. add hot-toas notification
+  //3. research/work on modal design
+  const handlePlusClick = () => {
+    /* if (favoritedItems.length == 0) return;
+    spotifyApi
+      .addToMySavedTracks(favoritedItems.map((item) => item.id))
+      .then(dispatch(emptyFavorites())); */
   };
 
+  const [openNewListModal, setOpenNewListModal] = useState(false);
   return (
     <div className="flex h-screen ">
       <Head>
@@ -51,12 +85,73 @@ function likedTracks() {
       <div className=" w-screen bg-bodyBackground  overflow-y-scroll   ">
         <Header />
 
-        <h1 className="text-3xl text-white text-center uppercase tracking-wide">
-          liked songs
+        <h1
+          onClick={() => setOpenNewListModal((prev) => !prev)}
+          className="text-3xl text-white text-center uppercase tracking-wide"
+        >
+          liked songs test ...
         </h1>
 
+        {/* MODAL TEST */}
+        <Transition.Root show={openNewListModal} as={Fragment}>
+          <Dialog
+            as="div"
+            className="fixed z-50 inset-0 //overscroll-y-auto overflow-y-auto"
+            onClose={setOpenNewListModal}
+          >
+            <div className="flex items-center justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+              </Transition.Child>
+
+              {/* trick browser to center the modal contents...-> */}
+              <span
+                className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                aria-hidden="true"
+              >
+                &#8203;
+              </span>
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-1.5  pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
+                  <div>
+                    <div className="mt-1 text-center sm:mt-3.5">
+                      <Dialog.Title
+                        as="h3"
+                        className="text-lg leading-6 font-medium text-gray-900"
+                      >
+                        New Playlist
+                      </Dialog.Title>
+                    </div>
+                  </div>
+                </div>
+              </Transition.Child>
+            </div>
+          </Dialog>
+        </Transition.Root>
+
+        {/* END MODAL TEST */}
+
         <button
-          onClick={handlePlusClickTest}
+          //onClick={() => console.log(favoritedItems.map((item) => item.id))}
+          //onClick={() =>  spotifyApi.addToMySavedTracks(favoritedItems.map((item) => item.id))}
+          //onClick={handlePlusClick}
+
           data-tooltip-id="create"
           className={`connectingToTooltip: create ${
             favoritedItems.length > 0 && "hover:scale-105"
@@ -65,6 +160,7 @@ function likedTracks() {
         >
           <PlusIcon className="h-9 w-9 text-white" />
         </button>
+
         <Tooltip
           content={`${
             favoritedItems.length == 0
@@ -82,7 +178,7 @@ function likedTracks() {
           data-tooltip-id="trash"
           className={` trash ${
             favoritedItems == 0 && "hidden"
-          } //bg-spotifyBlack //rounded-full  h-8 w-8 absolute cursor-pointer z-30 bottom-7 ml-3 text-white transform transition duration-200 ease-in hover:scale-105`}
+          } //bg-spotifyBlack //rounded-full  h-8 w-8 absolute cursor-pointer z-30 bottom-7 ml-4 text-white transform transition duration-200 ease-in hover:scale-105`}
         />
         <Tooltip
           content="Clear all songs"

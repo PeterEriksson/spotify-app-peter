@@ -114,7 +114,7 @@ export default function profile() {
         </h2>
         <div className="mx-5">
           {recentSongs?.map(({ track }, i) => (
-            <Song key={i} nr={i + 1} artistSong track={track} />
+            <Song key={i} nr={i + 1} wideDesign track={track} />
           ))}
         </div>
       </div>
