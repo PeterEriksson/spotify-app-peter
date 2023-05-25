@@ -1,11 +1,12 @@
 import {
   ArrowLeftOnRectangleIcon,
+  ListBulletIcon,
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
 import Head from "next/head";
 
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment, useRef } from "react";
 import { SocialIcon } from "react-social-icons";
 import { Tooltip } from "react-tooltip";
 import Sidebar from "../components/Sidebar";
@@ -50,6 +51,18 @@ function likedTracks() {
   const [openNewPlaylistModal, setOpenNewPlaylistModal] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState("");
+  const [playlistName, setPlaylistName] = useState("");
+
+  const playlistInputRef = useRef();
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+
+    if (event.target.value === "option2") {
+      setTimeout(() => {
+        playlistInputRef.current.focus();
+      }, 70);
+    }
+  };
   return (
     <div className="flex h-screen ">
       <Head>
@@ -110,13 +123,13 @@ function likedTracks() {
                     >
                       New Playlist
                     </Dialog.Title>
-                    <div className="flex flex-col    ">
+                    <div className="flex flex-col  mt-2  ">
                       <label>
                         <input
                           type="radio"
                           value="option1"
                           checked={selectedOption === "option1"}
-                          onChange={(e) => setSelectedOption(e.target.value)}
+                          onChange={handleOptionChange}
                         />
                         add songs to liked on spotify
                       </label>
@@ -125,10 +138,26 @@ function likedTracks() {
                           type="radio"
                           value="option2"
                           checked={selectedOption === "option2"}
-                          onChange={(e) => setSelectedOption(e.target.value)}
+                          onChange={handleOptionChange}
                         />
                         create new playlist
                       </label>
+                    </div>
+                    <div className="relative mt-3 rounded-md ">
+                      <div className="absolute z-30 inset-y-0 pl-3 flex items-center pointer-events-none ">
+                        <ListBulletIcon className="h-5 w-5 text-gray-500 " />
+                      </div>
+                      <input
+                        disabled={selectedOption == "option1"}
+                        ref={playlistInputRef}
+                        type="text"
+                        value={playlistName}
+                        onChange={(e) => setPlaylistName(e.target.value)}
+                        className={`${
+                          selectedOption !== "option2" && "cursor-not-allowed"
+                        }    bg-gray-50 px-10 py-1.5 focus:outline-none focus:border-gray-400 border w-full    block sm:text-sm  rounded-md`}
+                        placeholder="Playlist name"
+                      />
                     </div>
                   </div>
                 </div>
