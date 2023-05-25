@@ -4,6 +4,7 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/solid";
 import Head from "next/head";
+
 import React, { useEffect, useState, Fragment } from "react";
 import { SocialIcon } from "react-social-icons";
 import { Tooltip } from "react-tooltip";
@@ -31,48 +32,24 @@ function likedTracks() {
     dispatch(emptyFavorites());
   };
 
-  //AFTER testing: not an issue. If song already exists, it get moved to the top. In Modal, give user
-  //option to either add to liked songs OR create a new playlist
-  //TEST TEMP filteredIds (filter out tracks that are in real spotify liked tracks)
-  //works, but bug if we remove an item/s ..
-  //need to update value every time we remove item/s.  -> call testing() every time we use remove??
-  /* const [idsFiltered, setIdsFiltered] = useState([]);
-  const updateFiltered = async () => {
-    let idsFiltered = await favoritedItems
-      .map((item) => item.id)
-      .map((itemId) => {
-        spotifyApi.containsMySavedTracks([itemId]).then(
-          function (data) {
-            // An array is returned, where the first element corresponds to the first track ID in the query
-            var trackIsInYourMusic = data.body[0];
-
-            if (trackIsInYourMusic) {
-              //console.log("Track was found in the user's Your Music library");
-              //setIdsFiltered((prev) => [...prev, itemId]);
-              return null;
-            } else {
-              setIdsFiltered((prev) => [...prev, itemId]);
-            }
-          },
-          function (err) {
-            console.log("Something went wrong!", err);
-          }
-        );
-      });
-  }; */
-
   //ok.
   //1. remove songs when method is completed.
   //2. add hot-toas notification
   //3. research/work on modal design
   const handlePlusClick = () => {
+    //add this code to new function -> handleCreate
     /* if (favoritedItems.length == 0) return;
     spotifyApi
       .addToMySavedTracks(favoritedItems.map((item) => item.id))
       .then(dispatch(emptyFavorites())); */
+
+    //if (favoritedItems.length == 0) return;
+    setOpenNewPlaylistModal((prev) => !prev);
   };
 
-  const [openNewListModal, setOpenNewListModal] = useState(false);
+  const [openNewPlaylistModal, setOpenNewPlaylistModal] = useState(false);
+
+  const [selectedOption, setSelectedOption] = useState("");
   return (
     <div className="flex h-screen ">
       <Head>
@@ -85,19 +62,16 @@ function likedTracks() {
       <div className=" w-screen bg-bodyBackground  overflow-y-scroll   ">
         <Header />
 
-        <h1
-          onClick={() => setOpenNewListModal((prev) => !prev)}
-          className="text-3xl text-white text-center uppercase tracking-wide"
-        >
+        <h1 className="text-3xl text-white text-center uppercase tracking-wide">
           liked songs test ...
         </h1>
 
         {/* MODAL TEST */}
-        <Transition.Root show={openNewListModal} as={Fragment}>
+        <Transition.Root show={openNewPlaylistModal} as={Fragment}>
           <Dialog
             as="div"
             className="fixed z-50 inset-0 //overscroll-y-auto overflow-y-auto"
-            onClose={setOpenNewListModal}
+            onClose={setOpenNewPlaylistModal}
           >
             <div className="flex items-center justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
               <Transition.Child
@@ -129,14 +103,32 @@ function likedTracks() {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-1.5  pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
-                  <div>
-                    <div className="mt-1 text-center sm:mt-3.5">
-                      <Dialog.Title
-                        as="h3"
-                        className="text-lg leading-6 font-medium text-gray-900"
-                      >
-                        New Playlist
-                      </Dialog.Title>
+                  <div className="mt-1  flex flex-col items-center sm:mt-3.5">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-lg text-center underline leading-6 font-medium text-gray-900"
+                    >
+                      New Playlist
+                    </Dialog.Title>
+                    <div className="flex flex-col    ">
+                      <label>
+                        <input
+                          type="radio"
+                          value="option1"
+                          checked={selectedOption === "option1"}
+                          onChange={(e) => setSelectedOption(e.target.value)}
+                        />
+                        add songs to liked on spotify
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          value="option2"
+                          checked={selectedOption === "option2"}
+                          onChange={(e) => setSelectedOption(e.target.value)}
+                        />
+                        create new playlist
+                      </label>
                     </div>
                   </div>
                 </div>
@@ -150,8 +142,7 @@ function likedTracks() {
         <button
           //onClick={() => console.log(favoritedItems.map((item) => item.id))}
           //onClick={() =>  spotifyApi.addToMySavedTracks(favoritedItems.map((item) => item.id))}
-          //onClick={handlePlusClick}
-
+          onClick={handlePlusClick}
           data-tooltip-id="create"
           className={`connectingToTooltip: create ${
             favoritedItems.length > 0 && "hover:scale-105"
