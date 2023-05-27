@@ -21,6 +21,7 @@ import { emptyFavorites } from "../slices/favoritesSlice";
 import useSpotify from "../hooks/useSpotify";
 
 import { Dialog, Transition } from "@headlessui/react";
+import modalstyles from "../styles/effects.module.css";
 
 function likedTracks() {
   const { data: session } = useSession();
@@ -58,11 +59,14 @@ function likedTracks() {
     setSelectedOption(event.target.value);
 
     if (event.target.value === "option2") {
+      //fixes small bug...->
       setTimeout(() => {
         playlistInputRef.current.focus();
-      }, 70);
+      }, 50);
     }
   };
+
+  const handleCreate = () => {};
   return (
     <div className="flex h-screen ">
       <Head>
@@ -121,20 +125,23 @@ function likedTracks() {
                       as="h3"
                       className="text-lg text-center underline leading-6 font-medium text-gray-900"
                     >
-                      New Playlist
+                      Add Songs
                     </Dialog.Title>
                     <div className="flex flex-col  mt-2  ">
-                      <label>
+                      <label className={modalstyles.radioLabel}>
                         <input
+                          color="#191414"
+                          className="mr-1"
                           type="radio"
                           value="option1"
                           checked={selectedOption === "option1"}
                           onChange={handleOptionChange}
                         />
-                        add songs to liked on spotify
+                        add songs to your liked on spotify
                       </label>
-                      <label>
+                      <label className={modalstyles.radioLabel}>
                         <input
+                          className="mr-1 "
                           type="radio"
                           value="option2"
                           checked={selectedOption === "option2"}
@@ -154,11 +161,37 @@ function likedTracks() {
                         value={playlistName}
                         onChange={(e) => setPlaylistName(e.target.value)}
                         className={`${
-                          selectedOption !== "option2" && "cursor-not-allowed"
-                        }    bg-gray-50 px-10 py-1.5 focus:outline-none focus:border-gray-400 border w-full    block sm:text-sm  rounded-md`}
+                          selectedOption == "option1" && "cursor-not-allowed"
+                        } ${
+                          selectedOption == "option1" &&
+                          "line-through opacity-60"
+                        }   bg-gray-50 px-12 py-1.5 focus:outline-none focus:border-gray-400 border w-full    block sm:text-sm  rounded-md`}
                         placeholder="Playlist name"
                       />
                     </div>
+                    <button
+                      onClick={handleCreate}
+                      disabled={
+                        (playlistName.length >= 100 &&
+                          selectedOption == "option2") ||
+                        (playlistName == "" && selectedOption !== "option1") ||
+                        (!playlistName.trim() &&
+                          selectedOption !== "option1") ||
+                        selectedOption == ""
+                      }
+                      className={`${
+                        ((playlistName.length >= 100 &&
+                          selectedOption == "option2") ||
+                          (playlistName == "" &&
+                            selectedOption !== "option1") ||
+                          (!playlistName.trim() &&
+                            selectedOption !== "option1") ||
+                          selectedOption == "") &&
+                        "cursor-not-allowed opacity-50"
+                      }  text-white rounded-xl bg-spotifyGreen px-4 py-2  mt-5   `}
+                    >
+                      Create
+                    </button>
                   </div>
                 </div>
               </Transition.Child>

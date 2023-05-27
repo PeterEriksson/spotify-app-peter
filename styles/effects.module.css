@@ -57,3 +57,28 @@
     background-position: right;
   }
 }
+
+/* ------------------Modal radio buttons---------------------- */
+/* Hide the default radio button */
+.radioLabel input[type="radio"] {
+  appearance: none;
+}
+
+/* Create a custom radio button */
+.radioLabel input[type="radio"]::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.2px solid black; /* Set the border color to black */
+  background-color: white;
+
+  /* align items... */
+  margin-bottom: -2px;
+}
+
+/* Style the custom radio button when checked */
+.radioLabel input[type="radio"]:checked::before {
+  background-color: #1db954; /* Set the background color to black */
+}

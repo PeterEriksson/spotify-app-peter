@@ -13,6 +13,10 @@ export default function profile() {
   const [profile, setProfile] = useState({});
   const [recentSongs, setRecentSongs] = useState([]);
 
+  /* test temp, recently songs arg input */
+  /* ok, add loading indicator */
+  const [recentlySongsLimit, setRecentlySongsLimit] = useState(5);
+
   const { data: session } = useSession();
   const spotifyApi = useSpotify();
 
@@ -28,7 +32,7 @@ export default function profile() {
 
   const getRecentSongs = () => {
     spotifyApi
-      .getMyRecentlyPlayedTracks({ limit: 5 })
+      .getMyRecentlyPlayedTracks({ limit: recentlySongsLimit })
       .then((data) => setRecentSongs(data.body.items))
       .catch((err) => console.log(err));
   };
@@ -38,7 +42,7 @@ export default function profile() {
     //  if (spotifyApi.getAccessToken()) {
     getRecentSongs();
     //  }
-  }, []);
+  }, [recentlySongsLimit]);
 
   const [playlists, setPlaylists] = useState([]);
   const getMyPlaylists = () => {
@@ -117,6 +121,18 @@ export default function profile() {
             <Song key={i} nr={i + 1} wideDesign track={track} />
           ))}
         </div>
+
+        {/* load more button */}
+        {recentlySongsLimit < 15 && (
+          <div className="flex justify-center">
+            <button
+              onClick={() => setRecentlySongsLimit((prev) => prev + 5)}
+              className="text-gray-600 font-bold text-center my-2 cursor-pointer  "
+            >
+              Load more
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

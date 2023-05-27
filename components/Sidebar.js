@@ -137,27 +137,22 @@ function Sidebar() {
           </p>
         </div>
 
-        {/*  <div
-          onClick={() => router.push(`/profile`)}
+        <div
           className="sidebarDiv group"
+          onClick={() => router.push("/discover")}
         >
-          <UserIcon
+          <GlobeAltIcon
             className={`sidebarIcon ${
-              asPath === "/profile" ? "text-spotifyGreen" : "text-gray-400"
-            }  `}
+              asPath === "/discover" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
           />
           <p
             className={` ${
-              asPath === "/profile" ? "text-spotifyGreen" : "text-gray-400"
+              asPath === "/discover" ? "text-spotifyGreen" : "text-gray-400"
             } hoverStyling `}
           >
-            Profile
+            Discover
           </p>
-        </div> */}
-
-        <div className="sidebarDiv">
-          <GlobeAltIcon className="sidebarIcon" />
-          <p className="text-gray-400">Discover</p>
         </div>
 
         {/* search */}
