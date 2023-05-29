@@ -1,4 +1,4 @@
-import { Waveform, RaceBy } from "@uiball/loaders";
+import { RaceBy } from "@uiball/loaders";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -20,7 +20,6 @@ export default function artistDetails({ artistId }) {
       .then((data) => setArtist(data.body))
       .then(() => setLoading(false))
       .catch((err) => console.log(err));
-    //if err -> display error msg on page???
   };
 
   useEffect(() => {

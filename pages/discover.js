@@ -1,9 +1,35 @@
+import { getSession } from "next-auth/react";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Artist from "../components/Artist";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import useSpotify from "../hooks/useSpotify";
 
 export default function discover() {
+  const spotifyApi = useSpotify();
+
+  const [topArtists, setTopArtists] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [artistsSelected, setArtistsSelected] = useState([]);
+
+  const getArtists = () => {
+    spotifyApi
+      .getMyTopArtists({ limit: 14, time_range: "long_term" })
+      .then((data) => setTopArtists(data.body.items))
+      .then(() => setLoading(false))
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      setLoading(true);
+      //increase loading-spinner time -> more ux friendly
+      setTimeout(() => {
+        getArtists();
+      }, 500);
+    }
+  }, []);
+
   return (
     <div className="flex h-screen ">
       <Head>
@@ -16,18 +42,47 @@ export default function discover() {
 
       <div className=" w-screen   overflow-y-scroll  bg-bodyBackground">
         <Header />
-        <div className="text-white">
-          <h1>Hello from discover</h1>
-          <h3>
-            display artists. select which ones you want to send in as args in
-            discover call. Adjust min_energy and min_popularity.
-            spotifyApi.getRecommendations
-          </h3>
-          <h1 className="text-3xl text-white text-center uppercase tracking-wide">
-            Discover songs
-          </h1>
+
+        <h1
+          onClick={() => console.log(artistsSelected)}
+          className="text-3xl my-2 text-white text-center uppercase tracking-wide"
+        >
+          Discover songs/artists?
+        </h1>
+
+        <div className="flex mx-5 lg:grid lg:grid-cols-7 lg:gap-1 lg:space-x-0 space-x-2      justify-start overflow-x-scroll  ">
+          {topArtists.map((artist, i) => (
+            <Artist
+              discoverPage
+              key={i}
+              artist={artist}
+              artistsSelected={artistsSelected}
+              setArtistsSelected={setArtistsSelected}
+            />
+          ))}
+        </div>
+        <div className="mx-5">
+          <h4 className="text-white">min energy</h4>
+          <h4 className="text-white">min popularity</h4>
+        </div>
+
+        <div className="flex justify-center mt-3">
+          <button className=" text-white border border-white rounded-xl px-3 py-2  ">
+            Search
+          </button>
         </div>
       </div>
     </div>
   );
+}
+
+//(when refreshing the page -> data is not shown. solution) ->
+//onload issue -> pre-fetch the session / pre render the user -> data is shown.
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  return {
+    props: {
+      session,
+    },
+  };
 }

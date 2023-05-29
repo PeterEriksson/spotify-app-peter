@@ -125,9 +125,9 @@ function likedTracks() {
                       as="h3"
                       className="text-lg text-center underline leading-6 font-medium text-gray-900"
                     >
-                      Add Songs
+                      Perform action with liked songs
                     </Dialog.Title>
-                    <div className="flex flex-col  mt-2  ">
+                    <div className="flex flex-col  mt-1.5  ">
                       <label className={modalstyles.radioLabel}>
                         <input
                           color="#191414"
@@ -190,7 +190,9 @@ function likedTracks() {
                         "cursor-not-allowed opacity-50"
                       }  text-white rounded-xl bg-spotifyGreen px-4 py-2  mt-5   `}
                     >
-                      Create
+                      {selectedOption == "" && "select option"}
+                      {selectedOption == "option1" && "Add Songs"}
+                      {selectedOption == "option2" && "Create Playlist"}
                     </button>
                   </div>
                 </div>

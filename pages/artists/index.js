@@ -87,26 +87,26 @@ export default function Home() {
           Most Played Artists
         </h1>
 
-        <div>
-          <div className="relative max-w-fit mx-auto">
-            <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
-              {tabsData.map((tab, idx) => (
-                <button
-                  key={idx}
-                  ref={(el) => (tabsRef.current[idx] = el)}
-                  className="pt-2 pb-3"
-                  onClick={() => handleTimePeriodClick(idx, tab)}
-                >
-                  {tab.text}
-                </button>
-              ))}
-            </div>
-            <span
-              className="absolute bottom-0 block h-1  bg-spotifyGreen/// bg-white/80 transition-all duration-300"
-              style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
-            />
+        {/* <div> */}
+        <div className="relative max-w-fit mx-auto">
+          <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
+            {tabsData.map((tab, idx) => (
+              <button
+                key={idx}
+                ref={(el) => (tabsRef.current[idx] = el)}
+                className="pt-2 pb-3"
+                onClick={() => handleTimePeriodClick(idx, tab)}
+              >
+                {tab.text}
+              </button>
+            ))}
           </div>
+          <span
+            className="absolute bottom-0 block h-1  bg-spotifyGreen/// bg-white/80 transition-all duration-300"
+            style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
+          />
         </div>
+        {/* </div> */}
 
         {loading ? (
           <div className="flex justify-center   mt-24">
