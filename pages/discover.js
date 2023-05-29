@@ -6,6 +6,8 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import useSpotify from "../hooks/useSpotify";
 
+import styles from "../styles/effects.module.css";
+
 export default function discover() {
   const spotifyApi = useSpotify();
 
@@ -30,6 +32,42 @@ export default function discover() {
     }
   }, []);
 
+  /* input range */
+  const [popularity, setPopularity] = useState(0);
+  const handlePopularityChange = (event) => {
+    const newPopularity = Math.round(event.target.value / 10) * 10;
+    setPopularity(newPopularity);
+  };
+  const [energy, setEnergy] = useState(0);
+  const handleEnergyChange = (event) => {
+    const newEnergy = Math.round(event.target.value / 10) * 10;
+    setEnergy(newEnergy);
+  };
+
+  //ok.
+  const [recommendations, setRecommendations] = useState([]);
+  const [loadingRecommendations, setLoadingRecommendations] = useState(false);
+  //attach to button. include getAccessToken? Add loading state, loading-ui and increase loading time.
+  const getRecommendations = () => {
+    spotifyApi
+      .getRecommendations({
+        min_energy: 0.4,
+        seed_artists: ["0cAOG10Gh3ORpBRZ9c7Zam"],
+        min_popularity: 50,
+      })
+      .then((data) => setRecommendations(data.body.tracks))
+      .catch((err) => console.log(err));
+  };
+
+  //ok.
+  /* useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      setTimeout(() => {
+        getRecommendations();
+      }, 500);
+    }
+  }, []); */
+
   return (
     <div className="flex h-screen ">
       <Head>
@@ -44,13 +82,13 @@ export default function discover() {
         <Header />
 
         <h1
-          onClick={() => console.log(artistsSelected)}
+          onClick={() => console.log(recommendations)}
           className="text-3xl my-2 text-white text-center uppercase tracking-wide"
         >
           Discover songs/artists?
         </h1>
 
-        <div className="flex mx-5 lg:grid lg:grid-cols-7 lg:gap-1 lg:space-x-0 space-x-2      justify-start overflow-x-scroll  ">
+        <div className="flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2      justify-start overflow-x-scroll  ">
           {topArtists.map((artist, i) => (
             <Artist
               discoverPage
@@ -61,9 +99,34 @@ export default function discover() {
             />
           ))}
         </div>
-        <div className="mx-5">
-          <h4 className="text-white">min energy</h4>
-          <h4 className="text-white">min popularity</h4>
+        {/* input range div */}
+        <div className="mx-5 flex space-x-5 justify-between mt-3">
+          <div className="text-center  w-full">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={popularity}
+              onChange={handlePopularityChange}
+              className={`${styles.rangeInput} bg-gray-700 `}
+            />
+            <p className="mt-2 text-lg text-gray-700 ">
+              Popularity: {popularity}
+            </p>
+          </div>
+
+          <div className="text-center w-full">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="10"
+              value={energy}
+              onChange={handleEnergyChange}
+              className={`${styles.rangeInput} bg-gray-700          /w-full /h-1 /bg-gray-700 /outline-none /appearance-none /rounded `}
+            />
+            <p className="mt-2 text-lg text-gray-700">Energy: {energy}</p>
+          </div>
         </div>
 
         <div className="flex justify-center mt-3">

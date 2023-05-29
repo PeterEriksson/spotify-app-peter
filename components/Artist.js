@@ -25,7 +25,7 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
     <div
       className={`bg-gray-800 rounded-xl border border-black/70  group cursor-pointer      overflow-hidden    ${
         discoverPage &&
-        "w-28 /h-24 flex-shrink-0 lg:w-full    transition duration-[250ms] ease-in-out  "
+        "w-28  flex-shrink-0 mdlg:w-full    transition duration-[250ms] ease-in-out  "
       }   ${isArtistSelected() && "border-spotifyGreen "}  `}
       //onClick={() => router.push("/artists/" + artist?.id)}
       onClick={handleClick}

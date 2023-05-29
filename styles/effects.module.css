@@ -82,3 +82,25 @@
 .radioLabel input[type="radio"]:checked::before {
   background-color: #1db954; /* Set the background color to black */
 }
+
+/* ------------input range--------------- */
+.rangeInput {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 6px;
+  outline: 0;
+  /*  background: #333333; */
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 18px;
+  width: 18px;
+  border-radius: 3px;
+  background: #1db954;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+}
