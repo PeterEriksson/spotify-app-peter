@@ -39,7 +39,7 @@ function likedTracks() {
   //2. add hot-toas notification
   //3. research/work on modal design
   const handlePlusClick = () => {
-    //add this code to new function -> handleCreate
+    //add this code to new function -> handleAction
     /* if (favoritedItems.length == 0) return;
     spotifyApi
       .addToMySavedTracks(favoritedItems.map((item) => item.id))
@@ -66,7 +66,18 @@ function likedTracks() {
     }
   };
 
-  const handleCreate = () => {};
+  const actionNotAllowed = () => {
+    return (
+      (playlistName.length >= 100 && selectedOption == "option2") ||
+      favoritedItems.length == 0 ||
+      (playlistName == "" && selectedOption !== "option1") ||
+      (!playlistName.trim() && selectedOption !== "option1") ||
+      selectedOption == ""
+    );
+  };
+
+  const handleAction = () => {};
+
   return (
     <div className="flex h-screen ">
       <Head>
@@ -79,7 +90,10 @@ function likedTracks() {
       <div className=" w-screen bg-bodyBackground  overflow-y-scroll   ">
         <Header />
 
-        <h1 className="text-3xl text-white text-center uppercase tracking-wide">
+        <h1
+          onClick={() => console.log(actionNotAllowed())}
+          className="text-3xl text-white text-center uppercase tracking-wide"
+        >
           liked songs test ...
         </h1>
 
@@ -123,7 +137,7 @@ function likedTracks() {
                   <div className="mt-1  flex flex-col items-center sm:mt-3.5">
                     <Dialog.Title
                       as="h3"
-                      className="text-lg text-center underline leading-6 font-medium text-gray-900"
+                      className="text-lg text-center underline// leading-6 font-medium text-gray-900"
                     >
                       Perform action with liked songs
                     </Dialog.Title>
@@ -137,7 +151,7 @@ function likedTracks() {
                           checked={selectedOption === "option1"}
                           onChange={handleOptionChange}
                         />
-                        add songs to your liked on spotify
+                        Add songs to your liked on Spotify
                       </label>
                       <label className={modalstyles.radioLabel}>
                         <input
@@ -147,7 +161,7 @@ function likedTracks() {
                           checked={selectedOption === "option2"}
                           onChange={handleOptionChange}
                         />
-                        create new playlist
+                        Create new playlist on Spotify
                       </label>
                     </div>
                     <div className="relative mt-3 rounded-md ">
@@ -170,24 +184,10 @@ function likedTracks() {
                       />
                     </div>
                     <button
-                      onClick={handleCreate}
-                      disabled={
-                        (playlistName.length >= 100 &&
-                          selectedOption == "option2") ||
-                        (playlistName == "" && selectedOption !== "option1") ||
-                        (!playlistName.trim() &&
-                          selectedOption !== "option1") ||
-                        selectedOption == ""
-                      }
+                      onClick={handleAction}
+                      disabled={actionNotAllowed()}
                       className={`${
-                        ((playlistName.length >= 100 &&
-                          selectedOption == "option2") ||
-                          (playlistName == "" &&
-                            selectedOption !== "option1") ||
-                          (!playlistName.trim() &&
-                            selectedOption !== "option1") ||
-                          selectedOption == "") &&
-                        "cursor-not-allowed opacity-50"
+                        actionNotAllowed() && "cursor-not-allowed opacity-50"
                       }  text-white rounded-xl bg-spotifyGreen px-4 py-2  mt-5   `}
                     >
                       {selectedOption == "" && "select option"}
@@ -216,7 +216,7 @@ function likedTracks() {
           <PlusIcon className="h-9 w-9 text-white" />
         </button>
 
-        <Tooltip
+        {/* <Tooltip
           content={`${
             favoritedItems.length == 0
               ? "Like songs & create a playlist!"
@@ -226,7 +226,7 @@ function likedTracks() {
           delayShow={favoritedItems.length > 0 ? 400 : 150}
           anchorSelect=".create"
           place="top"
-        />
+        /> */}
 
         <TrashIcon
           onClick={() => dispatch(emptyFavorites())}

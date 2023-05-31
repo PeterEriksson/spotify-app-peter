@@ -93,7 +93,6 @@ export default function tracks() {
           most played songs
         </h1>
 
-        {/* <div> */}
         <div className="relative max-w-fit mx-auto">
           <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
             {tabsData.map((tab, idx) => (
@@ -112,7 +111,7 @@ export default function tracks() {
             style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
           />
         </div>
-        {/* </div> */}
+
         {/* TOP TRACKS */}
         {loading ? (
           <div className="flex justify-center mt-4">

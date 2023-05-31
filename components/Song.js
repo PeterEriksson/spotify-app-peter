@@ -44,6 +44,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
     //else stop
     setPlaying(false);
   };
+
   useEffect(() => {
     document.addEventListener("click", handleStopPlay, true);
     return () => {
@@ -53,31 +54,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
 
   const dispatch = useDispatch();
   const favoritedItems = useSelector(selectFavoritedItmes);
-
-  //test temp
-  /* const spotifyApi = useSpotify();
-  useEffect(() => {
-    //works. Removes tracks that are already in Spotify saved songs. Use this later maybe.
- 
-      spotifyApi.containsMySavedTracks([track.id]).then(
-        function (data) {
-          // An array is returned, where the first element corresponds to the first track ID in the query
-          var trackIsInYourMusic = data.body[0];
-
-          if (trackIsInYourMusic) {
-            console.log("Track was found in the user's Your Music library");
-            dispatch(removeFromFavorites(track.id));
-          } else {
-            console.log("Track was not found.");
-          }
-        },
-        function (err) {
-          console.log("Something went wrong!", err);
-        }
-      );
-    };
- 
-  }, []); */
 
   const handleLike = () => {
     //when  in /likedTracks, animation retriggers when removing a like, -> solution->
@@ -123,7 +99,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
                 height="20"
                 width="30"
                 radius="9"
-                /*  color="gray" */
                 color="#1DB954"
                 ariaLabel="play-animation"
                 wrapperStyle

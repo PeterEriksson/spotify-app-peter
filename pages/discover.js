@@ -1,9 +1,13 @@
+import { Waveform } from "@uiball/loaders";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
+
 import Artist from "../components/Artist";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import Song from "../components/Song";
 import useSpotify from "../hooks/useSpotify";
 
 import styles from "../styles/effects.module.css";
@@ -12,19 +16,19 @@ export default function discover() {
   const spotifyApi = useSpotify();
 
   const [topArtists, setTopArtists] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loadingArtists, setLoadingArtists] = useState(false);
   const [artistsSelected, setArtistsSelected] = useState([]);
 
   const getArtists = () => {
     spotifyApi
       .getMyTopArtists({ limit: 14, time_range: "long_term" })
       .then((data) => setTopArtists(data.body.items))
-      .then(() => setLoading(false))
+      .then(() => setLoadingArtists(false))
       .catch((err) => console.log(err));
   };
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
-      setLoading(true);
+      setLoadingArtists(true);
       //increase loading-spinner time -> more ux friendly
       setTimeout(() => {
         getArtists();
@@ -44,26 +48,42 @@ export default function discover() {
     setEnergy(newEnergy);
   };
 
-  //ok.
   const [recommendations, setRecommendations] = useState([]);
   const [loadingRecommendations, setLoadingRecommendations] = useState(false);
   //attach to button. include getAccessToken? Add loading state, loading-ui and increase loading time.
   const getRecommendations = () => {
-    spotifyApi
-      .getRecommendations({
-        min_energy: 0.4,
-        seed_artists: ["0cAOG10Gh3ORpBRZ9c7Zam"],
-        min_popularity: 50,
-      })
-      .then((data) => setRecommendations(data.body.tracks))
-      .catch((err) => console.log(err));
+    setLoadingRecommendations(true);
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi
+        .getRecommendations({
+          min_energy: 0.4,
+          seed_artists: ["0cAOG10Gh3ORpBRZ9c7Zam"],
+          min_popularity: 50,
+        })
+        .then((data) => setRecommendations(data.body.tracks))
+        .then(() => setLoadingRecommendations(false))
+        .catch((err) => console.log(err));
+    }
   };
 
-  //ok.
-  /* useEffect(() => {
+  /*  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      getRecommendations();
+    }
+  }, []); */
+
+  const [testTracks, setTestTracks] = useState([]);
+  /* const getTracks = () => {
+    spotifyApi
+      .getMyTopTracks({ limit: 10, time_range: "long_term" })
+      .then((data) => setTestTracks(data.body.items))
+
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       setTimeout(() => {
-        getRecommendations();
+        getTracks();
       }, 500);
     }
   }, []); */
@@ -85,7 +105,13 @@ export default function discover() {
           onClick={() => console.log(recommendations)}
           className="text-3xl my-2 text-white text-center uppercase tracking-wide"
         >
-          Discover songs/artists?
+          console.log recommendations
+        </h1>
+        <h1
+          onClick={() => console.log(testTracks)}
+          className="text-3xl my-2 text-white text-center uppercase tracking-wide"
+        >
+          console.log test tracks
         </h1>
 
         <div className="flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2      justify-start overflow-x-scroll  ">
@@ -111,7 +137,7 @@ export default function discover() {
               className={`${styles.rangeInput} bg-gray-700 `}
             />
             <p className="mt-2 text-lg text-gray-700 ">
-              Popularity: {popularity}
+              Min Popularity: {popularity}
             </p>
           </div>
 
@@ -125,15 +151,30 @@ export default function discover() {
               onChange={handleEnergyChange}
               className={`${styles.rangeInput} bg-gray-700          /w-full /h-1 /bg-gray-700 /outline-none /appearance-none /rounded `}
             />
-            <p className="mt-2 text-lg text-gray-700">Energy: {energy}</p>
+            <p className="mt-2 text-lg text-gray-700">Min Energy: {energy}</p>
           </div>
         </div>
 
         <div className="flex justify-center mt-3">
-          <button className=" text-white border border-white rounded-xl px-3 py-2  ">
+          <button
+            onClick={() => getRecommendations()}
+            className=" text-white border border-white rounded-xl px-3 py-2  "
+          >
             Search
           </button>
         </div>
+
+        {loadingRecommendations ? (
+          <div className="flex justify-center mt-4">
+            <Waveform color="white" speed={0.8} />
+          </div>
+        ) : (
+          <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
+            {recommendations?.map((_track, i) => (
+              <Song key={i} track={_track} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
