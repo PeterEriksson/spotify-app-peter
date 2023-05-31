@@ -1,4 +1,4 @@
-import { Waveform } from "@uiball/loaders";
+import { RaceBy, Waveform } from "@uiball/loaders";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -16,7 +16,7 @@ export default function discover() {
   const spotifyApi = useSpotify();
 
   const [topArtists, setTopArtists] = useState([]);
-  const [loadingArtists, setLoadingArtists] = useState(false);
+  const [loadingArtists, setLoadingArtists] = useState(true);
   const [artistsSelected, setArtistsSelected] = useState([]);
 
   const getArtists = () => {
@@ -53,40 +53,16 @@ export default function discover() {
   //attach to button. include getAccessToken? Add loading state, loading-ui and increase loading time.
   const getRecommendations = () => {
     setLoadingRecommendations(true);
-    if (spotifyApi.getAccessToken()) {
-      spotifyApi
-        .getRecommendations({
-          min_energy: 0.4,
-          seed_artists: ["0cAOG10Gh3ORpBRZ9c7Zam"],
-          min_popularity: 50,
-        })
-        .then((data) => setRecommendations(data.body.tracks))
-        .then(() => setLoadingRecommendations(false))
-        .catch((err) => console.log(err));
-    }
-  };
-
-  /*  useEffect(() => {
-    if (spotifyApi.getAccessToken()) {
-      getRecommendations();
-    }
-  }, []); */
-
-  const [testTracks, setTestTracks] = useState([]);
-  /* const getTracks = () => {
     spotifyApi
-      .getMyTopTracks({ limit: 10, time_range: "long_term" })
-      .then((data) => setTestTracks(data.body.items))
-
+      .getRecommendations({
+        min_energy: 0.4,
+        seed_artists: ["0cAOG10Gh3ORpBRZ9c7Zam"],
+        min_popularity: 50,
+      })
+      .then((data) => setRecommendations(data.body.tracks))
+      .then(() => setLoadingRecommendations(false))
       .catch((err) => console.log(err));
   };
-  useEffect(() => {
-    if (spotifyApi.getAccessToken()) {
-      setTimeout(() => {
-        getTracks();
-      }, 500);
-    }
-  }, []); */
 
   return (
     <div className="flex h-screen ">
@@ -101,79 +77,90 @@ export default function discover() {
       <div className=" w-screen   overflow-y-scroll  bg-bodyBackground">
         <Header />
 
-        <h1
-          onClick={() => console.log(recommendations)}
-          className="text-3xl my-2 text-white text-center uppercase tracking-wide"
-        >
-          console.log recommendations
-        </h1>
-        <h1
-          onClick={() => console.log(testTracks)}
-          className="text-3xl my-2 text-white text-center uppercase tracking-wide"
-        >
-          console.log test tracks
-        </h1>
-
-        <div className="flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2      justify-start overflow-x-scroll  ">
-          {topArtists.map((artist, i) => (
-            <Artist
-              discoverPage
-              key={i}
-              artist={artist}
-              artistsSelected={artistsSelected}
-              setArtistsSelected={setArtistsSelected}
-            />
-          ))}
-        </div>
-        {/* input range div */}
-        <div className="mx-5 flex space-x-5 justify-between mt-3">
-          <div className="text-center  w-full">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={popularity}
-              onChange={handlePopularityChange}
-              className={`${styles.rangeInput} bg-gray-700 `}
-            />
-            <p className="mt-2 text-lg text-gray-700 ">
-              Min Popularity: {popularity}
-            </p>
-          </div>
-
-          <div className="text-center w-full">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              step="10"
-              value={energy}
-              onChange={handleEnergyChange}
-              className={`${styles.rangeInput} bg-gray-700          /w-full /h-1 /bg-gray-700 /outline-none /appearance-none /rounded `}
-            />
-            <p className="mt-2 text-lg text-gray-700">Min Energy: {energy}</p>
-          </div>
-        </div>
-
-        <div className="flex justify-center mt-3">
-          <button
-            onClick={() => getRecommendations()}
-            className=" text-white border border-white rounded-xl px-3 py-2  "
-          >
-            Search
-          </button>
-        </div>
-
-        {loadingRecommendations ? (
-          <div className="flex justify-center mt-4">
-            <Waveform color="white" speed={0.8} />
+        {loadingArtists ? (
+          <div className="flex justify-center  mt-28">
+            <RaceBy color="white" speed={1.2} size={150} lineWeight={4} />
           </div>
         ) : (
-          <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
-            {recommendations?.map((_track, i) => (
-              <Song key={i} track={_track} />
-            ))}
-          </div>
+          <>
+            <h1
+              aria-label="ignore-pause"
+              //onClick={() => console.log(recommendations)}
+              className="text-3xl my-2 text-white text-center uppercase tracking-wide"
+            >
+              Discover
+            </h1>
+
+            <div className="flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2      justify-start overflow-x-scroll  ">
+              {topArtists.map((artist, i) => (
+                <Artist
+                  key={i}
+                  artist={artist}
+                  discoverPage
+                  artistsSelected={artistsSelected}
+                  setArtistsSelected={setArtistsSelected}
+                />
+              ))}
+            </div>
+            <div
+              aria-label="INPUT RANGE DIV"
+              className="mx-5 flex space-x-5 justify-between mt-3"
+            >
+              <div className="text-center  w-full">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={popularity}
+                  onChange={handlePopularityChange}
+                  className={`${styles.rangeInput} bg-gray-700 `}
+                />
+                <p className="mt-2 text-lg text-gray-700 ">
+                  Min Popularity: {popularity}
+                </p>
+              </div>
+
+              <div className="text-center w-full">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="10"
+                  value={energy}
+                  onChange={handleEnergyChange}
+                  className={`${styles.rangeInput} bg-gray-700          /w-full /h-1 /bg-gray-700 /outline-none /appearance-none /rounded `}
+                />
+                <p className="mt-2 text-lg text-gray-700">
+                  Min Energy: {energy}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-center mt-3">
+              <button
+                onClick={() => getRecommendations()}
+                className=" text-white border border-white rounded-xl px-3 py-2  "
+              >
+                Search
+              </button>
+            </div>
+
+            {loadingRecommendations ? (
+              <div className="flex justify-center mt-4">
+                <Waveform color="white" speed={0.8} />
+              </div>
+            ) : (
+              <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
+                {recommendations
+                  //... (Also include defensive solution in other pages??)
+                  //error issue: some tracks dont have preview_url -> solution, filter out->
+                  ?.filter((track) => track.preview_url !== null)
+                  .map((_track, i) => (
+                    <Song key={i} track={_track} />
+                  ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
