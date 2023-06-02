@@ -66,6 +66,7 @@ export default function Home() {
   ];
 
   const handleTimePeriodClick = (idx, tab) => {
+    if (loading) return;
     setActiveTabIndex(idx);
     setTimePeriod(tab.label);
   };

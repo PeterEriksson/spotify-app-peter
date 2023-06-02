@@ -116,9 +116,12 @@ export default function artistDetails({ artistId }) {
             {/* popular songs */}
             {/* load more button -> change 5  to 10? */}
             <h2 className="text-white mt-3 text-xl">Popular</h2>
-            {artistTopSongs?.tracks.slice(0, 5).map((track, i) => (
-              <Song key={i} nr={i + 1} wideDesign track={track} />
-            ))}
+            {artistTopSongs?.tracks
+              .slice(0, 5)
+              .filter((track) => track.preview_url !== null)
+              .map((track, i) => (
+                <Song key={i} nr={i + 1} wideDesign track={track} />
+              ))}
           </div>
         )}
       </div>

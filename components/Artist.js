@@ -11,12 +11,16 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
 
   const handleClick = () => {
     if (discoverPage) {
-      const newArr = artistsSelected.filter((id) => id !== artist.id);
-      //if artist is already selected we remove it from the arr, else we add.
-      isArtistSelected()
-        ? setArtistsSelected(newArr)
-        : setArtistsSelected((prev) => [...prev, artist.id]);
+      if (isArtistSelected()) {
+        const newArr = artistsSelected.filter((id) => id !== artist.id);
+        setArtistsSelected(newArr);
+      } else {
+        //only let the user select max 3 artists
+        if (artistsSelected.length >= 3) return;
+        setArtistsSelected((prev) => [...prev, artist.id]);
+      }
     } else {
+      //user is not in discover page
       router.push("/artists/" + artist?.id);
     }
   };
@@ -32,7 +36,7 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
     >
       <div
         className={`relative flex items-center justify-center w-full       ${
-          discoverPage ? "h-28" : "h-40"
+          discoverPage ? "h-[88px]" : "h-40"
         }  `}
       >
         <Image

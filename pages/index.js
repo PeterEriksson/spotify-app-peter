@@ -117,15 +117,18 @@ export default function profile() {
           Recently Played
         </h2>
         <div className="mx-5">
-          {recentSongs?.map(({ track }, i) => (
-            <Song key={i} nr={i + 1} wideDesign track={track} />
-          ))}
+          {recentSongs
+            ?.filter((track) => track.preview_url !== null)
+            .map(({ track }, i) => (
+              <Song key={i} nr={i + 1} wideDesign track={track} />
+            ))}
         </div>
 
         {/* load more button */}
         {songsLimit < 15 && (
           <div className="flex justify-center">
             <button
+              aria-label="ignore-pause"
               onClick={() => setSongsLimit((prev) => prev + 5)}
               className="text-gray-600 font-bold text-center my-2 cursor-pointer  "
             >

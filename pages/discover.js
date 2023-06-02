@@ -2,7 +2,7 @@ import { RaceBy, Waveform } from "@uiball/loaders";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Artist from "../components/Artist";
 import Header from "../components/Header";
@@ -50,18 +50,29 @@ export default function discover() {
 
   const [recommendations, setRecommendations] = useState([]);
   const [loadingRecommendations, setLoadingRecommendations] = useState(false);
-  //attach to button. include getAccessToken? Add loading state, loading-ui and increase loading time.
-  const getRecommendations = () => {
+  // increase loading time..?
+  const handleGetRecommendations = () => {
     setLoadingRecommendations(true);
     spotifyApi
       .getRecommendations({
         min_energy: 0.4,
         seed_artists: ["0cAOG10Gh3ORpBRZ9c7Zam"],
         min_popularity: 50,
+        limit: 10,
+        //min_danceability
       })
       .then((data) => setRecommendations(data.body.tracks))
       .then(() => setLoadingRecommendations(false))
       .catch((err) => console.log(err));
+  };
+
+  const containerRef = useRef(null);
+
+  const handleArrowClick = (scrollOffset) => {
+    containerRef.current.scrollTo({
+      left: containerRef.current.scrollLeft + scrollOffset,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -91,7 +102,13 @@ export default function discover() {
               Discover
             </h1>
 
-            <div className="flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2      justify-start overflow-x-scroll  ">
+            <h1 onClick={() => handleArrowClick(200)} className="text-white">
+              scroll
+            </h1>
+            <div
+              ref={containerRef}
+              className="flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2      justify-start overflow-x-scroll  "
+            >
               {topArtists.map((artist, i) => (
                 <Artist
                   key={i}
@@ -136,9 +153,9 @@ export default function discover() {
               </div>
             </div>
 
-            <div className="flex justify-center mt-3">
+            <div className="flex justify-center mt-2">
               <button
-                onClick={() => getRecommendations()}
+                onClick={() => handleGetRecommendations()}
                 className=" text-white border border-white rounded-xl px-3 py-2  "
               >
                 Search
