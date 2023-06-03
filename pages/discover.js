@@ -1,3 +1,4 @@
+import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 import { RaceBy, Waveform } from "@uiball/loaders";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
@@ -97,27 +98,34 @@ export default function discover() {
             <h1
               aria-label="ignore-pause"
               //onClick={() => console.log(recommendations)}
-              className="text-3xl my-2 text-white text-center uppercase tracking-wide"
+              className="text-3xl mt-1.5 text-white text-center uppercase tracking-wide"
             >
               Discover
             </h1>
+            <h3 className="text-white text-center mt-0.5 mb-1 text-base ">
+              Select up to 3 artists and adjust popularity & energy
+            </h3>
 
-            <h1 onClick={() => handleArrowClick(200)} className="text-white">
-              scroll
-            </h1>
-            <div
-              ref={containerRef}
-              className="flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2      justify-start overflow-x-scroll  "
-            >
-              {topArtists.map((artist, i) => (
-                <Artist
-                  key={i}
-                  artist={artist}
-                  discoverPage
-                  artistsSelected={artistsSelected}
-                  setArtistsSelected={setArtistsSelected}
-                />
-              ))}
+            <div className="relative bg-red-400  flex justify-end items-center ">
+              <div
+                ref={containerRef}
+                className={`     ${styles.hideScrollbar} justify-start/  overflow-x-scroll    flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2       `}
+              >
+                {topArtists.map((artist, i) => (
+                  <Artist
+                    key={i}
+                    artist={artist}
+                    discoverPage
+                    artistsSelected={artistsSelected}
+                    setArtistsSelected={setArtistsSelected}
+                  />
+                ))}
+              </div>
+
+              <ArrowRightCircleIcon
+                onClick={() => handleArrowClick(250)}
+                className="text-white  absolute  h-8 w-8 z-50 mb-4 mr-1 cursor-pointer "
+              />
             </div>
             <div
               aria-label="INPUT RANGE DIV"
@@ -155,10 +163,11 @@ export default function discover() {
 
             <div className="flex justify-center mt-2">
               <button
+                disabled={artistsSelected.length == 0}
                 onClick={() => handleGetRecommendations()}
                 className=" text-white border border-white rounded-xl px-3 py-2  "
               >
-                Search
+                Get Recommendations
               </button>
             </div>
 
@@ -169,7 +178,6 @@ export default function discover() {
             ) : (
               <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
                 {recommendations
-                  //... (Also include defensive solution in other pages??)
                   //error issue: some tracks dont have preview_url -> solution, filter out->
                   ?.filter((track) => track.preview_url !== null)
                   .map((_track, i) => (

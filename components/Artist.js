@@ -31,7 +31,6 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
         discoverPage &&
         "w-28  flex-shrink-0 mdlg:w-full    transition duration-[250ms] ease-in-out  "
       }   ${isArtistSelected() && "border-spotifyGreen "}  `}
-      //onClick={() => router.push("/artists/" + artist?.id)}
       onClick={handleClick}
     >
       <div

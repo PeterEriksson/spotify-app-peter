@@ -13,8 +13,6 @@ export default function profile() {
   const [profile, setProfile] = useState({});
   const [recentSongs, setRecentSongs] = useState([]);
 
-  /* test temp, recently songs arg input */
-  /* ok, add loading indicator */
   const [songsLimit, setSongsLimit] = useState(5);
 
   const { data: session } = useSession();

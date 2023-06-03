@@ -104,3 +104,14 @@
   border: 0;
   cursor: pointer;
 }
+
+/* ------------ */
+/* Hide the scrollbar */
+.hideScrollbar::-webkit-scrollbar {
+  width: 0.4rem;
+  background-color: transparent;
+}
+
+.hideScrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
