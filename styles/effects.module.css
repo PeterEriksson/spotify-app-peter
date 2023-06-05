@@ -105,13 +105,23 @@
   cursor: pointer;
 }
 
-/* ------------ */
-/* Hide the scrollbar */
+/* --------------Hide scrollbar--------------- */
 .hideScrollbar::-webkit-scrollbar {
-  width: 0.4rem;
-  background-color: transparent;
+  /* width: 0.4rem;
+  background-color: transparent; */
+
+  display: none;
 }
 
 .hideScrollbar::-webkit-scrollbar-thumb {
-  background-color: transparent;
+  /* background-color: transparent; */
+
+  display: none;
+}
+
+/* -----------justify content----use when xs:----...not in use...------------ */
+@media (min-width: 585px) {
+  .justifyUnset {
+    justify-content: unset;
+  }
 }

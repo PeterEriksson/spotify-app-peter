@@ -71,20 +71,13 @@ export default function Home() {
     setTimePeriod(tab.label);
   };
 
-  const testFcn = () => {
-    console.log(topArtists);
-  };
-
   return (
     <div className="flex h-screen  ">
       <Sidebar />
       <div className=" w-screen bg-bodyBackground overflow-y-scroll   ">
         <Header />
 
-        <h1
-          onClick={testFcn}
-          className="text-3xl text-white text-center uppercase tracking-wide"
-        >
+        <h1 className="text-3xl text-white text-center uppercase tracking-wide">
           Most Played Artists
         </h1>
 

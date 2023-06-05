@@ -102,14 +102,14 @@ export default function discover() {
             >
               Discover
             </h1>
-            <h3 className="text-white text-center mt-0.5 mb-1 text-base ">
-              Select up to 3 artists and adjust popularity & energy
+            <h3 className="text-white text-center mt-0.5// mb-1 text-base ">
+              Select up to 3 artists
             </h3>
 
-            <div className="relative bg-red-400  flex justify-end items-center ">
+            <div className="relative  flex justify-end items-center ">
               <div
                 ref={containerRef}
-                className={`     ${styles.hideScrollbar} justify-start/  overflow-x-scroll    flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2       `}
+                className={`     ${styles.hideScrollbar} scroll justify-start/   overflow-x-scroll    flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2       `}
               >
                 {topArtists.map((artist, i) => (
                   <Artist
@@ -124,13 +124,12 @@ export default function discover() {
 
               <ArrowRightCircleIcon
                 onClick={() => handleArrowClick(250)}
-                className="text-white  absolute  h-8 w-8 z-50 mb-4 mr-1 cursor-pointer "
+                className="text-white mdlg:hidden  absolute  h-8 w-8 z-50   mr-1 cursor-pointer "
               />
             </div>
-            <div
-              aria-label="INPUT RANGE DIV"
-              className="mx-5 flex space-x-5 justify-between mt-3"
-            >
+
+            {/* INPUT RANGE DIV */}
+            <div className="mx-5 flex space-x-5 justify-between mt-3">
               <div className="text-center  w-full">
                 <input
                   type="range"
@@ -153,7 +152,7 @@ export default function discover() {
                   step="10"
                   value={energy}
                   onChange={handleEnergyChange}
-                  className={`${styles.rangeInput} bg-gray-700          /w-full /h-1 /bg-gray-700 /outline-none /appearance-none /rounded `}
+                  className={`${styles.rangeInput} bg-gray-700    `}
                 />
                 <p className="mt-2 text-lg text-gray-700">
                   Min Energy: {energy}

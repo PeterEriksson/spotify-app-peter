@@ -90,12 +90,12 @@ function likedTracks() {
       <div className=" w-screen bg-bodyBackground  overflow-y-scroll   ">
         <Header />
 
-        <h1
-          onClick={() => console.log(actionNotAllowed())}
-          className="text-3xl text-white text-center uppercase tracking-wide"
-        >
-          liked songs test ...
+        <h1 className="text-3xl text-white text-center uppercase tracking-wide">
+          liked songs
         </h1>
+        <h3 className="text-base text-white text-center ">
+          Add tracks to your liked on Spotify or create a new playlist
+        </h3>
 
         {/* MODAL TEST */}
         <Transition.Root show={openNewPlaylistModal} as={Fragment}>
@@ -104,7 +104,7 @@ function likedTracks() {
             className="fixed z-50 inset-0 //overscroll-y-auto overflow-y-auto"
             onClose={setOpenNewPlaylistModal}
           >
-            <div className="flex items-center justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="flex items-center justify-center min-h-[800px]/ sm: min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -136,11 +136,12 @@ function likedTracks() {
                 <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-1.5  pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
                   <div className="mt-1  flex flex-col items-center sm:mt-3.5">
                     <Dialog.Title
-                      as="h3"
+                      as="h1"
                       className="text-lg text-center underline// leading-6 font-medium text-gray-900"
                     >
                       Perform action with liked songs
                     </Dialog.Title>
+
                     <div className="flex flex-col  mt-1.5  ">
                       <label className={modalstyles.radioLabel}>
                         <input

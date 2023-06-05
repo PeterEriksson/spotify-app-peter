@@ -8,6 +8,8 @@ import Sidebar from "../../components/Sidebar";
 import Song from "../../components/Song";
 import useSpotify from "../../hooks/useSpotify";
 
+import styles from "../../styles/effects.module.css";
+
 export default function artistDetails({ artistId }) {
   const [artist, setArtist] = useState({});
   const [loading, setLoading] = useState(true);
@@ -66,7 +68,10 @@ export default function artistDetails({ artistId }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Sidebar />
-      <div className=" w-screen bg-gray-800// bg-bodyBackground  overflow-y-scroll">
+
+      <div
+        className={`w-screen bg-bodyBackground overflow-y-scroll  /*heart-interferes-with-scrollbar-> */ ${styles.hideScrollbar}   `}
+      >
         <Header backArrow />
 
         {loading ? (

@@ -7,6 +7,8 @@ import Sidebar from "../components/Sidebar";
 import useSpotify from "../hooks/useSpotify";
 
 import { countries } from "country-data";
+
+import styles from "../styles/effects.module.css";
 import Song from "../components/Song";
 
 export default function profile() {
@@ -67,28 +69,27 @@ export default function profile() {
         <Header />
 
         <div className="flex justify-between mx-5 bg-r mt-6 text-white items-center   ">
-          <div className="flex items-center">
-            <div className="relative h-[200px] w-[200px] rounded-full ">
+          <div
+            className={`flex items-center               bg-red-600/ /w-full /xs:w-fit /justify-between $/{styles.justifyUnset} `}
+          >
+            <div className="relative h-[140px] w-[140px]  xs:h-[200px] xs:w-[200px] rounded-full ">
               <Image
                 layout="fill"
-                className="h-20/ /w-20 rounded-full "
+                className="rounded-full "
                 src={session?.user?.image}
                 //src="https://baypark.ca/wp-content/uploads/2020/02/spotify-logo-png-spotify-music-app-icon-1024.jpg"
                 alt="spotify-logo"
               />
             </div>
-            <div className="ml-6 ">
+            <div className="ml-6">
               <p className="text-sm  ">Profile</p>
-              <h1
-                onClick={() => console.log(profile)}
-                className="text-4xl sm:text-5xl md:text-7xl font-bold  //mt-4"
-              >
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold  //mt-4">
                 {session?.user?.name}
               </h1>
               <p className="mt-2.5 text-sm">{profile?.product} user</p>
 
               <button
-                className="p-2 sm:p-2.5 flex items-center border border-white rounded-lg mt-3 group relative transform transition duration-200 ease-in hover:scale-105"
+                className=" p-2 sm:p-2.5 flex items-center border border-white rounded-lg mt-3 group relative transform transition duration-200 ease-in hover:scale-105"
                 onClick={() => window.open(profile?.external_urls?.spotify)}
               >
                 View Spotify
