@@ -7,6 +7,7 @@ import {
   GlobeAltIcon,
   HeartIcon,
   UserIcon,
+  InformationCircleIcon,
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import { selectItems as selectFavoritedItmes } from "../slices/favoritesSlice";
@@ -152,6 +153,21 @@ function Sidebar() {
             } hoverStyling `}
           >
             Discover
+          </p>
+        </div>
+
+        <div className="sidebarDiv group" onClick={() => router.push("/info")}>
+          <InformationCircleIcon
+            className={`sidebarIcon ${
+              asPath === "/info" ? "text-spotifyGreen" : "text-gray-400"
+            } `}
+          />
+          <p
+            className={` ${
+              asPath === "/info" ? "text-spotifyGreen" : "text-gray-400"
+            } hoverStyling `}
+          >
+            Info
           </p>
         </div>
 

@@ -43,10 +43,10 @@ export default function discover() {
     const newPopularity = Math.round(event.target.value / 10) * 10;
     setPopularity(newPopularity);
   };
-  const [energy, setEnergy] = useState(0);
-  const handleEnergyChange = (event) => {
-    const newEnergy = Math.round(event.target.value / 10) * 10;
-    setEnergy(newEnergy);
+  const [danceability, setDanceability] = useState(0);
+  const handleDanceabilityChange = (event) => {
+    const newDanceability = Math.round(event.target.value / 10) * 10;
+    setDanceability(newDanceability);
   };
 
   const [recommendations, setRecommendations] = useState([]);
@@ -56,11 +56,14 @@ export default function discover() {
     setLoadingRecommendations(true);
     spotifyApi
       .getRecommendations({
-        min_energy: 0.4,
+        /*  min_energy: 0.4,
         seed_artists: ["0cAOG10Gh3ORpBRZ9c7Zam"],
-        min_popularity: 50,
-        limit: 10,
-        //min_danceability
+        min_popularity: 50, */
+        min_danceability: danceability / 100,
+        seed_artists: artistsSelected,
+        min_popularity: popularity,
+        limit: 15,
+        //min_danceability (more options...)
       })
       .then((data) => setRecommendations(data.body.tracks))
       .then(() => setLoadingRecommendations(false))
@@ -102,8 +105,9 @@ export default function discover() {
             >
               Discover
             </h1>
-            <h3 className="text-white text-center mt-0.5// mb-1 text-base ">
-              Select up to 3 artists
+            <h3 className="text-white text-center mb-1 text-base ">
+              Select up to 3 artists{" "}
+              {artistsSelected.length > 0 && `(${artistsSelected.length})`}
             </h3>
 
             <div className="relative  flex justify-end items-center ">
@@ -150,12 +154,12 @@ export default function discover() {
                   min="0"
                   max="100"
                   step="10"
-                  value={energy}
-                  onChange={handleEnergyChange}
+                  value={danceability}
+                  onChange={handleDanceabilityChange}
                   className={`${styles.rangeInput} bg-gray-700    `}
                 />
                 <p className="mt-2 text-lg text-gray-700">
-                  Min Energy: {energy}
+                  Min Danceability: {danceability}
                 </p>
               </div>
             </div>

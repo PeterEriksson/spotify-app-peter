@@ -93,7 +93,7 @@ function likedTracks() {
         <h1 className="text-3xl text-white text-center uppercase tracking-wide">
           liked songs
         </h1>
-        <h3 className="text-base text-white text-center ">
+        <h3 className="text-base text-white text-center mx-2">
           Add tracks to your liked on Spotify or create a new playlist
         </h3>
 
