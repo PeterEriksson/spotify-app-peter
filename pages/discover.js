@@ -1,4 +1,4 @@
-import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
+import { ArrowRightCircleIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { RaceBy, Waveform } from "@uiball/loaders";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
@@ -105,9 +105,17 @@ export default function discover() {
             >
               Discover
             </h1>
-            <h3 className="text-white text-center mb-1 text-base ">
+            <h3 className="relative text-white w-fit mx-auto mb-1 text-base flex items-center  ">
               Select up to 3 artists{" "}
-              {artistsSelected.length > 0 && `(${artistsSelected.length})`}
+              {artistsSelected.length > 0 && (
+                <div className="absolute -right-12 flex items-center ">
+                  <p> ({artistsSelected.length}) </p>
+                  <TrashIcon
+                    className="h-4 w-4 text-white/90 ml-1 cursor-pointer"
+                    onClick={() => setArtistsSelected([])}
+                  />
+                </div>
+              )}
             </h3>
 
             <div className="relative  flex justify-end items-center ">

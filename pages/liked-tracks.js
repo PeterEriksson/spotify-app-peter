@@ -23,6 +23,8 @@ import useSpotify from "../hooks/useSpotify";
 import { Dialog, Transition } from "@headlessui/react";
 import modalstyles from "../styles/effects.module.css";
 
+import toast, { Toaster } from "react-hot-toast";
+
 function likedTracks() {
   const { data: session } = useSession();
   const spotifyApi = useSpotify();
@@ -34,18 +36,7 @@ function likedTracks() {
     dispatch(emptyFavorites());
   };
 
-  //ok.
-  //1. remove songs when method is completed.
-  //2. add hot-toas notification
-  //3. research/work on modal design
   const handlePlusClick = () => {
-    //add this code to new function -> handleAction
-    /* if (favoritedItems.length == 0) return;
-    spotifyApi
-      .addToMySavedTracks(favoritedItems.map((item) => item.id))
-      .then(dispatch(emptyFavorites())); */
-
-    //if (favoritedItems.length == 0) return;
     setOpenNewPlaylistModal((prev) => !prev);
   };
 
@@ -72,11 +63,139 @@ function likedTracks() {
       favoritedItems.length == 0 ||
       (playlistName == "" && selectedOption !== "option1") ||
       (!playlistName.trim() && selectedOption !== "option1") ||
-      selectedOption == ""
+      selectedOption == "" ||
+      loadingAction
     );
   };
 
-  const handleAction = () => {};
+  const [loadingAction, setLoadingAction] = useState(false);
+
+  //add notification for option2 aswell
+  const handleAction = () => {
+    if (selectedOption == "option1") {
+      setLoadingAction(true);
+      const notificationAdd = toast.loading(
+        `Adding ${favoritedItems.length > 1 ? "songs" : "song"}`,
+        {
+          style: {
+            background: "#191414",
+            color: "#1DB954",
+            fontWeight: "bold",
+            fontSize: "17px",
+            padding: "20px",
+          },
+        }
+      );
+
+      //add extra loading time -> ux friendly
+      setTimeout(() => {
+        spotifyApi
+          .addToMySavedTracks(favoritedItems.map((item) => item.id))
+          //.then(dispatch(emptyFavorites()))
+          .then(() => setOpenNewPlaylistModal(false))
+          .then(() => {
+            toast.success(
+              `Song${
+                favoritedItems.length > 1 ? "s" : ""
+              } added to your liked on Spotify!`,
+              {
+                id: notificationAdd,
+                duration: 3300,
+                style: {
+                  background: "#191414",
+                  color: "#1DB954",
+                  fontWeight: "bold",
+                  fontSize: "17px",
+                  padding: "20px",
+                },
+              }
+            );
+          })
+          .then(dispatch(emptyFavorites()))
+          .catch((err) => {
+            console.log(err);
+            toast("ERROR, something went wrong", {
+              id: notificationAdd,
+              duration: 3500,
+              style: {
+                background: "red",
+                color: "white",
+                fontWeight: "bolder",
+                fontSize: "17px",
+                padding: "20px",
+              },
+            });
+          })
+          .finally(() => {
+            setLoadingAction(false);
+            setSelectedOption("");
+            setPlaylistName("");
+          });
+      }, 1200);
+    }
+
+    if (selectedOption == "option2") {
+      //first we create a playlist, then we grab hold of the id of that playlist
+      //in order to use addTracksToPlaylist
+      setLoadingAction(true);
+      const notificationCreate = toast.loading(`Creating Playlist...`, {
+        style: {
+          background: "#191414",
+          color: "#1DB954",
+          fontWeight: "bold",
+          fontSize: "17px",
+          padding: "20px",
+        },
+      });
+
+      spotifyApi
+        .createPlaylist(playlistName, {
+          description: "",
+          public: false,
+          collaborative: false,
+        })
+        .then((data) =>
+          spotifyApi.addTracksToPlaylist(
+            data.body.id,
+            favoritedItems.map((item) => `spotify:track:${item.id}`)
+          )
+        )
+        .then(dispatch(emptyFavorites()))
+        .then(() => setOpenNewPlaylistModal(false))
+        .then(() => {
+          toast.success(`${playlistName} playlist created!`, {
+            id: notificationCreate,
+            duration: 4000,
+            style: {
+              background: "#191414",
+              color: "#1DB954",
+              fontWeight: "bold",
+              fontSize: "17px",
+              padding: "20px",
+            },
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast("ERROR, something went wrong", {
+            id: notificationCreate,
+            duration: 3500,
+            style: {
+              background: "red",
+              color: "white",
+              fontWeight: "bolder",
+              fontSize: "17px",
+              padding: "20px",
+            },
+          });
+        })
+        .finally(() => {
+          setLoadingAction(false);
+          setPlaylistName("");
+          setSelectedOption("");
+        });
+    }
+  };
 
   return (
     <div className="flex h-screen ">
@@ -88,6 +207,7 @@ function likedTracks() {
       <Sidebar />
 
       <div className=" w-screen bg-bodyBackground  overflow-y-scroll   ">
+        <Toaster position="top-center" />
         <Header />
 
         <h1 className="text-3xl text-white text-center uppercase tracking-wide">
@@ -97,7 +217,7 @@ function likedTracks() {
           Add tracks to your liked on Spotify or create a new playlist
         </h3>
 
-        {/* MODAL TEST */}
+        {/* MODAL -> own component? */}
         <Transition.Root show={openNewPlaylistModal} as={Fragment}>
           <Dialog
             as="div"
@@ -117,8 +237,8 @@ function likedTracks() {
                 <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
               </Transition.Child>
 
-              {/* trick browser to center the modal contents...-> */}
               <span
+                aria-label="trick browser to center the modal contents...-> "
                 className="hidden sm:inline-block sm:align-middle sm:h-screen"
                 aria-hidden="true"
               >
@@ -201,8 +321,7 @@ function likedTracks() {
             </div>
           </Dialog>
         </Transition.Root>
-
-        {/* END MODAL TEST */}
+        {/* END OF MODAL */}
 
         <button
           //onClick={() => console.log(favoritedItems.map((item) => item.id))}
@@ -216,18 +335,6 @@ function likedTracks() {
         >
           <PlusIcon className="h-9 w-9 text-white" />
         </button>
-
-        {/* <Tooltip
-          content={`${
-            favoritedItems.length == 0
-              ? "Like songs & create a playlist!"
-              : "Create playlist with liked songs"
-          } `}
-          className={`${styles.bottomButton} `}
-          delayShow={favoritedItems.length > 0 ? 400 : 150}
-          anchorSelect=".create"
-          place="top"
-        /> */}
 
         <TrashIcon
           onClick={() => dispatch(emptyFavorites())}
@@ -248,7 +355,6 @@ function likedTracks() {
             <Song key={i} track={track} noPlay />
           ))}
         </div>
-        {/* IF user hasn't liked any songs -> display message...? */}
       </div>
     </div>
   );
