@@ -10,6 +10,7 @@ import { countries } from "country-data";
 
 import styles from "../styles/effects.module.css";
 import Song from "../components/Song";
+import { DotPulse } from "@uiball/loaders";
 
 export default function profile() {
   const [profile, setProfile] = useState({});
@@ -30,11 +31,14 @@ export default function profile() {
     getProfileInfo();
   }, []);
 
+  const [loadingSongsFetch, setLoadingSongsFetch] = useState(true);
   const getRecentSongs = () => {
+    setLoadingSongsFetch(true);
     spotifyApi
       .getMyRecentlyPlayedTracks({ limit: songsLimit })
       .then((data) => setRecentSongs(data.body.items))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoadingSongsFetch(false));
   };
   useEffect(() => {
     //WebapiRegularError: An error occurred while communicating with Spotify's Web API.
@@ -124,15 +128,24 @@ export default function profile() {
         </div>
 
         {/* load more button */}
-        {songsLimit < 15 && (
-          <div className="flex justify-center">
+        {songsLimit < 20 && (
+          <div className="flex justify-center relative">
             <button
               aria-label="ignore-pause"
               onClick={() => setSongsLimit((prev) => prev + 5)}
-              className="text-gray-600 font-bold text-center my-2 cursor-pointer  "
+              className={`text-gray-600 font-bold text-center my-2 cursor-pointer  ${
+                loadingSongsFetch && "hidden/ opacity-0"
+              }`}
             >
               Load more
             </button>
+            <div
+              className={`z-30 absolute mt-4 ${
+                !loadingSongsFetch && "hidden"
+              } `}
+            >
+              <DotPulse /* size={150} */ speed={0.9} color="white" />
+            </div>
           </div>
         )}
       </div>

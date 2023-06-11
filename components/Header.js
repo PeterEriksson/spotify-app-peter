@@ -22,7 +22,7 @@ function Header({ backArrow }) {
           } cursor-pointer text-white mr-2 h-8 w-8 hover:opacity-70 transition duration-200 ease-in`}
         />
         <h1 className={`${backArrow && "hidden"} text-lg font-bold`}>
-          Spotify Stats
+          TrackTrends
         </h1>
         <h3 className={`${backArrow && "hidden"} font-extralight text-sm`}>
           by Peter

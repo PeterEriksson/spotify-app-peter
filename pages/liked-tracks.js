@@ -308,7 +308,7 @@ function likedTracks() {
                       onClick={handleAction}
                       disabled={actionNotAllowed()}
                       className={`${
-                        actionNotAllowed() && "cursor-not-allowed opacity-50"
+                        actionNotAllowed() && "opacity-50"
                       }  text-white rounded-xl bg-spotifyGreen px-4 py-2  mt-5   `}
                     >
                       {selectedOption == "" && "select option"}

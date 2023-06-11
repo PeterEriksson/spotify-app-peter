@@ -111,7 +111,7 @@ export default function discover() {
                 <div className="absolute -right-12 flex items-center ">
                   <p> ({artistsSelected.length}) </p>
                   <TrashIcon
-                    className="h-4 w-4 text-white/90 ml-1 cursor-pointer"
+                    className="h-4 w-4 text-white/90 ml-0.5 cursor-pointer"
                     onClick={() => setArtistsSelected([])}
                   />
                 </div>
