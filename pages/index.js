@@ -59,6 +59,11 @@ export default function profile() {
     getMyPlaylists();
   }, []);
 
+  const handleLoadMore = () => {
+    if (loadingSongsFetch) return;
+    setSongsLimit((prev) => prev + 5);
+  };
+
   return (
     <div className="flex h-screen ">
       <Head>
@@ -128,11 +133,12 @@ export default function profile() {
         </div>
 
         {/* load more button */}
-        {songsLimit < 20 && (
+        {songsLimit < 21 && (
           <div className="flex justify-center relative">
             <button
               aria-label="ignore-pause"
-              onClick={() => setSongsLimit((prev) => prev + 5)}
+              //onClick={() => setSongsLimit((prev) => prev + 5)}
+              onClick={handleLoadMore}
               className={`text-gray-600 font-bold text-center my-2 cursor-pointer  ${
                 loadingSongsFetch && "hidden/ opacity-0"
               }`}
