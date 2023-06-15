@@ -14,19 +14,19 @@ function Header({ backArrow }) {
   const router = useRouter();
   return (
     <div className="flex items-center justify-between  text-white py-2 px-4   test:-> /z-50 /sticky /top-0    bg-bodyBackground  ">
-      <div className="flex flex-col items-center font-dancing ">
+      <div className="flex flex-col items-center font-dancing/ /font-serif">
         <ArrowLeftIcon
           onClick={() => router.back()}
           className={`${
             !backArrow && "hidden"
           } cursor-pointer text-white mr-2 h-8 w-8 hover:opacity-70 transition duration-200 ease-in`}
         />
-        <h1 className={`${backArrow && "hidden"} text-lg font-bold`}>
+        {/* <h1 className={`${backArrow && "hidden"} text-lg font-bold`}>
           TrackTrends
         </h1>
         <h3 className={`${backArrow && "hidden"} font-extralight text-sm`}>
           by Peter
-        </h3>
+        </h3> */}
       </div>
 
       <div className="space-x-2 flex items-center">

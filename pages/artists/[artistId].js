@@ -80,14 +80,14 @@ export default function artistDetails({ artistId }) {
           </div>
         ) : (
           <div className="mx-5 ">
-            <div className=" relative justify-start items-center w-full h-72 flex  rounded-xl ">
+            <div className=" relative justify-start items-center w-full h-72 flex  //rounded-xl ">
               <Image
                 onClick={() => console.log(artistTopSongs)}
                 src={artist?.images[0]?.url}
-                className="object-cover opacity-70  rounded-xl"
+                className="object-cover opacity-70//  //rounded-xl"
                 layout="fill"
               />
-              <div className="absolute text-white opacity-100 ml-3">
+              {/* <div className="absolute text-white opacity-100 ml-3">
                 <h1 className="text-4xl font-bold">{artist?.name}</h1>
 
                 <div className="flex items-center space-x-1.5">
@@ -115,11 +115,10 @@ export default function artistDetails({ artistId }) {
                 <h3 className={` mt-2 `}>
                   {userIsFollowingArtist && "Following"}
                 </h3>
-              </div>
+                <p className="text-white mt-2">Play on Spotify...+icon/logo</p>
+              </div> */}
             </div>
 
-            {/* popular songs */}
-            {/* load more button -> change 5  to 10? */}
             <h2 className="text-white mt-3 text-xl">Popular</h2>
             {artistTopSongs?.tracks
               .slice(0, 5)
@@ -135,11 +134,13 @@ export default function artistDetails({ artistId }) {
 }
 
 //also pre-fetch session??
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params }, context) {
   const { artistId } = params;
+  const session = await getSession(context);
   return {
     props: {
       artistId,
+      session,
     },
   };
 }

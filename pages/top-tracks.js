@@ -8,6 +8,7 @@ import { Waveform } from "@uiball/loaders";
 import Song from "../components/Song";
 import Head from "next/head";
 import Header from "../components/Header";
+import SongExtended from "../components/SongExtended";
 
 export default function tracks() {
   const spotifyApi = useSpotify();
@@ -90,7 +91,10 @@ export default function tracks() {
       <div className=" w-screen bg-bodyBackground  overflow-y-scroll">
         <Header />
 
-        <h1 className="text-3xl text-white text-center uppercase tracking-wide">
+        <h1
+          onClick={() => console.log(topTracks)}
+          className="text-3xl text-white text-center uppercase tracking-wide"
+        >
           most played songs
         </h1>
 
@@ -123,7 +127,8 @@ export default function tracks() {
             {topTracks
               ?.filter((track) => track.preview_url !== null)
               .map((track, i) => (
-                <Song key={i} track={track} />
+                //<Song key={i} track={track} />
+                <SongExtended key={i} track={track} />
               ))}
           </div>
         )}

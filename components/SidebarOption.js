@@ -7,7 +7,9 @@ function SidebarOption({ Icon, title, url, favoritedItems }) {
 
   return (
     <div
-      className={`sidebarDiv  group   ${favoritedItems && "relative"}`}
+      className={`sidebarDiv/ sidebarOption  group   ${
+        favoritedItems && "relative"
+      }`}
       onClick={() => router.push(url)}
     >
       <Icon
@@ -26,7 +28,7 @@ function SidebarOption({ Icon, title, url, favoritedItems }) {
         <div
           className={`${
             favoritedItems.length == 0 && "hidden"
-          } absolute top-0.5 left-9 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
+          } absolute top-0.5 left-10 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
         >
           <p className={`text-sm text-white/75  `}>{favoritedItems.length}</p>
         </div>

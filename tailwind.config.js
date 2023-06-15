@@ -18,8 +18,9 @@ module.exports = {
         //bg-gray-700:"#333333""
         //bg-gray-800: "#333333"
         //bg-gray-900: "#111827"
-        /* bodyBackground: "#111827", */
+        /* bodyBackground: "#212020", */
         bodyBackground: "#111827",
+        cardBackground: "#3c3d3c",
       },
       maxWidth: {
         readableSongTitle: "25ch",

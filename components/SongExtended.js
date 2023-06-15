@@ -20,7 +20,7 @@ import useSpotify from "../hooks/useSpotify";
 import { Audio as AudioPlayAnimation } from "react-loader-spinner";
 import { convertMsToMinuteSecond } from "../utils/timeUtils.js";
 
-function Song({ track, noPlay, wideDesign, nr }) {
+function SongExtended({ track, noPlay, wideDesign, nr }) {
   const [audio, setAudio] = useState(new Audio(track?.preview_url));
   const [playing, setPlaying] = useState(false);
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
@@ -67,7 +67,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
     return favoritedItems.some((item) => item.id === track.id);
   };
 
-  //return a "different" Song design (wideDesign/Profile:recentlyPlayed)
+  //return wide Song design (wideDesign/Profile:recentlyPlayed)
   if (wideDesign) {
     return (
       <>
@@ -135,87 +135,78 @@ function Song({ track, noPlay, wideDesign, nr }) {
   } else {
     //return "normal" Song design,  we don't recieve wideDesign in props.
     return (
-      <div className="bg-cardBackground/40 bg-gray-800// rounded-xl border border-black/70 relative group  ">
-        {/* DIV for centering play/pause */}
-        <div className="relative flex items-center justify-center    h-40 w-full ">
+      <div className="bg-cardBackground/40   rounded-xl// border border-black/70 relative group  ">
+        <div className="relative flex items-center justify-center    h-32 w-full ">
           <Image
-            className={`h-40// //w-full object-cover rounded-t-xl  
-           group-hover:opacity-40
-           transition duration-300 ease-in-out ${playing && "opacity-40"}  `}
+            className={` object-cover/ object-contain rounded-t-xl//  
+           
+           transition duration-300 ease-in-out    `}
             src={track?.album?.images[0]?.url}
             alt="song-image"
             layout="fill"
           />
-          {noPlay && (
-            <InformationCircleIcon
-              onClick={() => setShowAdditionalInfo((prev) => !prev)}
-              className="h-12 w-12 text-white cursor-pointer absolute mt-6 group-hover:-translate-y-4 group-hover:opacity-100   opacity-0  transition !duration-500 transform ease-in-out"
-            />
-          )}
-          {playing ? (
-            <>
-              <PauseIcon
-                className={`h-14 w-14 text-white cursor-pointer   absolute ${
-                  noPlay && "hidden"
-                } `}
-                onClick={() => setPlaying(false)}
-              />
-              <div className="mt-auto ">
-                <AudioPlayAnimation
-                  height="40"
-                  width="40"
-                  radius="9"
-                  color="gray"
-                  ariaLabel="play-animation"
-                  wrapperStyle
-                />
-              </div>
-            </>
-          ) : (
-            <PlayIcon
-              className={`h-14 w-14 text-white cursor-pointer  absolute  mt-6   group-hover:-translate-y-4 group-hover:opacity-100   opacity-0  transition !duration-500 transform ease-in-out ${
-                noPlay && "hidden"
-              } `}
-              onClick={() => setPlaying(true)}
-            />
-          )}
         </div>
 
-        <h2 className="text-bold text-white p-4">{track?.name}</h2>
+        <h1 className="text-bold text-white p-3">{track?.name}</h1>
 
-        <hr
-          className={`-mt-2.5 mb-1 ${
-            noPlay && showAdditionalInfo && "border-gray-600  mx-3"
-          } ${!showAdditionalInfo && "hidden"} ${!noPlay && "hidden"}`}
-        />
+        <hr className={`-mt-2.5 mb-1 border-gray-600  mx-3  `} />
 
-        <h3
-          className={`text-sm px-4 text-white ${
-            !showAdditionalInfo && "hidden"
-          }`}
-        >
+        <h3 className={`text-sm px-3 text-white  `}>
           Artist: {track?.artists[0]?.name}
         </h3>
-        <h3
-          className={`text-sm px-4 pb-1 text-white truncate ${
-            !showAdditionalInfo && "hidden"
-          }`}
-        >
+        <h3 className={`text-sm px-3 mb-2 text-white truncate `}>
           Album: {track?.album?.name}
         </h3>
-        {/* HEART ICON DIV */}
-        <div
-          aria-label="ignore-pause"
-          onClick={handleLike}
-          className={` absolute -top-1.5 -left-1.5  ${
-            liked() ? styles.heartRed : styles.heart
-          }  ${!liked() && triggerLikeEffect && styles.animateUnlike}  ${
-            liked() && triggerLikeEffect && styles.animate
-          }   `}
+
+        <img
+          onClick={() => window.open(track?.external_urls.spotify)}
+          className="h-[24px] ml-3 -mb-2 cursor-pointer"
+          src="../images/Spotify_Logo_CMYK_Green.png"
+          alt="spotify logo/icon"
         />
+
+        <div className="flex justify-between items-center w-full ">
+          <div className="ml-3">
+            {playing ? (
+              <div className="flex items-center">
+                <PauseIcon
+                  className={`h-6 w-6 text-white cursor-pointer    ${
+                    noPlay && "hidden"
+                  } `}
+                  onClick={() => setPlaying(false)}
+                />
+                <div className=" ">
+                  <AudioPlayAnimation
+                    height="18"
+                    width="18"
+                    radius="9"
+                    color="gray"
+                    ariaLabel="play-animation"
+                    wrapperStyle
+                  />
+                </div>
+              </div>
+            ) : (
+              <PlayIcon
+                className={`h-6 w-6 text-white cursor-pointer       ${
+                  noPlay && "hidden"
+                } `}
+                onClick={() => setPlaying(true)}
+              />
+            )}
+          </div>
+          {/* HEART ICON DIV */}
+          <div
+            aria-label="ignore-pause"
+            onClick={handleLike}
+            className={`  ${liked() ? styles.heartRed : styles.heart}  ${
+              !liked() && triggerLikeEffect && styles.animateUnlike
+            }  ${liked() && triggerLikeEffect && styles.animate}   `}
+          />
+        </div>
       </div>
     );
   }
 }
 
-export default Song;
+export default SongExtended;

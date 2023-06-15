@@ -5,8 +5,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 
 @layer components {
-  .sidebarDiv {
-    @apply flex items-center pl-7 py-2    space-x-2     hover:cursor-pointer;
+  .sidebarOption {
+    @apply flex items-center pl-8 py-2    space-x-2     hover:cursor-pointer;
   }
   .sidebarIcon {
     @apply h-7 w-7 text-gray-400 group-hover:text-spotifyGreen group-hover:cursor-pointer transition duration-200 ease-in;

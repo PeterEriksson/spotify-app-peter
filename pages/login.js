@@ -13,8 +13,8 @@ function Login({ providers }) {
         <div className="flex flex-col items-center" key={provider.name}>
           <h1 className="text-white text-2xl ">TrackTrends </h1>
           <p className="text-white mb-3">
-            See your spotify stats, like songs, create playlists, discover new
-            tracks.
+            See your spotify stats, select favorite songs, create playlists,
+            discover new tracks.
           </p>
           <h3 className="text-white mb-3">By Pete</h3>
           <button

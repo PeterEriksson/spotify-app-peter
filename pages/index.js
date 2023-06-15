@@ -61,7 +61,11 @@ export default function profile() {
 
   const handleLoadMore = () => {
     if (loadingSongsFetch) return;
-    setSongsLimit((prev) => prev + 5);
+    //increase loading time
+    setLoadingSongsFetch(true);
+    setTimeout(() => {
+      setSongsLimit((prev) => prev + 5);
+    }, 700);
   };
 
   return (
@@ -98,10 +102,14 @@ export default function profile() {
               <p className="mt-2.5 text-sm">{profile?.product} user</p>
 
               <button
-                className=" p-2 sm:p-2.5 flex items-center border border-white rounded-lg mt-3 group relative transform transition duration-200 ease-in hover:scale-105"
+                className=" p-2 sm:p-2.5 flex items-center border border-spotifyGreen rounded-lg mt-3 group relative transform transition duration-200 ease-in hover:scale-105"
                 onClick={() => window.open(profile?.external_urls?.spotify)}
               >
-                View Spotify
+                <img
+                  className="h-[24px] "
+                  src="/images/Spotify_Logo_CMYK_Green.png"
+                  alt=""
+                />
               </button>
             </div>
           </div>
