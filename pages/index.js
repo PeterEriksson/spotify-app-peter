@@ -11,6 +11,7 @@ import { countries } from "country-data";
 import styles from "../styles/effects.module.css";
 import Song from "../components/Song";
 import { DotPulse } from "@uiball/loaders";
+import SongExtended from "../components/SongExtended";
 
 export default function profile() {
   const [profile, setProfile] = useState({});
@@ -136,7 +137,8 @@ export default function profile() {
           {recentSongs
             ?.filter((track) => track.preview_url !== null)
             .map(({ track }, i) => (
-              <Song key={i} nr={i + 1} wideDesign track={track} />
+              //<Song key={i} nr={i + 1} wideDesign track={track} />
+              <SongExtended key={i} nr={i + 1} wideDesign track={track} />
             ))}
         </div>
 

@@ -41,6 +41,8 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
     //user has clicked a star of another song -> keep on playing
     /* ....enough with following line of code. Don't need to use ref to get the result we want. */
     if (e.target.getAttribute("aria-label") === "ignore-pause") return;
+    /* if user clicks on information svg icon -> keep playing music.. */
+    if (e.target.tagName === "path") return;
     //else stop
     setPlaying(false);
   };
@@ -67,15 +69,15 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
     return favoritedItems.some((item) => item.id === track.id);
   };
 
-  //return wide Song design (wideDesign/Profile:recentlyPlayed)
+  //return WIDE Song design (wideDesign/Profile:recentlyPlayed)
   if (wideDesign) {
     return (
       <>
-        <div className="text-white py-1.5 flex items-center justify-between //bg-red-400">
+        <div className="text-white py-1.5 flex items-center justify-between ">
           <div className="flex items-center space-x-1.5 sm:space-x-2 mdlg:space-x-4 lg:space-x-5">
             <p className="mr-1 ">{nr}</p>
             <img
-              className="h-9 w-9 rounded-lg object-cover"
+              className="h-9 w-9 rounded-lg/ object-contain"
               src={track?.album?.images[0]?.url}
               alt=""
             />
@@ -106,20 +108,37 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
             </div>
           </div>
 
-          <div className="flex  items-center">
+          <div className={`flex  items-center`}>
+            <InformationCircleIcon
+              onClick={() => setShowAdditionalInfo((prev) => !prev)}
+              //onClick={() => console.log(track)}
+              className="h-5 w-5 mr-2 cursor-pointer"
+            />
+
             <CalendarDaysIcon className="h-5 w-5 text-gray-300 hidden md:inline mr-1.5" />
             <p className="text-sm font-light mr-3  hidden md:inline">
               {track?.album?.release_date.substring(0, 4)}
             </p>
 
-            <ClockIcon className="h-5 w-5 mr-1.5 text-gray-300 hidden md:inline" />
-            <p className="font-light text-sm mr-3 md:inline hidden">
+            <ClockIcon className="h-5 w-5 mr-1.5 text-gray-300 hidden lg:inline" />
+            <p className="font-light text-sm mr-3 lg:inline hidden">
               {convertMsToMinuteSecond(track?.duration_ms)}{" "}
             </p>
-            <SparklesIcon className="h-5 w-5 text-gray-200 mr-1.5 hidden xs:inline" />
-            <p className="text-sm font-light hidden xs:inline">
+
+            <SparklesIcon className="h-5 w-5 text-gray-200 mr-1.5 hidden /xs:inline md:inline" />
+            <p className="text-sm font-light hidden /xs:inline md:inline">
               {track?.popularity}%
             </p>
+
+            <div className=" ml-3 bg-bodyBackground/ bg-spotifyBlack rounded-full z-50">
+              <img
+                onClick={() => window.open(track?.external_urls.spotify)}
+                className="h-[21px] w-[21px] cursor-pointer z-50"
+                src="../images/Spotify_Icon_CMYK_Green.png"
+                alt=""
+              />
+            </div>
+
             <div
               aria-label="ignore-pause"
               onClick={handleLike}
@@ -133,40 +152,72 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
       </>
     );
   } else {
-    //return "normal" Song design,  we don't recieve wideDesign in props.
+    //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
-      <div className="bg-cardBackground/40   rounded-xl// border border-black/70 relative group  ">
-        <div className="relative flex items-center justify-center    h-32 w-full ">
+      <div className="bg-cardBackground/40   rounded-xl// border border-black/70 relative group ">
+        <InformationCircleIcon
+          aria-label="ignore-pause"
+          onClick={() => setShowAdditionalInfo((prev) => !prev)}
+          className="   w-5 h-5 text-white cursor-pointer  absolute top-2 left-2"
+        />
+
+        <div
+          aria-label="ignore-pause"
+          onClick={handleLike}
+          className={` absolute z-30 -top-2.5 -right-3.5  ${
+            liked() ? styles.heartRed : styles.heart
+          }  ${!liked() && triggerLikeEffect && styles.animateUnlike}  ${
+            liked() && triggerLikeEffect && styles.animate
+          }   `}
+        />
+        <div className=" relative// items-center// h-32// flex justify-center  mt-2   ">
           <Image
-            className={` object-cover/ object-contain rounded-t-xl//  
-           
-           transition duration-300 ease-in-out    `}
+            className={` z-50  object-contain    `}
             src={track?.album?.images[0]?.url}
             alt="song-image"
-            layout="fill"
+            //layout="fill"
+            height={128}
+            width={128}
           />
         </div>
 
-        <h1 className="text-bold text-white p-3">{track?.name}</h1>
+        <h1
+          className={`text-smmd text-bold text-white mt-1.5 mb-0.5 mx-3      ${
+            !showAdditionalInfo && "truncate"
+          }  `}
+        >
+          {track?.name}
+        </h1>
 
-        <hr className={`-mt-2.5 mb-1 border-gray-600  mx-3  `} />
+        <hr className={` my-1 border-gray-600  mx-3  `} />
 
-        <h3 className={`text-sm px-3 text-white  `}>
+        <h3
+          className={`text-sm px-3 text-white  ${
+            !showAdditionalInfo && "truncate"
+          } `}
+        >
           Artist: {track?.artists[0]?.name}
         </h3>
-        <h3 className={`text-sm px-3 mb-2 text-white truncate `}>
+        <h3
+          className={`text-sm mx-3 text-white  ${
+            !showAdditionalInfo && "truncate"
+          } `}
+        >
           Album: {track?.album?.name}
         </h3>
 
-        <img
-          onClick={() => window.open(track?.external_urls.spotify)}
-          className="h-[24px] ml-3 -mb-2 cursor-pointer"
-          src="../images/Spotify_Logo_CMYK_Green.png"
-          alt="spotify logo/icon"
-        />
+        <div
+          className={`${
+            !showAdditionalInfo && "hidden"
+          } mx-3 text-sm flex items-center !text-white`}
+        >
+          <p className="text-sm font-light mr-3  hidden md:inline">
+            Release year: {track?.album?.release_date.substring(0, 4)}
+          </p>
+        </div>
 
-        <div className="flex justify-between items-center w-full ">
-          <div className="ml-3">
+        <div className="flex justify-between items-center w-full my-2 ">
+          <div className="ml-2 ">
             {playing ? (
               <div className="flex items-center">
                 <PauseIcon
@@ -175,12 +226,13 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
                   } `}
                   onClick={() => setPlaying(false)}
                 />
-                <div className=" ">
+                <div className="mb-1 ">
                   <AudioPlayAnimation
                     height="18"
                     width="18"
                     radius="9"
-                    color="gray"
+                    //color="#1DB954"
+                    color="white"
                     ariaLabel="play-animation"
                     wrapperStyle
                   />
@@ -195,13 +247,11 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
               />
             )}
           </div>
-          {/* HEART ICON DIV */}
-          <div
-            aria-label="ignore-pause"
-            onClick={handleLike}
-            className={`  ${liked() ? styles.heartRed : styles.heart}  ${
-              !liked() && triggerLikeEffect && styles.animateUnlike
-            }  ${liked() && triggerLikeEffect && styles.animate}   `}
+          <img
+            onClick={() => window.open(track?.external_urls.spotify)}
+            className="h-[22px] mr-3 cursor-pointer"
+            src="../images/Spotify_Logo_CMYK_Green.png"
+            alt="spotify logo/icon"
           />
         </div>
       </div>

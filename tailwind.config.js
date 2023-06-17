@@ -34,6 +34,9 @@ module.exports = {
       fontFamily: {
         dancing: ["Dancing Script", "cursive"],
       },
+      fontSize: {
+        smmd: ["1rem"],
+      },
     },
   },
   plugins: [],
