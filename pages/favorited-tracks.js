@@ -259,7 +259,10 @@ function favoritedTracks() {
                       as="h1"
                       className="text-lg text-center underline// leading-6 font-medium text-gray-900"
                     >
-                      Perform action with liked songs
+                      Perform action with liked song
+                      {(favoritedItems.length > 1 ||
+                        favoritedItems.length == 0) &&
+                        "s"}
                     </Dialog.Title>
 
                     <div className="flex flex-col  mt-1.5  ">
@@ -312,7 +315,13 @@ function favoritedTracks() {
                       }  text-white rounded-xl bg-spotifyGreen px-4 py-2  mt-5   `}
                     >
                       {selectedOption == "" && "select option"}
-                      {selectedOption == "option1" && "Add Songs"}
+                      {selectedOption == "option1" &&
+                        `Add Song${
+                          favoritedItems.length > 1 ||
+                          favoritedItems.length == 0
+                            ? "s"
+                            : ""
+                        }`}
                       {selectedOption == "option2" && "Create Playlist"}
                     </button>
                   </div>

@@ -28,15 +28,15 @@ function Sidebar() {
           alt="spotify-icon"
         />
       </div> */}
-      {/* TEST TEMP */}
+
       <div className="flex flex-col items-center  mb-7 text-white font-dancing/ /font-serif">
-        <h1 className={`  text-lg font-bold`}>TrackTrends</h1>
-        <h3 className={` font-extralight text-sm`}>by Peter</h3>
+        <h1 className={`text-lg font-bold`}>TrackTrends</h1>
+        <h3 className={`font-extralight text-sm`}>by Peter</h3>
       </div>
 
-      <hr className=" border-gray-600 w-full mt-2/ mb-3 " />
+      <hr className="border-gray-600 w-full mt-2/ mb-3 " />
 
-      <div className="w-44// w-[184px] space-y-3     ">
+      <div className="w-[184px] space-y-3     ">
         <SidebarOption Icon={UserIcon} url={"/"} title={"Profile"} />
 
         <SidebarOption

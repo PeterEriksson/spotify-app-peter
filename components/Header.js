@@ -13,7 +13,7 @@ import styles from "../styles/tooltip.module.css";
 function Header({ backArrow }) {
   const router = useRouter();
   return (
-    <div className="flex items-center justify-between  text-white py-2 px-4   test:-> /z-50 /sticky /top-0    bg-bodyBackground  ">
+    <header className="flex items-center justify-between  text-white py-2 px-4   test:-> /z-50 /sticky /top-0    bg-bodyBackground  ">
       <div className="flex flex-col items-center font-dancing/ /font-serif">
         <ArrowLeftIcon
           onClick={() => router.back()}
@@ -59,7 +59,7 @@ function Header({ backArrow }) {
           content="Log out"
         />
       </div>
-    </div>
+    </header>
   );
 }
 

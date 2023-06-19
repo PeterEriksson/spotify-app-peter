@@ -181,7 +181,9 @@ function Song({ track, noPlay, wideDesign, nr }) {
           )}
         </div>
 
-        <h2 className="text-bold text-white p-4">{track?.name}</h2>
+        <h2 className="text-bold text-white p-4       truncate">
+          {track?.name}
+        </h2>
 
         <hr
           className={`-mt-2.5 mb-1 ${

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import Song from "../../components/Song";
+import SongExtended from "../../components/SongExtended";
 import useSpotify from "../../hooks/useSpotify";
 
 import styles from "../../styles/effects.module.css";
@@ -41,16 +42,15 @@ export default function artistDetails({ artistId }) {
     getArtistTracks();
   }, []);
 
-  //is user following this artist?
   const [userIsFollowingArtist, SetUserIsFollowingArtist] = useState(false);
   const IsFollowingArtistCheck = () => {
     //onload issue, use getAccessToken()
-    if (spotifyApi.getAccessToken()) {
-      spotifyApi
-        .isFollowingArtists([artistId])
-        .then((data) => SetUserIsFollowingArtist(data.body[0]))
-        .catch((err) => console.log(err));
-    }
+    //if (spotifyApi.getAccessToken()) {
+    spotifyApi
+      .isFollowingArtists([artistId])
+      .then((data) => SetUserIsFollowingArtist(data.body[0]))
+      .catch((err) => console.log(err));
+    //}
   };
 
   //onload issue...use settimeout
@@ -80,14 +80,15 @@ export default function artistDetails({ artistId }) {
           </div>
         ) : (
           <div className="mx-5 ">
-            <div className=" relative justify-start items-center w-full h-72 flex  //rounded-xl ">
+            {/* NON-EXTENDED: */}
+            {/* <div className=" relative flex justify-start items-center h-72 w-full  rounded-xl ">
               <Image
-                onClick={() => console.log(artistTopSongs)}
+                //onClick={() => console.log(artistTopSongs)}
                 src={artist?.images[0]?.url}
-                className="object-cover opacity-70//  //rounded-xl"
+                className="object-cover //object-contain opacity-70  //rounded-xl"
                 layout="fill"
               />
-              {/* <div className="absolute text-white opacity-100 ml-3">
+              <div className="absolute text-white opacity-100 ml-3">
                 <h1 className="text-4xl font-bold">{artist?.name}</h1>
 
                 <div className="flex items-center space-x-1.5">
@@ -115,8 +116,63 @@ export default function artistDetails({ artistId }) {
                 <h3 className={` mt-2 `}>
                   {userIsFollowingArtist && "Following"}
                 </h3>
-                <p className="text-white mt-2">Play on Spotify...+icon/logo</p>
+               </div>
+            </div> */}
+
+            {/* EXTENDED: */}
+            <div className="flex justify-between items-center w-full ">
+              {/* <div className="relative w-2/5//  //h-72    bg-red-200  ">
+                <Image
+                  //onClick={() => console.log(artistTopSongs)}
+                  src={artist?.images[0]?.url}
+                  className=" object-contain  "
+                  //layout="fill"
+                  height={200}
+                  width={200}
+                />
               </div> */}
+              <img
+                onClick={() => console.log(artist)}
+                className="object-contain w-2/5   xl:w-1/3"
+                src={artist?.images[0]?.url}
+                alt=""
+              />
+              <div className=" text-white w-min">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold ">
+                  {artist?.name}
+                </h1>
+
+                <div className="flex items-center space-x-1.5 ">
+                  <h4 className="font-bold text-lg"> {artist?.popularity}%</h4>
+                  <p className="text-sm font-light">popularity</p>
+                </div>
+
+                <div className="flex items-center space-x-1.5">
+                  <h4 className="font-bold text-lg">
+                    {artist?.followers?.total.toLocaleString("en-US", {
+                      minimumFractionDigits: 0,
+                    })}
+                  </h4>
+                  <p className="text-sm font-light">followers</p>
+                </div>
+                <div className="flex/ /flex-col /space-x-1   ">
+                  {artist?.genres?.map((genre, i) => (
+                    <h4 key={i} className="text-sm italic ">
+                      {genre}
+                    </h4>
+                  ))}
+                </div>
+
+                <h3 className={`mb-1 `}>
+                  {userIsFollowingArtist && "Following"}
+                </h3>
+                <img
+                  onClick={() => window.open(artist?.external_urls?.spotify)}
+                  className="h-[22px] mr-3 cursor-pointer"
+                  src="../images/Spotify_Logo_CMYK_Green.png"
+                  alt="spotify logo/icon"
+                />
+              </div>
             </div>
 
             <h2 className="text-white mt-3 text-xl">Popular</h2>
@@ -124,7 +180,8 @@ export default function artistDetails({ artistId }) {
               .slice(0, 5)
               .filter((track) => track.preview_url !== null)
               .map((track, i) => (
-                <Song key={i} nr={i + 1} wideDesign track={track} />
+                //<Song key={i} nr={i + 1} wideDesign track={track} />
+                <SongExtended key={i} nr={i + 1} wideDesign track={track} />
               ))}
           </div>
         )}
@@ -136,11 +193,11 @@ export default function artistDetails({ artistId }) {
 //also pre-fetch session??
 export async function getServerSideProps({ params }, context) {
   const { artistId } = params;
-  const session = await getSession(context);
+  //const session = await getSession(context);
   return {
     props: {
       artistId,
-      session,
+      //session,
     },
   };
 }

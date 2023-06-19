@@ -12,11 +12,13 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
   const handleClick = () => {
     if (discoverPage) {
       if (isArtistSelected()) {
-        const newArr = artistsSelected.filter((id) => id !== artist.id);
-        setArtistsSelected(newArr);
+        setArtistsSelected((prevArtists) =>
+          prevArtists.filter((id) => id !== artist.id)
+        );
       } else {
         //only let the user select max 3 artists
         if (artistsSelected.length >= 3) return;
+        //add artist to selected
         setArtistsSelected((prev) => [...prev, artist.id]);
       }
     } else {
@@ -30,7 +32,7 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
       className={`bg-gray-800 rounded-xl border border-black/70  group cursor-pointer      overflow-hidden    ${
         discoverPage &&
         "w-28  flex-shrink-0 mdlg:w-full    transition duration-[250ms] ease-in-out  "
-      }   ${isArtistSelected() && "border-spotifyGreen "}  `}
+      }   ${isArtistSelected() && "!border-spotifyGreen "}  `}
       onClick={handleClick}
     >
       <div

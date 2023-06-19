@@ -41,8 +41,7 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
     //user has clicked a star of another song -> keep on playing
     /* ....enough with following line of code. Don't need to use ref to get the result we want. */
     if (e.target.getAttribute("aria-label") === "ignore-pause") return;
-    /* if user clicks on information svg icon -> keep playing music.. */
-    if (e.target.tagName === "path") return;
+
     //else stop
     setPlaying(false);
   };
@@ -101,7 +100,8 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
                 height="20"
                 width="30"
                 radius="9"
-                color="#1DB954"
+                //color="#1DB954"
+                color="white"
                 ariaLabel="play-animation"
                 wrapperStyle
               />
@@ -109,11 +109,16 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
           </div>
 
           <div className={`flex  items-center`}>
-            <InformationCircleIcon
+            {/* INFO ICON */}
+            <div
+              aria-label="ignore-pause"
               onClick={() => setShowAdditionalInfo((prev) => !prev)}
-              //onClick={() => console.log(track)}
-              className="h-5 w-5 mr-2 cursor-pointer"
-            />
+              className="mr-2 flex items-center justify-center /italic 
+             text-stone-500  w-[18px] h-[18px] p-2/ 
+              cursor-pointer rounded-full border border-gray-500 bg-white/90 text-sm"
+            >
+              i
+            </div>
 
             <CalendarDaysIcon className="h-5 w-5 text-gray-300 hidden md:inline mr-1.5" />
             <p className="text-sm font-light mr-3  hidden md:inline">
@@ -130,14 +135,21 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
               {track?.popularity}%
             </p>
 
-            <div className=" ml-3 bg-bodyBackground/ bg-spotifyBlack rounded-full z-50">
+            <div className=" ml-3 bg-spotifyBlack rounded-full z-50 xl:hidden">
               <img
                 onClick={() => window.open(track?.external_urls.spotify)}
                 className="h-[21px] w-[21px] cursor-pointer z-50"
                 src="../images/Spotify_Icon_CMYK_Green.png"
-                alt=""
+                alt="icon"
               />
             </div>
+
+            <img
+              onClick={() => window.open(track?.external_urls.spotify)}
+              className="h-[22px] cursor-pointer z-50 ml-3 xl:inline hidden"
+              src="../images/Spotify_Logo_CMYK_Green.png"
+              alt="logo"
+            />
 
             <div
               aria-label="ignore-pause"
@@ -155,11 +167,16 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
     //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
       <div className="bg-cardBackground/40   rounded-xl// border border-black/70 relative group ">
-        <InformationCircleIcon
+        {/* INFO ICON */}
+        <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className="   w-5 h-5 text-white cursor-pointer  absolute top-2 left-2"
-        />
+          className="absolute top-2 left-2 flex items-center justify-center /italic 
+             text-stone-500  w-[17px] h-[17px] p-2/ 
+              cursor-pointer rounded-full border border-gray-500 bg-white/90 text-sm"
+        >
+          i
+        </div>
 
         <div
           aria-label="ignore-pause"
@@ -206,15 +223,13 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
           Album: {track?.album?.name}
         </h3>
 
-        <div
+        <p
           className={`${
             !showAdditionalInfo && "hidden"
-          } mx-3 text-sm flex items-center !text-white`}
+          } mx-3 text-sm font-light mr-3 text-white  `}
         >
-          <p className="text-sm font-light mr-3  hidden md:inline">
-            Release year: {track?.album?.release_date.substring(0, 4)}
-          </p>
-        </div>
+          Release year: {track?.album?.release_date.substring(0, 4)}
+        </p>
 
         <div className="flex justify-between items-center w-full my-2 ">
           <div className="ml-2 ">
