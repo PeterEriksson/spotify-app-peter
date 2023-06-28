@@ -9,6 +9,7 @@ import Artist from "../components/Artist";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Song from "../components/Song";
+import SongExtended from "../components/SongExtended";
 import useSpotify from "../hooks/useSpotify";
 
 import styles from "../styles/effects.module.css";
@@ -187,12 +188,13 @@ export default function discover() {
                 <Waveform color="white" speed={0.8} />
               </div>
             ) : (
-              <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
+              <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
                 {recommendations
                   //error issue: some tracks dont have preview_url -> solution, filter out->
                   ?.filter((track) => track.preview_url !== null)
                   .map((_track, i) => (
-                    <Song key={i} track={_track} />
+                    //<Song key={i} track={_track} />
+                    <SongExtended key={i} track={_track} />
                   ))}
               </div>
             )}

@@ -275,7 +275,11 @@ function favoritedTracks() {
                           checked={selectedOption === "option1"}
                           onChange={handleOptionChange}
                         />
-                        Add songs to your liked on Spotify
+                        Add song
+                        {(favoritedItems.length > 1 ||
+                          favoritedItems.length == 0) &&
+                          "s"}{" "}
+                        to your liked on Spotify
                       </label>
                       <label className={modalstyles.radioLabel}>
                         <input

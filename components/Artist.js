@@ -29,10 +29,10 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
 
   return (
     <div
-      className={`bg-gray-800 rounded-xl border border-black/70  group cursor-pointer      overflow-hidden    ${
+      className={`bg-gray-800 rounded-xl border group cursor-pointer overflow-hidden ${
         discoverPage &&
         "w-28  flex-shrink-0 mdlg:w-full    transition duration-[250ms] ease-in-out  "
-      }   ${isArtistSelected() && "!border-spotifyGreen "}  `}
+      }   ${isArtistSelected() ? "border-spotifyGreen " : "border-black/70"}  `}
       onClick={handleClick}
     >
       <div

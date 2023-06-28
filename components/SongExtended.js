@@ -2,7 +2,6 @@ import {
   CalendarDaysIcon,
   ChevronDownIcon,
   ClockIcon,
-  InformationCircleIcon,
   PauseIcon,
   PlayIcon,
   SparklesIcon,
@@ -85,7 +84,7 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
             </h1>
             {playing ? (
               <PauseIcon
-                className={`h-6 w-6 text-white/80 cursor-pointer    `}
+                className={`h-6 w-6 text-white/90 cursor-pointer    `}
                 onClick={() => setPlaying(false)}
               />
             ) : (
@@ -109,13 +108,12 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
           </div>
 
           <div className={`flex  items-center`}>
-            {/* INFO ICON */}
+            {/* INFORMATION ICON */}
             <div
               aria-label="ignore-pause"
               onClick={() => setShowAdditionalInfo((prev) => !prev)}
-              className="mr-2 flex items-center justify-center /italic 
-             text-stone-500  w-[18px] h-[18px] p-2/ 
-              cursor-pointer rounded-full border border-gray-500 bg-white/90 text-sm"
+              className="mr-2 flex items-center justify-center  italic -rotate-6 text-stone-500 w-[18px] h-[18px]
+              cursor-pointer rounded-full border border-gray-600 bg-white/90 text-sm"
             >
               i
             </div>
@@ -167,13 +165,13 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
     //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
       <div className="bg-cardBackground/40   rounded-xl// border border-black/70 relative group ">
-        {/* INFO ICON */}
+        {/* INFORMATION ICON */}
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className="absolute top-2 left-2 flex items-center justify-center /italic 
+          className="absolute top-2 left-2 flex items-center justify-center italic -rotate-6 
              text-stone-500  w-[17px] h-[17px] p-2/ 
-              cursor-pointer rounded-full border border-gray-500 bg-white/90 text-sm"
+              cursor-pointer rounded-full border border-gray-600 bg-gray-300/90 text-sm"
         >
           i
         </div>
@@ -226,7 +224,7 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
         <p
           className={`${
             !showAdditionalInfo && "hidden"
-          } mx-3 text-sm font-light mr-3 text-white  `}
+          } mx-3 text-sm mr-3 text-white  `}
         >
           Release year: {track?.album?.release_date.substring(0, 4)}
         </p>

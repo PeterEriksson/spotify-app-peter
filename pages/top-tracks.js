@@ -123,7 +123,7 @@ export default function tracks() {
             <Waveform color="white" speed={0.8} />
           </div>
         ) : (
-          <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
+          <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
             {topTracks
               ?.filter((track) => track.preview_url !== null)
               .map((track, i) => (

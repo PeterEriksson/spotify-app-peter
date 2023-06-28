@@ -13,7 +13,7 @@ import styles from "../styles/tooltip.module.css";
 function Header({ backArrow }) {
   const router = useRouter();
   return (
-    <header className="flex items-center justify-between  text-white py-2 px-4   test:-> /z-50 /sticky /top-0    bg-bodyBackground  ">
+    <header className="flex items-center justify-between  text-white py-2 mx-4   test:-> /z-50 /sticky /top-0    bg-bodyBackground  ">
       <div className="flex flex-col items-center font-dancing/ /font-serif">
         <ArrowLeftIcon
           onClick={() => router.back()}
@@ -43,6 +43,7 @@ function Header({ backArrow }) {
           anchorSelect=".github"
           content="Github"
           delayShow={400}
+          noArrow
         />
 
         <button
@@ -57,6 +58,7 @@ function Header({ backArrow }) {
           className={styles.header}
           anchorSelect=".logOut"
           content="Log out"
+          noArrow
         />
       </div>
     </header>
