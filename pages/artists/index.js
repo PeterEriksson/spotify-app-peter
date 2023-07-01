@@ -3,6 +3,7 @@ import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import Artist from "../../components/Artist";
+import ArtistExtended from "../../components/ArtistExtended";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import useSpotify from "../../hooks/useSpotify";
@@ -107,7 +108,8 @@ export default function Home() {
         ) : (
           <div className="!mx-5 lg:!mx-auto  gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5  lg:px-2 max-w-4xl  ">
             {topArtists?.map((_artist, i) => (
-              <Artist key={i} artist={_artist} />
+              //<Artist key={i} artist={_artist} />
+              <ArtistExtended key={i} artist={_artist} />
             ))}
           </div>
         )}

@@ -112,8 +112,8 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
             <div
               aria-label="ignore-pause"
               onClick={() => setShowAdditionalInfo((prev) => !prev)}
-              className="mr-2 flex items-center justify-center  italic -rotate-6 text-stone-500 w-[18px] h-[18px]
-              cursor-pointer rounded-full border border-gray-600 bg-white/90 text-sm"
+              className="mr-2 flex items-center justify-center  italic -rotate-6 w-[18px] h-[18px]
+              cursor-pointer rounded-full border border-gray-600 bg-white/90 text-sm text-black/80"
             >
               i
             </div>
@@ -164,14 +164,12 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
   } else {
     //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
-      <div className="bg-cardBackground/40   rounded-xl// border border-black/70 relative group ">
+      <div className="bg-cardBackground/40   rounded-xl border border-black/70 relative group ">
         {/* INFORMATION ICON */}
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className="absolute top-2 left-2 flex items-center justify-center italic -rotate-6 
-             text-stone-500  w-[17px] h-[17px] p-2/ 
-              cursor-pointer rounded-full border border-gray-600 bg-gray-300/90 text-sm"
+          className="absolute top-2 left-2 flex items-center justify-center italic -rotate-6 w-[17px] h-[17px] cursor-pointer rounded-full border text-black/80 border-gray-600 bg-gray-300/90 text-sm"
         >
           i
         </div>
