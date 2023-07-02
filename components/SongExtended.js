@@ -79,9 +79,23 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
               src={track?.album?.images[0]?.url}
               alt=""
             />
-            <h1 className="max-w-[14ch] sm:max-w-[15ch] mdlg:max-w-[22ch] lg:max-w-[35ch] truncate font-semibold ">
-              {track?.name}
-            </h1>
+            <div>
+              <h1
+                className={`${
+                  showAdditionalInfo && "!max-w-full "
+                } max-w-[14ch] sm:max-w-[15ch] mdlg:max-w-[22ch] lg:max-w-[35ch] ${
+                  !showAdditionalInfo && "truncate"
+                } /truncate font-semibold `}
+              >
+                {track?.name}
+              </h1>
+              <h3 className={`text-sm  ${!showAdditionalInfo && "hidden"} `}>
+                Artist: {track?.artists[0]?.name}
+              </h3>
+              <h3 className={`text-sm  ${!showAdditionalInfo && "hidden"} `}>
+                Album: {track?.album?.name}
+              </h3>
+            </div>
             {playing ? (
               <PauseIcon
                 className={`h-6 w-6 text-white/90 cursor-pointer    `}
@@ -133,8 +147,13 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
               {track?.popularity}%
             </p>
 
-            <div className=" ml-3 bg-spotifyBlack rounded-full z-50 xl:hidden">
+            {/* SPOTIFY ICON */}
+            <div
+              aria-label="ignore-pause"
+              className=" ml-3 bg-spotifyBlack rounded-full z-50 xl:hidden"
+            >
               <img
+                aria-label="ignore-pause"
                 onClick={() => window.open(track?.external_urls.spotify)}
                 className="h-[21px] w-[21px] cursor-pointer z-50"
                 src="../images/Spotify_Icon_CMYK_Green.png"
@@ -142,7 +161,9 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
               />
             </div>
 
+            {/* SPOTIFY LOGO (show on xl screens...) */}
             <img
+              aria-label="ignore-pause"
               onClick={() => window.open(track?.external_urls.spotify)}
               className="h-[22px] cursor-pointer z-50 ml-3 xl:inline hidden"
               src="../images/Spotify_Logo_CMYK_Green.png"
@@ -219,13 +240,13 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
           Album: {track?.album?.name}
         </h3>
 
-        <p
+        <h3
           className={`${
             !showAdditionalInfo && "hidden"
           } mx-3 text-sm mr-3 text-white  `}
         >
           Release year: {track?.album?.release_date.substring(0, 4)}
-        </p>
+        </h3>
 
         <div className="flex justify-between items-center w-full my-2 ">
           <div className="ml-2 ">
