@@ -71,10 +71,10 @@ function favoritedTracks() {
 
   const [loadingAction, setLoadingAction] = useState(false);
 
-  //add notification for option2 aswell
   const handleAction = () => {
     if (selectedOption == "option1") {
       setLoadingAction(true);
+      setOpenNewPlaylistModal(false);
       const notificationAdd = toast.loading(
         `Adding ${favoritedItems.length > 1 ? "songs" : "song"}`,
         {
@@ -92,8 +92,6 @@ function favoritedTracks() {
       setTimeout(() => {
         spotifyApi
           .addToMySavedTracks(favoritedItems.map((item) => item.id))
-          //.then(dispatch(emptyFavorites()))
-          .then(() => setOpenNewPlaylistModal(false))
           .then(() => {
             toast.success(
               `Song${
@@ -139,6 +137,7 @@ function favoritedTracks() {
       //first we create a playlist, then we grab hold of the id of that playlist
       //in order to use addTracksToPlaylist
       setLoadingAction(true);
+      setOpenNewPlaylistModal(false);
       const notificationCreate = toast.loading(`Creating Playlist...`, {
         style: {
           background: "#191414",
@@ -162,7 +161,6 @@ function favoritedTracks() {
           )
         )
         .then(dispatch(emptyFavorites()))
-        .then(() => setOpenNewPlaylistModal(false))
         .then(() => {
           toast.success(`${playlistName} playlist created!`, {
             id: notificationCreate,

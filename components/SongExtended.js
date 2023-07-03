@@ -37,10 +37,7 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
   }, []);
 
   const handleStopPlay = (e) => {
-    //user has clicked a star of another song -> keep on playing
-    /* ....enough with following line of code. Don't need to use ref to get the result we want. */
     if (e.target.getAttribute("aria-label") === "ignore-pause") return;
-
     //else stop
     setPlaying(false);
   };
@@ -56,8 +53,9 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
   const favoritedItems = useSelector(selectFavoritedItmes);
 
   const handleLike = () => {
-    //when  in /likedTracks, animation retriggers when removing a like, -> solution->
+    //when  in /favorited-tracks, animation retriggers when removing a like, -> solution->
     !noPlay && setTriggerLikeEffect(true);
+    //if song isn't liked -> add. else -> remove
     favoritedItems.every((item) => item.id !== track.id)
       ? dispatch(addToFavorites(track))
       : dispatch(removeFromFavorites(track.id));
@@ -190,7 +188,7 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className="absolute top-2 left-2 flex items-center justify-center italic -rotate-6 w-[17px] h-[17px] cursor-pointer rounded-full border text-black/80 border-gray-600 bg-gray-300/90 text-sm"
+          className="absolute top-2 left-2 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-600 bg-gray-300/90 text-sm"
         >
           i
         </div>
