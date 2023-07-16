@@ -11,7 +11,7 @@ function Login({ providers }) {
       /> */}
       {Object.values(providers).map((provider, i) => (
         <div className="flex flex-col items-center" key={provider.name}>
-          <h1 className="text-white text-2xl ">TrackTrends </h1>
+          <h1 className="text-white text-4xl ">TrackTrends </h1>
           <p className="text-white mb-3">
             See your spotify stats, select favorite songs, create playlists,
             discover new tracks.
