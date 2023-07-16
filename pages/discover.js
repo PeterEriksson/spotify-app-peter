@@ -103,7 +103,7 @@ export default function discover() {
             >
               Discover
             </h1>
-            <h3 className="relative text-white w-fit mx-auto mb-1 text-base flex items-center  ">
+            <h3 className="relative text-white w-fit mx-auto mb-1 text-base flex items-center ">
               Select up to 3 artists{" "}
               {artistsSelected.length > 0 && (
                 <div className="absolute -right-12 flex items-center ">
@@ -119,7 +119,7 @@ export default function discover() {
             <div className="relative  flex justify-end items-center ">
               <div
                 ref={containerRef}
-                className={`     ${styles.hideScrollbar} scroll justify-start/   overflow-x-scroll    flex mx-5 mdlg:grid mdlg:grid-cols-7 mdlg:gap-1 mdlg:space-x-0 space-x-2       `}
+                className={`     ${styles.hideScrollbar} flex  overflow-x-scroll space-x-2   lg:mx-5 mx-7 lg:grid lg:grid-cols-7 lg:gap-1 lg:space-x-0          `}
               >
                 {topArtists.map((artist, i) => (
                   //<Artist
@@ -141,7 +141,7 @@ export default function discover() {
 
               <ArrowRightCircleIcon
                 onClick={() => handleArrowClick(250)}
-                className="text-white mdlg:hidden  absolute  h-8 w-8 z-50   mr-1 cursor-pointer "
+                className="text-white lg:hidden absolute  h-8// w-8// h-5 w-5   z-10 mr-0.5 cursor-pointer "
               />
             </div>
 
