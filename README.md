@@ -31,3 +31,12 @@ TrackTrends is a webapp that gives insight about your Spotify experience: top ar
 ## Todo
 
 ## Setup
+
+#### In case you want to run the project locally:
+Install dependencies, then run the development server:
+
+```bash
+npm install
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
