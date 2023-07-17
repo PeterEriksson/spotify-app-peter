@@ -6,7 +6,7 @@ User can play previews of songs and select them as favorited. In the favorited-p
 
 In the Discover page the user can also explore new tracks.
 
-Link to site: spotify-app-peter.vercel.app
+Link to site: https://tracktrends.vercel.app/
 
 ## Table of contents
 
