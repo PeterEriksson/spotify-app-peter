@@ -4,7 +4,7 @@ TrackTrends is a webapp that gives insight about your Spotify experience: top ar
 
 User can play previews of songs and select them as favorited. In the favorited-page the user can then make an action with these favorited songs - either add them to liked songs on Spotify or create a new playlist on Spotify. 
 
-In the Discover page the user can also explore new tracks.
+In the Discover page the user can explore new tracks.
 
 Link to site: https://tracktrends.vercel.app/
 
