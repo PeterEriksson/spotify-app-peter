@@ -1,4 +1,4 @@
-# 🎶TrackTrends - See your Spotify stats
+# 🎶 TrackTrends - See your Spotify stats
 
 TrackTrends is a webapp that gives insight about your Spotify experience: top artists and top songs. 
 
