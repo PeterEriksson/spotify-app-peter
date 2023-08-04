@@ -14,7 +14,6 @@ Link to site: https://tracktrends.vercel.app/
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Todo](#todo)
-- [Author](#author)
  
 
 ## Technologies
