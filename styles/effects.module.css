@@ -74,6 +74,8 @@
   border: 1.2px solid black; /* Set the border color to black */
   background-color: white;
 
+  cursor: pointer;
+
   /* align items... */
   margin-bottom: -2px;
 }

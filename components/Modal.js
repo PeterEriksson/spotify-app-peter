@@ -217,10 +217,10 @@ function Modal({
                 </Dialog.Title>
 
                 <div className="flex flex-col  mt-1.5  ">
-                  <label className={modalstyles.radioLabel}>
+                  <label className={`${modalstyles.radioLabel} cursor-pointer`}>
                     <input
                       color="#191414"
-                      className="mr-1"
+                      className="mr-1 "
                       type="radio"
                       value="option1"
                       checked={selectedOption === "option1"}
@@ -232,7 +232,7 @@ function Modal({
                       "s"}{" "}
                     to your liked on Spotify
                   </label>
-                  <label className={modalstyles.radioLabel}>
+                  <label className={`${modalstyles.radioLabel} cursor-pointer`}>
                     <input
                       className="mr-1 "
                       type="radio"

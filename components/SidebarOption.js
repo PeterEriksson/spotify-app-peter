@@ -1,39 +1,47 @@
 import { useRouter } from "next/router";
 import React from "react";
+import Link from "next/link";
 
 function SidebarOption({ Icon, title, url, favoritedItems }) {
   const router = useRouter();
   const { asPath } = useRouter();
 
   return (
-    <div
+    /*  <div
       className={`sidebarDiv/ sidebarOption  group   ${
         favoritedItems && "relative"
       }`}
       onClick={() => router.push(url)}
-    >
-      <Icon
-        className={`sidebarIcon ${
-          asPath === url ? "text-spotifyGreen" : "text-gray-400"
-        }  `}
-      />
-      <p
-        className={`${
-          asPath === url ? "!text-spotifyGreen" : "text-gray-400"
-        }   hoverStyling `}
+    > */
+    <Link href={url}>
+      <div
+        className={`sidebarDiv/ sidebarOption  group   ${
+          favoritedItems && "relative"
+        }`}
       >
-        {title}
-      </p>
-      {favoritedItems && (
-        <div
+        <Icon
+          className={`sidebarIcon ${
+            asPath === url ? "text-spotifyGreen" : "text-gray-400"
+          }  `}
+        />
+        <p
           className={`${
-            favoritedItems.length == 0 && "hidden"
-          } absolute top-0.5 left-10 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
+            asPath === url ? "!text-spotifyGreen" : "text-gray-400"
+          }   hoverStyling `}
         >
-          <p className={`text-sm text-white/75  `}>{favoritedItems.length}</p>
-        </div>
-      )}
-    </div>
+          {title}
+        </p>
+        {favoritedItems && (
+          <div
+            className={`${
+              favoritedItems.length == 0 && "hidden"
+            } absolute top-0.5 left-10 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
+          >
+            <p className={`text-sm text-white/75  `}>{favoritedItems.length}</p>
+          </div>
+        )}
+      </div>
+    </Link>
   );
 }
 

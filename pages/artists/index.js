@@ -73,47 +73,47 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen  ">
-      <Sidebar />
-      <div className=" w-screen bg-bodyBackground overflow-y-scroll   ">
-        <Header />
+    <div className="flex/ /h-screen  ">
+      {/* <Sidebar /> */}
+      {/*  <div className=" w-screen bg-bodyBackground overflow-y-scroll   "> */}
+      {/* <Header /> */}
 
-        <h1 className="text-3xl text-white text-center uppercase tracking-wide">
-          Most Played Artists
-        </h1>
+      <h1 className="text-3xl text-white text-center uppercase tracking-wide">
+        Most Played Artists
+      </h1>
 
-        <div className="relative max-w-fit mx-auto">
-          <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
-            {tabsData.map((tab, idx) => (
-              <button
-                key={idx}
-                ref={(el) => (tabsRef.current[idx] = el)}
-                className="pt-2 pb-3"
-                onClick={() => handleTimePeriodClick(idx, tab)}
-              >
-                {tab.text}
-              </button>
-            ))}
-          </div>
-          <span
-            className="absolute bottom-0 block h-1  bg-spotifyGreen/// bg-white/80 transition-all duration-300"
-            style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
-          />
+      <div className="relative max-w-fit mx-auto">
+        <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
+          {tabsData.map((tab, idx) => (
+            <button
+              key={idx}
+              ref={(el) => (tabsRef.current[idx] = el)}
+              className="pt-2 pb-3"
+              onClick={() => handleTimePeriodClick(idx, tab)}
+            >
+              {tab.text}
+            </button>
+          ))}
         </div>
-
-        {loading ? (
-          <div className="flex justify-center   mt-24">
-            <RaceBy color="white" speed={1.2} size={150} lineWeight={4} />
-          </div>
-        ) : (
-          <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
-            {topArtists?.map((_artist, i) => (
-              //<Artist key={i} artist={_artist} />
-              <ArtistExtended key={i} artist={_artist} />
-            ))}
-          </div>
-        )}
+        <span
+          className="absolute bottom-0 block h-1  bg-spotifyGreen/// bg-white/80 transition-all duration-300"
+          style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
+        />
       </div>
+
+      {loading ? (
+        <div className="flex justify-center   mt-24">
+          <RaceBy color="white" speed={1.2} size={150} lineWeight={4} />
+        </div>
+      ) : (
+        <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
+          {topArtists?.map((_artist, i) => (
+            //<Artist key={i} artist={_artist} />
+            <ArtistExtended key={i} artist={_artist} />
+          ))}
+        </div>
+      )}
+      {/* </div> */}
     </div>
   );
 }

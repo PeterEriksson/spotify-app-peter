@@ -60,6 +60,7 @@ export default function artistDetails({ artistId }) {
     }, 1000);
   }, []);
 
+  //TEMP solution (see artistId)-> special render on [artistId].js, including Sidebar and Header
   return (
     <div className="flex h-screen   ">
       <Head>
@@ -70,7 +71,7 @@ export default function artistDetails({ artistId }) {
       <Sidebar />
 
       <div
-        className={`w-screen bg-bodyBackground overflow-y-scroll  /*heart-interferes-with-scrollbar-> */ ${styles.hideScrollbar}   `}
+        className={`w-screen bg-bodyBackground overflow-y-scroll  /heart-interferes-with-scrollbar-> / $/{styles.hideScrollbar}   `}
       >
         <Header backArrow />
 
@@ -80,57 +81,7 @@ export default function artistDetails({ artistId }) {
           </div>
         ) : (
           <div className="mx-5 ">
-            {/* NON-EXTENDED: */}
-            {/* <div className=" relative flex justify-start items-center h-72 w-full  rounded-xl ">
-              <Image
-                //onClick={() => console.log(artistTopSongs)}
-                src={artist?.images[0]?.url}
-                className="object-cover //object-contain opacity-70  //rounded-xl"
-                layout="fill"
-              />
-              <div className="absolute text-white opacity-100 ml-3">
-                <h1 className="text-4xl font-bold">{artist?.name}</h1>
-
-                <div className="flex items-center space-x-1.5">
-                  <h4 className="font-bold text-lg"> {artist?.popularity}%</h4>
-                  <p className="text-sm font-light">popularity</p>
-                </div>
-
-                <div className="flex items-center space-x-1.5">
-                  <h4 className="font-bold text-lg">
-                    {artist?.followers?.total.toLocaleString("en-US", {
-                      minimumFractionDigits: 0,
-                    })}
-                  </h4>
-                  <p className="text-sm font-light">followers</p>
-                </div>
-                <div className="flex space-x-1">
-                  {artist?.genres?.map((genre, i) => (
-                    <h4 key={i} className="text-sm italic ">
-                      {genre}
-                      {i !== artist?.genres?.length - 1 && ","}
-                    </h4>
-                  ))}
-                </div>
-
-                <h3 className={` mt-2 `}>
-                  {userIsFollowingArtist && "Following"}
-                </h3>
-               </div>
-            </div> */}
-
-            {/* EXTENDED: */}
             <div className="flex justify-between items-center w-full ">
-              {/* <div className="relative w-2/5//  //h-72    bg-red-200  ">
-                <Image
-                  //onClick={() => console.log(artistTopSongs)}
-                  src={artist?.images[0]?.url}
-                  className=" object-contain  "
-                  //layout="fill"
-                  height={200}
-                  width={200}
-                />
-              </div> */}
               <img
                 onClick={() => console.log(artist)}
                 className="object-contain w-2/5   xl:w-1/3"
@@ -180,7 +131,6 @@ export default function artistDetails({ artistId }) {
               .slice(0, 5)
               .filter((track) => track.preview_url !== null)
               .map((track, i) => (
-                //<Song key={i} nr={i + 1} wideDesign track={track} />
                 <SongExtended key={i} nr={i + 1} wideDesign track={track} />
               ))}
           </div>

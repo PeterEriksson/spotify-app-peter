@@ -36,28 +36,24 @@ function Sidebar() {
 
       <hr className="border-gray-600 w-full mt-2/ mb-3 " />
 
-      <div className="w-[184px] space-y-3     ">
+      <div className="w-[184px] space-y-3 ">
         <SidebarOption Icon={UserIcon} url={"/"} title={"Profile"} />
-
         <SidebarOption
           Icon={MusicalNoteIcon}
           url={"/top-tracks"}
           title={"Top Tracks"}
         />
-
         <SidebarOption
           Icon={HeartIcon}
           url={"/favorited-tracks"}
           title={"Favorited"}
           favoritedItems={favoritedItems}
         />
-
         <SidebarOption
           Icon={MicrophoneIcon}
           url="/artists"
           title="Top Artists"
         />
-
         <SidebarOption Icon={GlobeAltIcon} url="/discover" title="Discover" />
       </div>
     </nav>
