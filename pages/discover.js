@@ -192,7 +192,7 @@ export default function discover() {
               onClick={handleGetRecommendations}
               className={`${
                 artistsSelected.length == 0 && "opacity-70"
-              } bg-spotifyGreen  text-white border-2 border-spotifyBlack rounded-3xl p-4  `}
+              } bg-spotifyGreen  text-white border border-spotifyBlack rounded-3xl p-4  `}
             >
               Get Recommendations
             </button>
