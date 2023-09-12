@@ -73,7 +73,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex/ /h-screen  ">
+    <div className="flex/ h-screen  ">
       {/* <Sidebar /> */}
       {/*  <div className=" w-screen bg-bodyBackground overflow-y-scroll   "> */}
       {/* <Header /> */}

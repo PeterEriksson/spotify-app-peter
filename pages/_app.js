@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     <SessionProvider session={session}>
       <Provider store={store}>
         {session ? (
-          <div className="flex h-screen ">
+          <div className="flex h-screen flex-col-reverse   xxs:flex-row">
             <Sidebar />
             <div className=" w-screen   overflow-y-scroll  !bg-bodyBackground">
               <Header backArrow={isArtistPage} />

@@ -14,11 +14,7 @@ function SidebarOption({ Icon, title, url, favoritedItems }) {
       onClick={() => router.push(url)}
     > */
     <Link href={url}>
-      <div
-        className={`sidebarDiv/ sidebarOption  group   ${
-          favoritedItems && "relative"
-        }`}
-      >
+      <div className={`sidebarOption group  ${favoritedItems && "relative"}`}>
         <Icon
           className={`sidebarIcon ${
             asPath === url ? "text-spotifyGreen" : "text-gray-400"
@@ -27,7 +23,7 @@ function SidebarOption({ Icon, title, url, favoritedItems }) {
         <p
           className={`${
             asPath === url ? "!text-spotifyGreen" : "text-gray-400"
-          }   hoverStyling `}
+          }   hoverStyling  hidden xxs:inline`}
         >
           {title}
         </p>
@@ -35,7 +31,7 @@ function SidebarOption({ Icon, title, url, favoritedItems }) {
           <div
             className={`${
               favoritedItems.length == 0 && "hidden"
-            } absolute top-0.5 left-10 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
+            } absolute top-0.5 left-2 xxs:left-10 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
           >
             <p className={`text-sm text-white/75  `}>{favoritedItems.length}</p>
           </div>

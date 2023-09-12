@@ -184,7 +184,6 @@ function SongExtended({ track, noPlay, wideDesign, nr }) {
     //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
       <div className="bg-cardBackground/40   rounded-xl border border-black/70 relative group ">
-        {/* INFORMATION ICON */}
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
