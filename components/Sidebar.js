@@ -15,7 +15,7 @@ function Sidebar() {
   const favoritedItems = useSelector(selectFavoritedItmes);
 
   return (
-    <nav className=" flex xxs:flex-col xxs:h-screen py-3 xxs:py-0   border-t-2 xxs:border-t-0      bg-spotifyBlack items-center xxs:pt-4 xxs:border-r border-gray-600 ">
+    <nav className="sticky z-20        flex xxs:flex-col xxs:h-screen py-3 xxs:py-0   border-t-2 xxs:border-t-0      bg-spotifyBlack items-center xxs:pt-4 xxs:border-r border-gray-600 ">
       {/*  <div
         onClick={() => window.open("https://www.spotify.com")}
         className="cursor-pointer relative h-[88px] w-[88px] rounded-full -mt-2.5"

@@ -5,9 +5,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import useSpotify from "../hooks/useSpotify";
-
 import { countries } from "country-data";
-
 import styles from "../styles/effects.module.css";
 import Song from "../components/Song";
 import { DotPulse } from "@uiball/loaders";
@@ -20,6 +18,8 @@ export default function profile() {
   const [songsLimit, setSongsLimit] = useState(5);
 
   const { data: session } = useSession();
+  //console.log(session);
+
   const spotifyApi = useSpotify();
 
   const getProfileInfo = () => {
@@ -91,8 +91,7 @@ export default function profile() {
               layout="fill"
               className="rounded-full "
               src={session?.user?.image}
-              //src="https://baypark.ca/wp-content/uploads/2020/02/spotify-logo-png-spotify-music-app-icon-1024.jpg"
-              alt="spotify-logo"
+              alt="user-img"
             />
           </div>
           <div className="ml-6">
@@ -144,12 +143,11 @@ export default function profile() {
           ))}
       </div>
 
-      {/* load more button */}
+      {/* LOAD MORE button */}
       {songsLimit < 21 && (
         <div className="flex justify-center relative">
           <button
             aria-label="ignore-pause"
-            //onClick={() => setSongsLimit((prev) => prev + 5)}
             onClick={handleLoadMore}
             className={`text-gray-600 font-bold text-center my-2 cursor-pointer  ${
               loadingSongsFetch && "hidden/ opacity-0"

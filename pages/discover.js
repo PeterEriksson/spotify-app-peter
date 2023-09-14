@@ -198,7 +198,7 @@ export default function discover() {
           ) : (
             <div
               /* ref={recommendationsContainerRef} */
-              className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  "
+              className="pb-3 xxs:pb-0     !mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  "
             >
               {recommendations
                 //error issue: some tracks dont have preview_url -> solution, filter out->
