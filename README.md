@@ -6,6 +6,8 @@ User can play previews of songs and select them as favorited. In the favorited-p
 
 In the  discover-page the user can explore new tracks based on the user's most played artists.
 
+Login using your Spotify credentials.
+
 Link to site: https://tracktrends.vercel.app/
 
 ## Table of contents
