@@ -67,7 +67,7 @@ function favoritedTracks() {
         className={`connectingToTooltip: create ${
           favoritedItems.length > 0 && "hover:scale-105"
         } 
-        bottom-20 right-4 xxs:bottom-4    absolute z-50 rounded-full p-4 bg-spotifyGreen transform transition duration-200 ease-in  `}
+        bottom-14 right-4 xxs:bottom-4    absolute z-50 rounded-full p-4 bg-spotifyGreen transform transition duration-200 ease-in  `}
       >
         <PlusIcon className="h-9 w-9 text-white" />
       </button>
@@ -77,7 +77,7 @@ function favoritedTracks() {
         data-tooltip-id="trash"
         className={` trash ${
           favoritedItems == 0 && "hidden"
-        } bottom-[90px] xxs:bottom-7    h-8 w-8 absolute cursor-pointer z-30  ml-4 text-white transform transition duration-200 ease-in hover:scale-105`}
+        } bottom-16 xxs:bottom-7    h-8 w-8 absolute cursor-pointer z-30  ml-4 text-white transform transition duration-200 ease-in hover:scale-105`}
       />
       <Tooltip
         content="Clear all songs"
