@@ -204,7 +204,6 @@ export default function discover() {
                 //error issue: some tracks dont have preview_url -> solution, filter out->
                 ?.filter((track) => track.preview_url !== null)
                 .map((_track, i) => (
-                  //<Song key={i} track={_track} />
                   <SongExtended key={i} track={_track} />
                 ))}
             </div>
