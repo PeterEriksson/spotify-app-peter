@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import Song from "../../components/Song";
-import SongExtended from "../../components/SongExtended";
 import useSpotify from "../../hooks/useSpotify";
 
 import styles from "../../styles/effects.module.css";
@@ -131,7 +130,7 @@ export default function artistDetails({ artistId }) {
               .slice(0, 5)
               .filter((track) => track.preview_url !== null)
               .map((track, i) => (
-                <SongExtended key={i} nr={i + 1} wideDesign track={track} />
+                <Song key={i} nr={i + 1} wideDesign track={track} />
               ))}
           </div>
         )}

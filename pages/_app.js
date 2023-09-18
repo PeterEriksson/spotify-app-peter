@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             </div>
           </div>
         ) : (
-          //redirects to login page
+          //redirects to login page (_middleware)
           <Component {...pageProps} />
         )}
       </Provider>

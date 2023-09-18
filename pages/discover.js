@@ -6,11 +6,9 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 
 import Artist from "../components/Artist";
-import ArtistExtended from "../components/ArtistExtended";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Song from "../components/Song";
-import SongExtended from "../components/SongExtended";
 import useSpotify from "../hooks/useSpotify";
 
 import styles from "../styles/effects.module.css";
@@ -130,7 +128,7 @@ export default function discover() {
               className={`     $//{styles.hideScrollbar} flex  overflow-x-scroll space-x-2   lg:mx-5 mx-5 lg:grid lg:grid-cols-7 lg:gap-1 lg:space-x-0          `}
             >
               {topArtists.map((artist, i) => (
-                <ArtistExtended
+                <Artist
                   key={i}
                   artist={artist}
                   discoverPage
@@ -204,7 +202,7 @@ export default function discover() {
                 //error issue: some tracks dont have preview_url -> solution, filter out->
                 ?.filter((track) => track.preview_url !== null)
                 .map((_track, i) => (
-                  <SongExtended key={i} track={_track} />
+                  <Song key={i} track={_track} />
                 ))}
             </div>
           )}

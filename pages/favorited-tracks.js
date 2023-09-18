@@ -10,14 +10,13 @@ import { Tooltip } from "react-tooltip";
 import Sidebar from "../components/Sidebar";
 import styles from "../styles/tooltip.module.css";
 import Header from "../components/Header";
-import Song from "../components/Song";
 import { useDispatch, useSelector } from "react-redux";
 import { selectItems as selectFavoritedItmes } from "../slices/favoritesSlice";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { emptyFavorites } from "../slices/favoritesSlice";
 import { /* toast */ Toaster } from "react-hot-toast";
-import SongExtended from "../components/SongExtended";
+import Song from "../components/Song";
 import Modal from "../components/Modal";
 
 function favoritedTracks() {
@@ -88,7 +87,7 @@ function favoritedTracks() {
 
       <div className="pb-3 xxs:pb-0     !mx-5 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
         {favoritedItems.map((track, i) => (
-          <SongExtended key={i} track={track} noPlay />
+          <Song key={i} track={track} noPlay />
         ))}
       </div>
       {/* </div> */}

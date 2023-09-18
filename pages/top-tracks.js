@@ -5,10 +5,9 @@ import { SocialIcon } from "react-social-icons";
 import Sidebar from "../components/Sidebar";
 import useSpotify from "../hooks/useSpotify";
 import { Waveform } from "@uiball/loaders";
-import Song from "../components/Song";
 import Head from "next/head";
 import Header from "../components/Header";
-import SongExtended from "../components/SongExtended";
+import Song from "../components/Song";
 
 export default function tracks() {
   const spotifyApi = useSpotify();
@@ -127,7 +126,7 @@ export default function tracks() {
           {topTracks
             ?.filter((track) => track.preview_url !== null)
             .map((_track, i) => (
-              <SongExtended key={i} track={_track} />
+              <Song key={i} track={_track} />
             ))}
         </div>
       )}
