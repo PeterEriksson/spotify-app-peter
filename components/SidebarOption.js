@@ -3,16 +3,9 @@ import React from "react";
 import Link from "next/link";
 
 function SidebarOption({ Icon, title, url, favoritedItems }) {
-  const router = useRouter();
   const { asPath } = useRouter();
 
   return (
-    /*  <div
-      className={`sidebarDiv/ sidebarOption  group   ${
-        favoritedItems && "relative"
-      }`}
-      onClick={() => router.push(url)}
-    > */
     <Link href={url}>
       <div className={`sidebarOption group  ${favoritedItems && "relative"}`}>
         <Icon

@@ -10,7 +10,7 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
     return artistsSelected?.some((id) => id == artist.id);
   };
 
-  const handleClick = (e) => {
+  const handleArtistClick = (e) => {
     //if we click information or spotify icon we let the onclick of those respective elements go ahead and perform their actions.
     if (e.target.getAttribute("aria-label") === "ignore-pause") return;
 
@@ -30,9 +30,10 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
       router.push("/artists/" + artist?.id);
     }
   };
+
   return (
     <div
-      onClick={handleClick}
+      onClick={handleArtistClick}
       className={`bg-cardBackground/40 rounded-xl border group cursor-pointer relative overflow-hidden text-white   ${
         isArtistSelected() ? "border-spotifyGreen " : "border-black/70"
       } ${discoverPage && "flex-shrink-0 pt-6 pb-2 px-2.5 "}  `}
@@ -75,7 +76,7 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
         {artist?.name}
       </h1>
       {showAdditionalInfo && (
-        <>
+        <div className="m-2">
           <hr className=" border-gray-600   mb-2" />
           <h3 className="">Popularity: {artist.popularity}</h3>
           <h3 className="flex flex-col  ">
@@ -87,7 +88,7 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
               </p>
             ))}
           </h3>
-        </>
+        </div>
       )}
     </div>
   );

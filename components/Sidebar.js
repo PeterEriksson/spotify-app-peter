@@ -16,19 +16,6 @@ function Sidebar() {
 
   return (
     <nav className="sticky z-20        flex xxs:flex-col xxs:h-screen py-3 xxs:py-0   border-t-2 xxs:border-t-0      bg-spotifyBlack items-center xxs:pt-4 xxs:border-r border-gray-600 ">
-      {/*  <div
-        onClick={() => window.open("https://www.spotify.com")}
-        className="cursor-pointer relative h-[88px] w-[88px] rounded-full -mt-2.5"
-      >
-        <Image
-          layout="fill"
-          className="h-20/ /w-20 rounded-full "
-          //src="https://baypark.ca/wp-content/uploads/2020/02/spotify-logo-png-spotify-music-app-icon-1024.jpg"
-          src="/images/Spotify_Icon_CMYK_Green.png"
-          alt="spotify-icon"
-        />
-      </div> */}
-
       <div className="hidden xxs:flex     flex-col items-center  mb-7 text-white font-dancing/ /font-serif">
         <h1 className={`text-lg font-bold`}>TrackTrends</h1>
         <h3 className={`font-extralight text-sm`}>by Peter</h3>
