@@ -72,7 +72,7 @@ export default function Home() {
   };
 
   return (
-    <div className=" h-screen  ">
+    <div className={` h-screen//  ${loading && "h-screen"} `}>
       {/* <Sidebar /> */}
       {/*  <div className=" w-screen bg-bodyBackground overflow-y-scroll   "> */}
       {/* <Header /> */}

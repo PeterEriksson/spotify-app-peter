@@ -91,7 +91,7 @@ export default function tracks() {
       {/*  <Header /> */}
 
       <h1
-        onClick={() => console.log(topTracks)}
+        //onClick={() => console.log(topTracks)}
         className="text-3xl text-white text-center uppercase tracking-wide"
       >
         most played songs
@@ -122,7 +122,7 @@ export default function tracks() {
           <Waveform color="white" speed={0.8} />
         </div>
       ) : (
-        <div className=" overflow-y-auto/        needAnywayOnMobile?-> pb-2.5/    !mx-4 my-3 gap-3 grid grid-cols-1  xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
+        <div className=" overflow-y-auto///        needAnywayOnMobile?-> pb-2.5/    !mx-4 my-3 gap-3 grid grid-cols-1  xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
           {topTracks
             ?.filter((track) => track.preview_url !== null)
             .map((_track, i) => (
