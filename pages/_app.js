@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
   const isArtistPage = router.route === "/artists/[artistId]";
 
-  //(TEMP solution (see [artistId].js ) -> special render including Sidebar and Header)
+  //(temp solution (see [artistId].js ) -> special render including Sidebar and Header)
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
