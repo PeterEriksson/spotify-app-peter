@@ -183,7 +183,9 @@ function Song({ track, noPlay, wideDesign, nr }) {
   } else {
     //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
-      <div className="bg-cardBackground/40   rounded-xl border border-black/70 relative group ">
+      <div
+        className={`bg-cardBackground/40   rounded-xl border border-black/70 relative group  `}
+      >
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
@@ -207,15 +209,17 @@ function Song({ track, noPlay, wideDesign, nr }) {
             src={track?.album?.images[0]?.url}
             alt="song-image"
             //layout="fill"
-            height={128}
-            width={128}
+            // height={128}
+            // width={128}
+            height={140}
+            width={140}
           />
         </div>
 
         <h1
-          className={`text-smmd text-bold text-white mt-1.5 mb-0.5 mx-3      ${
-            !showAdditionalInfo && "truncate"
-          }  `}
+          className={`text-smmd text-bold ${
+            playing ? "text-spotifyGreen" : "text-white"
+          }  mt-1.5 mb-0.5 mx-3      ${!showAdditionalInfo && "truncate"}  `}
         >
           {track?.name}
         </h1>
@@ -223,7 +227,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <hr className={` my-1 border-gray-600  mx-3  `} />
 
         <h3
-          className={`text-sm px-3 text-white  ${
+          className={`text-sm px-3  text-white ${
             !showAdditionalInfo && "truncate"
           } `}
         >
@@ -240,45 +244,44 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <h3
           className={`${
             !showAdditionalInfo && "hidden"
-          } mx-3 text-sm mr-3 text-white  `}
+          } mx-3 text-sm mr-3  text-white   `}
         >
           Release year: {track?.album?.release_date.substring(0, 4)}
         </h3>
 
-        <div className="flex justify-between items-center w-full my-2 ">
-          <div className="ml-2 ">
-            {playing ? (
-              <div className="flex items-center">
-                <PauseIcon
-                  className={`h-6 w-6 text-white cursor-pointer    ${
-                    noPlay && "hidden"
-                  } `}
-                  onClick={() => setPlaying(false)}
-                />
-                <div className="mb-1 ">
-                  <AudioPlayAnimation
-                    height="18"
-                    width="18"
-                    radius="9"
-                    //color="#1DB954"
-                    color="white"
-                    ariaLabel="play-animation"
-                    wrapperStyle
-                  />
-                </div>
-              </div>
-            ) : (
-              <PlayIcon
-                className={`h-6 w-6 text-white cursor-pointer       ${
+        <div className={`flex justify-between items-center w-full my-2  px-2`}>
+          {playing ? (
+            <div className="flex items-center">
+              <PauseIcon
+                className={`h-6 w-6 text-white cursor-pointer    ${
                   noPlay && "hidden"
                 } `}
-                onClick={() => setPlaying(true)}
+                onClick={() => setPlaying(false)}
               />
-            )}
-          </div>
+              <div className="mb-1 ">
+                <AudioPlayAnimation
+                  height="18"
+                  width="18"
+                  radius="9"
+                  color="#1DB954"
+                  //color="white"
+                  ariaLabel="play-animation"
+                  wrapperStyle
+                />
+              </div>
+            </div>
+          ) : (
+            <PlayIcon
+              className={`h-6 w-6 text-white cursor-pointer       ${
+                noPlay && "hidden"
+              } `}
+              onClick={() => setPlaying(true)}
+            />
+          )}
+
           <img
             onClick={() => window.open(track?.external_urls.spotify)}
-            className="h-[22px] mr-3 cursor-pointer"
+            className="h-[22px] mr-3/// cursor-pointer"
             src="../images/Spotify_Logo_CMYK_Green.png"
             alt="spotify logo/icon"
           />

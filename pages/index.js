@@ -70,7 +70,7 @@ export default function profile() {
 
   return (
     <div
-      className={` ${
+      className={`MobileUiFix-> ${
         loadingSongsFetch && recentSongs.length <= 5 && "h-screen"
       } `}
     >
