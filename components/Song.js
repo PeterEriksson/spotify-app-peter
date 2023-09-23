@@ -216,13 +216,30 @@ function Song({ track, noPlay, wideDesign, nr }) {
           />
         </div>
 
-        <h1
-          className={`text-smmd text-bold ${
-            playing ? "text-spotifyGreen" : "text-white"
-          }  mt-1.5 mb-0.5 mx-3      ${!showAdditionalInfo && "truncate"}  `}
-        >
-          {track?.name}
-        </h1>
+        <div className="flex items-center   mx-3 space-x-1.5">
+          <h1
+            className={`  text-smmd text-bold ${
+              playing ? "text-spotifyGreen" : "text-white"
+            }  mt-1.5 mb-0.5 //mx-3      ${
+              !showAdditionalInfo && "truncate"
+            }  `}
+          >
+            {track?.name}
+          </h1>
+          {playing && (
+            <div className="ml-1/ overflow-hidden">
+              <AudioPlayAnimation
+                height="18"
+                width="18"
+                radius="9"
+                color="#1DB954"
+                //color="white"
+                ariaLabel="play-animation"
+                wrapperStyle
+              />
+            </div>
+          )}
+        </div>
 
         <hr className={` my-1 border-gray-600  mx-3  `} />
 
@@ -249,43 +266,34 @@ function Song({ track, noPlay, wideDesign, nr }) {
           Release year: {track?.album?.release_date.substring(0, 4)}
         </h3>
 
-        <div className={`flex justify-between items-center w-full my-2  px-2`}>
+        <img
+          onClick={() => window.open(track?.external_urls.spotify)}
+          className=" h-[22px] ml-2.5 my-2 cursor-pointer"
+          src="../images/Spotify_Logo_CMYK_Green.png"
+          alt="spotify logo/icon"
+        />
+
+        <button
+          onClick={() => setPlaying((prev) => !prev)}
+          className={`bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2  ${
+            playing && styles.playAnimate
+          }  `}
+        >
           {playing ? (
-            <div className="flex items-center">
-              <PauseIcon
-                className={`h-6 w-6 text-white cursor-pointer    ${
-                  noPlay && "hidden"
-                } `}
-                onClick={() => setPlaying(false)}
-              />
-              <div className="mb-1 ">
-                <AudioPlayAnimation
-                  height="18"
-                  width="18"
-                  radius="9"
-                  color="#1DB954"
-                  //color="white"
-                  ariaLabel="play-animation"
-                  wrapperStyle
-                />
-              </div>
-            </div>
-          ) : (
-            <PlayIcon
-              className={`h-6 w-6 text-white cursor-pointer       ${
+            <PauseIcon
+              className={`h-5 w-5 text-white cursor-pointer    ${
                 noPlay && "hidden"
               } `}
-              onClick={() => setPlaying(true)}
+              onClick={() => setPlaying(false)}
+            />
+          ) : (
+            <PlayIcon
+              className={`h-5 w-5 text-white cursor-pointer       ${
+                noPlay && "hidden"
+              } `}
             />
           )}
-
-          <img
-            onClick={() => window.open(track?.external_urls.spotify)}
-            className="h-[22px] mr-3/// cursor-pointer"
-            src="../images/Spotify_Logo_CMYK_Green.png"
-            alt="spotify logo/icon"
-          />
-        </div>
+        </button>
       </div>
     );
   }
