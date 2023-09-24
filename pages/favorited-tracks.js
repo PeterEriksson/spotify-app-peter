@@ -47,7 +47,10 @@ function favoritedTracks() {
       <Toaster position="top-center" />
       {/* <Header /> */}
 
-      <h1 className="text-3xl text-white text-center uppercase tracking-wide">
+      <h1
+        onClick={() => console.log(favoritedItems)}
+        className="text-3xl text-white text-center uppercase tracking-wide"
+      >
         favorited songs
       </h1>
       <h3 className="text-base text-white text-center mx-2">
@@ -87,7 +90,7 @@ function favoritedTracks() {
 
       <div className="   !mx-5 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
         {favoritedItems.map((track, i) => (
-          <Song key={i} track={track} noPlay />
+          <Song key={track.id} track={track} noPlay />
         ))}
       </div>
       {/* </div> */}

@@ -25,6 +25,9 @@ function Song({ track, noPlay, wideDesign, nr }) {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
   const [triggerLikeEffect, setTriggerLikeEffect] = useState(false);
 
+  const dispatch = useDispatch();
+  const favoritedItems = useSelector(selectFavoritedItmes);
+
   useEffect(() => {
     playing ? audio.play() : audio.pause();
   }, [playing]);
@@ -49,12 +52,8 @@ function Song({ track, noPlay, wideDesign, nr }) {
     };
   }, []);
 
-  const dispatch = useDispatch();
-  const favoritedItems = useSelector(selectFavoritedItmes);
-
   const handleLike = () => {
-    //when  in /favorited-tracks, animation retriggers when removing a like, -> solution->
-    !noPlay && setTriggerLikeEffect(true);
+    setTriggerLikeEffect(true);
     //if song isn't liked -> add. else -> remove
     favoritedItems.every((item) => item.id !== track.id)
       ? dispatch(addToFavorites(track))
@@ -268,32 +267,31 @@ function Song({ track, noPlay, wideDesign, nr }) {
 
         <img
           onClick={() => window.open(track?.external_urls.spotify)}
-          className=" h-[22px] ml-2.5 my-2 cursor-pointer"
+          className=" h-[22px] ml-2.5 mt-1 mb-2.5 cursor-pointer"
           src="../images/Spotify_Logo_CMYK_Green.png"
           alt="spotify logo/icon"
         />
 
-        <button
-          onClick={() => setPlaying((prev) => !prev)}
-          className={`bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2  ${
-            playing && styles.playAnimate
-          }  `}
-        >
-          {playing ? (
-            <PauseIcon
-              className={`h-5 w-5 text-white cursor-pointer    ${
-                noPlay && "hidden"
-              } `}
-              onClick={() => setPlaying(false)}
-            />
-          ) : (
-            <PlayIcon
-              className={`h-5 w-5 text-white cursor-pointer       ${
-                noPlay && "hidden"
-              } `}
-            />
-          )}
-        </button>
+        {!noPlay && (
+          <button
+            onClick={() => setPlaying(true)}
+            className={`  bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2  ${
+              playing && styles.playAnimate
+            }  `}
+          >
+            {playing ? (
+              <PauseIcon
+                className={`h-5 w-5 text-white cursor-pointer    `}
+                onClick={() => setPlaying(false)}
+              />
+            ) : (
+              <PlayIcon
+                onClick={() => setPlaying(true)}
+                className={`h-5 w-5 text-white cursor-pointer       `}
+              />
+            )}
+          </button>
+        )}
       </div>
     );
   }
