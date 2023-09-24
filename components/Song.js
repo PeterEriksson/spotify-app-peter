@@ -272,7 +272,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
           alt="spotify logo/icon"
         />
 
-        {!noPlay && (
+        {/* {!noPlay && (
           <button
             onClick={() => setPlaying(true)}
             className={`  bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2  ${
@@ -291,7 +291,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
               />
             )}
           </button>
-        )}
+        )} */}
       </div>
     );
   }
