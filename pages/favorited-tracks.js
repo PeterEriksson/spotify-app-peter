@@ -57,11 +57,11 @@ function favoritedTracks() {
         Add tracks to your liked on Spotify or create a new playlist
       </h3>
 
-      <Modal
+      {/* <Modal
         openNewPlaylistModal={openNewPlaylistModal}
         setOpenNewPlaylistModal={setOpenNewPlaylistModal}
         favoritedItems={favoritedItems}
-      />
+      /> */}
 
       <button
         onClick={handlePlusClick}
@@ -89,7 +89,7 @@ function favoritedTracks() {
       />
 
       <div className="   !mx-5 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
-        {favoritedItems.map((track, i) => (
+        {favoritedItems?.map((track, i) => (
           <Song key={i} track={track} noPlay />
         ))}
       </div>
