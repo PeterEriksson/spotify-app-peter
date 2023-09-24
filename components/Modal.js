@@ -1,9 +1,9 @@
-/* import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { emptyFavorites } from "../slices/favoritesSlice";
 import useSpotify from "../hooks/useSpotify";
 import modalstyles from "../styles/effects.module.css";
-import toast  from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { ListBulletIcon } from "@heroicons/react/24/solid";
 
@@ -287,4 +287,3 @@ function Modal({
 }
 
 export default Modal;
- */

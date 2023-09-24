@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@reduxjs/toolkit": "^1.6.1",
     "@uiball/loaders": "^1.2.6",
     "country-data": "^0.0.31",
