@@ -185,18 +185,20 @@ function Song({ track, noPlay, wideDesign, nr }) {
       <div
         className={`bg-cardBackground/40   rounded-xl border border-black/70 relative group  `}
       >
+        {/* INFORMATION ICON */}
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className="absolute top-2 left-2 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-600 bg-gray-300/90 text-sm"
+          className="absolute top-2 left-2.5 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-600 bg-gray-300/90 text-sm"
         >
           i
         </div>
 
+        {/* HEART ICON */}
         <div
           aria-label="ignore-pause"
           onClick={handleLike}
-          className={` absolute z-30 -top-2.5 -right-3.5  ${
+          className={` absolute z-30 -top-2.5 -right-2  ${
             liked() ? styles.heartRed : styles.heart
           }  ${!liked() && triggerLikeEffect && styles.animateUnlike}  ${
             liked() && triggerLikeEffect && styles.animate
@@ -275,9 +277,9 @@ function Song({ track, noPlay, wideDesign, nr }) {
         {!noPlay && (
           <button
             onClick={() => setPlaying(true)}
-            className={`  bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2  ${
-              playing && styles.playAnimate
-            }  `}
+            className={`  bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2   ${
+              styles.noHighLight
+            }  ${playing && styles.playAnimate}  `}
           >
             {playing ? (
               <PauseIcon
@@ -287,7 +289,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
             ) : (
               <PlayIcon
                 onClick={() => setPlaying(true)}
-                className={`h-5 w-5 text-white cursor-pointer       `}
+                className={`h-5 w-5 text-white cursor-pointer      `}
               />
             )}
           </button>

@@ -1,5 +1,5 @@
 import { ArrowRightCircleIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { RaceBy, Waveform } from "@uiball/loaders";
+import { RaceBy, Waveform, DotPulse } from "@uiball/loaders";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -55,25 +55,30 @@ export default function discover() {
     setDanceability(newDanceability);
   };
 
-  // increase loading time..?
+  // increase loading time ok..?
   const handleGetRecommendations = () => {
+    //weird bug fix: fetching recommendations when song is playing
+    setRecommendations([]);
     setLoadingRecommendations(true);
-    spotifyApi
-      .getRecommendations({
-        min_danceability: danceability / 100,
-        seed_artists: artistsSelected,
-        min_popularity: popularity,
-        limit: 15,
-      })
-      .then((data) => setRecommendations(data.body.tracks))
-      .then(() => setLoadingRecommendations(false))
-      .then(() =>
-        recommendationsContainerRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
+    setTimeout(() => {
+      spotifyApi
+        .getRecommendations({
+          min_danceability: danceability / 100,
+          seed_artists: artistsSelected,
+          min_popularity: popularity,
+          limit: 15,
         })
-      )
-      .catch((err) => console.log(err));
+        .then((data) => setRecommendations(data.body.tracks))
+        .then(() => setLoadingRecommendations(false))
+        .then(() =>
+          recommendationsContainerRef.current.scrollIntoView({
+            behavior: "smooth",
+            //start,center,end,nearest
+            block: "end",
+          })
+        )
+        .catch((err) => console.log(err));
+    }, 1000);
   };
 
   // const handleArrowClick = (scrollOffset) => {
@@ -82,6 +87,14 @@ export default function discover() {
   //     behavior: "smooth",
   //   });
   // };
+
+  const buttonNotAvailable = () => {
+    if (artistsSelected.length == 0 || loadingRecommendations) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <div
@@ -182,34 +195,32 @@ export default function discover() {
 
           <div className="flex justify-center mt-2">
             <button
-              ref={recommendationsContainerRef}
-              disabled={artistsSelected.length == 0}
+              //ref={recommendationsContainerRef}
+              disabled={buttonNotAvailable()}
               onClick={handleGetRecommendations}
               className={`${
-                artistsSelected.length == 0 && "opacity-70"
-              } bg-spotifyGreen  text-white border border-spotifyBlack rounded-3xl p-4  `}
+                buttonNotAvailable() && "opacity-70"
+              } bg-spotifyGreen  text-white border border-spotifyBlack rounded-3xl p-4/     w-52 h-14 flex justify-center items-center `}
             >
-              Get Recommendations
+              {loadingRecommendations ? (
+                <DotPulse /* size={150} */ speed={0.9} color="white" />
+              ) : (
+                "Get Recommendations"
+              )}
             </button>
           </div>
 
-          {loadingRecommendations ? (
-            <div className="flex justify-center mt-4">
-              <Waveform color="white" speed={0.8} />
-            </div>
-          ) : (
-            <div
-              /* ref={recommendationsContainerRef} */
-              className="   !mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  "
-            >
-              {recommendations
-                //error issue: some tracks dont have preview_url -> solution, filter out->
-                ?.filter((track) => track.preview_url !== null)
-                .map((_track, i) => (
-                  <Song key={i} track={_track} />
-                ))}
-            </div>
-          )}
+          <div
+            ref={recommendationsContainerRef}
+            className="   !mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  "
+          >
+            {recommendations
+              //error issue: some tracks dont have preview_url -> solution, filter out->
+              ?.filter((track) => track.preview_url !== null)
+              .map((_track, i) => (
+                <Song key={i} track={_track} />
+              ))}
+          </div>
         </>
       )}
       {/* </div> */}

@@ -1,3 +1,7 @@
+.noHighLight {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .playAnimate {
   animation-name: play-effect;
   animation-duration: 0.6s;

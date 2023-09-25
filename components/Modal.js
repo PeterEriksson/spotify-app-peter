@@ -219,6 +219,7 @@ function Modal({
                 <div className="flex flex-col  mt-1.5  ">
                   <label className={`${modalstyles.radioLabel} cursor-pointer`}>
                     <input
+                      id="addToLikedRadioBtn"
                       color="#191414"
                       className="mr-1 "
                       type="radio"
@@ -234,6 +235,7 @@ function Modal({
                   </label>
                   <label className={`${modalstyles.radioLabel} cursor-pointer`}>
                     <input
+                      id="newPlayListRadioBtn"
                       className="mr-1 "
                       type="radio"
                       value="option2"
@@ -248,6 +250,7 @@ function Modal({
                     <ListBulletIcon className="h-5 w-5 text-gray-500 " />
                   </div>
                   <input
+                    id="playListNameInput"
                     disabled={selectedOption == "option1"}
                     ref={playlistInputRef}
                     type="text"
