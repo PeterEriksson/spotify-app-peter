@@ -24,7 +24,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
   const [triggerLikeEffect, setTriggerLikeEffect] = useState(false);
 
-  /* TEST TEMP */
   const [pauseTriggerEffect, setPauseTriggerEffect] = useState(false);
 
   const dispatch = useDispatch();
@@ -282,7 +281,8 @@ function Song({ track, noPlay, wideDesign, nr }) {
         {!noPlay && (
           <button
             onClick={() => {
-              setPlaying(true);
+              //setPlaying(true);
+              setPlaying((prev) => !prev);
               setPauseTriggerEffect(true);
             }}
             className={`
