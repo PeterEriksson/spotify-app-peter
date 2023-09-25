@@ -4,7 +4,7 @@
 /* ------------------- */
 .playAnimate {
   animation-name: play-effect;
-  animation-duration: 0.5s;
+  animation-duration: 0.45s;
 }
 @keyframes play-effect {
   0% {
@@ -20,7 +20,7 @@
 
 .pauseAnimate {
   animation-name: pause-effect;
-  animation-duration: 0.4s;
+  animation-duration: 0.35s;
 }
 
 @keyframes pause-effect {

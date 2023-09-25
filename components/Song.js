@@ -45,8 +45,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
     if (e.target.getAttribute("aria-label") === "ignore-pause") return;
     //else stop
     setPlaying(false);
-    /* TEST TEMP */
-    setPauseTriggerEffect(true);
   };
 
   useEffect(() => {
@@ -171,12 +169,15 @@ function Song({ track, noPlay, wideDesign, nr }) {
               alt="logo"
             />
 
+            {/* HEART ICON (wide) */}
             <div
               aria-label="ignore-pause"
               onClick={handleLike}
               className={` ${liked() ? styles.heartRed : styles.heart}  ${
                 !liked() && triggerLikeEffect && styles.animateUnlike
-              }  ${liked() && triggerLikeEffect && styles.animate}  !-mr-4 `}
+              }  ${liked() && triggerLikeEffect && styles.animate}  !-mr-4  ${
+                styles.noHighLight
+              } `}
             />
           </div>
         </div>
@@ -205,8 +206,8 @@ function Song({ track, noPlay, wideDesign, nr }) {
           className={` absolute z-30 -top-2.5 -right-2  ${
             liked() ? styles.heartRed : styles.heart
           }  ${!liked() && triggerLikeEffect && styles.animateUnlike}  ${
-            liked() && triggerLikeEffect && styles.animate
-          }   `}
+            liked() && triggerLikeEffect && !noPlay && styles.animate
+          } ${styles.noHighLight}   `}
         />
         <div className=" relative// items-center// h-32// flex justify-center  mt-2   ">
           <Image
@@ -280,23 +281,21 @@ function Song({ track, noPlay, wideDesign, nr }) {
 
         {!noPlay && (
           <button
-            onClick={() => setPlaying(true)}
-            className={`  bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2   ${
+            onClick={() => {
+              setPlaying(true);
+              setPauseTriggerEffect(true);
+            }}
+            className={`
+            bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2   ${
               styles.noHighLight
-            }  ${playing && styles.playAnimate} ${
-              !playing && pauseTriggerEffect && styles.pauseAnimate
-            }  `}
+            }  ${playing && styles.playAnimate} 
+            ${!playing && pauseTriggerEffect && styles.pauseAnimate}
+            `}
           >
             {playing ? (
-              <PauseIcon
-                className={`h-5 w-5 text-white cursor-pointer    `}
-                onClick={() => setPlaying(false)}
-              />
+              <PauseIcon className={`h-5 w-5 text-white cursor-pointer    `} />
             ) : (
-              <PlayIcon
-                onClick={() => setPlaying(true)}
-                className={`h-5 w-5 text-white cursor-pointer      `}
-              />
+              <PlayIcon className={`h-5 w-5 text-white cursor-pointer   `} />
             )}
           </button>
         )}

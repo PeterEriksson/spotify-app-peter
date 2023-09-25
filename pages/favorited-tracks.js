@@ -18,6 +18,7 @@ import { emptyFavorites } from "../slices/favoritesSlice";
 import { /* toast */ Toaster } from "react-hot-toast";
 import Song from "../components/Song";
 import Modal from "../components/Modal";
+import effectsStyles from "../styles/effects.module.css";
 
 function favoritedTracks() {
   const [openNewPlaylistModal, setOpenNewPlaylistModal] = useState(false);
@@ -69,7 +70,9 @@ function favoritedTracks() {
         className={`connectingToTooltip: create ${
           favoritedItems.length > 0 && "hover:scale-105"
         } 
-        bottom-20 right-4 xxs:bottom-4 fixed     first: z-[55] rounded-full p-4 bg-spotifyGreen transform transition duration-200 ease-in  `}
+        ${
+          effectsStyles.noHighLight
+        } bottom-20 right-4 xxs:bottom-4 fixed     first: z-[55] rounded-full p-4 bg-spotifyGreen transform transition duration-200 ease-in  `}
       >
         <PlusIcon className="h-9 w-9 text-white" />
       </button>
@@ -88,7 +91,7 @@ function favoritedTracks() {
         delayShow={300}
       />
 
-      <div className="   !mx-5 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 mdlg:grid-cols-4 lg:grid-cols-5 lg:mx-auto lg:px-2 max-w-4xl ">
+      <div className="   !mx-5 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 /mdlg:grid-cols-4 /lg:grid-cols-5 md:mx-auto   /lg:mx-auto lg:px-2 /max-w-4xl ">
         {favoritedItems?.map((track, i) => (
           <Song key={i} track={track} noPlay />
         ))}

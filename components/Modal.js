@@ -5,7 +5,7 @@ import useSpotify from "../hooks/useSpotify";
 import modalstyles from "../styles/effects.module.css";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { ListBulletIcon } from "@heroicons/react/24/solid";
+import { ListBulletIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 
 function Modal({
   openNewPlaylistModal,
@@ -13,6 +13,7 @@ function Modal({
   favoritedItems,
 }) {
   const [playlistName, setPlaylistName] = useState("");
+  const [playlistDescription, setPlaylistDescription] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [loadingAction, setLoadingAction] = useState(false);
   const playlistInputRef = useRef();
@@ -35,8 +36,9 @@ function Modal({
 
   const actionNotAllowed = () => {
     return (
-      (playlistName.length >= 100 && selectedOption == "option2") ||
+      (playlistName.length >= 50 && selectedOption == "option2") ||
       favoritedItems.length == 0 ||
+      playlistDescription.length >= 100 ||
       (playlistName == "" && selectedOption !== "option1") ||
       (!playlistName.trim() && selectedOption !== "option1") ||
       selectedOption == "" ||
@@ -102,6 +104,7 @@ function Modal({
             setLoadingAction(false);
             setSelectedOption("");
             setPlaylistName("");
+            setPlaylistDescription("");
           });
       }, 1200);
     }
@@ -123,7 +126,7 @@ function Modal({
 
       spotifyApi
         .createPlaylist(playlistName, {
-          description: "",
+          description: playlistDescription,
           public: false,
           collaborative: false,
         })
@@ -164,6 +167,7 @@ function Modal({
         .finally(() => {
           setLoadingAction(false);
           setPlaylistName("");
+          setPlaylistDescription("");
           setSelectedOption("");
         });
     }
@@ -246,9 +250,12 @@ function Modal({
                   </label>
                 </div>
                 <div className="relative mt-3 rounded-md ">
-                  <div className="absolute z-30 inset-y-0 pl-3 flex items-center pointer-events-none ">
+                  <div
+                    className={`absolute z-30 inset-y-0 pl-3 pointer-events-none    mt-[9px] sm:mt-[7px]   `}
+                  >
                     <ListBulletIcon className="h-5 w-5 text-gray-500 " />
                   </div>
+
                   <input
                     id="playListNameInput"
                     disabled={selectedOption == "option1"}
@@ -263,6 +270,26 @@ function Modal({
                     }   bg-gray-50 px-12 py-1.5 focus:outline-none focus:border-gray-400 border w-full    block sm:text-sm  rounded-md`}
                     placeholder="Playlist name"
                   />
+
+                  {selectedOption == "option2" && (
+                    <>
+                      <div
+                        className={`absolute z-30 inset-y-0 pl-3 pointer-events-none    mt-[54px] sm:mt-[48px]   `}
+                      >
+                        <PencilSquareIcon className="h-5 w-5 text-gray-500 opacity-80 " />
+                      </div>
+                      <input
+                        id="playListDescriptionInput"
+                        type="text"
+                        value={playlistDescription}
+                        onChange={(e) => setPlaylistDescription(e.target.value)}
+                        className={`${
+                          selectedOption == "option1" && "hidden"
+                        }  mt-2 bg-gray-50 px-12 py-1.5 focus:outline-none focus:border-gray-400 border w-full    block sm:text-sm  rounded-md`}
+                        placeholder="Description (optional)"
+                      />
+                    </>
+                  )}
                 </div>
                 <button
                   onClick={handleAction}
