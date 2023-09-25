@@ -1,6 +1,5 @@
 import {
   CalendarDaysIcon,
-  ChevronDownIcon,
   ClockIcon,
   PauseIcon,
   PlayIcon,
@@ -25,6 +24,9 @@ function Song({ track, noPlay, wideDesign, nr }) {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
   const [triggerLikeEffect, setTriggerLikeEffect] = useState(false);
 
+  /* TEST TEMP */
+  const [pauseTriggerEffect, setPauseTriggerEffect] = useState(false);
+
   const dispatch = useDispatch();
   const favoritedItems = useSelector(selectFavoritedItmes);
 
@@ -43,6 +45,8 @@ function Song({ track, noPlay, wideDesign, nr }) {
     if (e.target.getAttribute("aria-label") === "ignore-pause") return;
     //else stop
     setPlaying(false);
+    /* TEST TEMP */
+    setPauseTriggerEffect(true);
   };
 
   useEffect(() => {
@@ -279,7 +283,9 @@ function Song({ track, noPlay, wideDesign, nr }) {
             onClick={() => setPlaying(true)}
             className={`  bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2   ${
               styles.noHighLight
-            }  ${playing && styles.playAnimate}  `}
+            }  ${playing && styles.playAnimate} ${
+              !playing && pauseTriggerEffect && styles.pauseAnimate
+            }  `}
           >
             {playing ? (
               <PauseIcon
