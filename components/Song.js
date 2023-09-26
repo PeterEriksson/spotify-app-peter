@@ -71,7 +71,22 @@ function Song({ track, noPlay, wideDesign, nr }) {
       <>
         <div className="text-white py-1.5 flex items-center justify-between ">
           <div className="flex items-center space-x-1.5 sm:space-x-2 mdlg:space-x-4 lg:space-x-5">
-            <p className="mr-1 ">{nr}</p>
+            {playing ? (
+              <div className={` mr-1`}>
+                <AudioPlayAnimation
+                  height="28"
+                  width="10"
+                  radius="9"
+                  color="#1DB954"
+                  //color="white"
+                  ariaLabel="play-animation"
+                  wrapperStyle
+                />
+              </div>
+            ) : (
+              <p className="mr-1 ">{nr}</p>
+            )}
+
             <img
               className="h-9 w-9 rounded-lg/ object-contain"
               src={track?.album?.images[0]?.url}
@@ -83,7 +98,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
                   showAdditionalInfo && "!max-w-full "
                 } max-w-[14ch] sm:max-w-[15ch] mdlg:max-w-[22ch] lg:max-w-[35ch] ${
                   !showAdditionalInfo && "truncate"
-                } /truncate font-semibold `}
+                } /truncate font-semibold ${playing && "text-spotifyGreen"} `}
               >
                 {track?.name}
               </h1>
@@ -95,28 +110,31 @@ function Song({ track, noPlay, wideDesign, nr }) {
               </h3>
             </div>
             {playing ? (
-              <PauseIcon
-                className={`h-6 w-6 text-white/90 cursor-pointer    `}
+              <div
                 onClick={() => setPlaying(false)}
-              />
+                className={`rounded-full bg-spotifyGreen  p-[5px] ${
+                  pauseTriggerEffect && styles.playAnimate
+                }    ${styles.noHighLight} `}
+              >
+                <PauseIcon
+                  className={`h-4 w-4 text-white/90 cursor-pointer    `}
+                />
+              </div>
             ) : (
-              <PlayIcon
-                className={`h-6 w-6 text-white/90 cursor-pointer   `}
-                onClick={() => setPlaying(true)}
-              />
+              <div
+                onClick={() => {
+                  setPlaying(true);
+                  setPauseTriggerEffect(true);
+                }}
+                className={`rounded-full bg-spotifyGreen p-[5px]  ${
+                  pauseTriggerEffect && styles.pauseAnimate
+                }   ${styles.noHighLight}`}
+              >
+                <PlayIcon
+                  className={`h-4 w-4 text-white/90 cursor-pointer   `}
+                />
+              </div>
             )}
-
-            <div className={`${!playing && "hidden"}  mb-1.5`}>
-              <AudioPlayAnimation
-                height="20"
-                width="30"
-                radius="9"
-                //color="#1DB954"
-                color="white"
-                ariaLabel="play-animation"
-                wrapperStyle
-              />
-            </div>
           </div>
 
           <div className={`flex  items-center`}>
@@ -124,7 +142,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
             <div
               aria-label="ignore-pause"
               onClick={() => setShowAdditionalInfo((prev) => !prev)}
-              className="mr-2 flex items-center justify-center  italic -rotate-6 w-[18px] h-[18px]
+              className="xxs:mr-2 flex items-center justify-center  italic -rotate-6 w-[18px] h-[18px]
               cursor-pointer rounded-full border border-gray-600 bg-white/90 text-sm text-black/80"
             >
               i
@@ -148,7 +166,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
             {/* SPOTIFY ICON */}
             <div
               aria-label="ignore-pause"
-              className=" ml-3 bg-spotifyBlack rounded-full z-50 xl:hidden"
+              className=" ml-3 xxs:-mr-0 -mr-1  bg-spotifyBlack rounded-full z-50 xl:hidden"
             >
               <img
                 aria-label="ignore-pause"

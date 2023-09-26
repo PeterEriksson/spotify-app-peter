@@ -154,7 +154,7 @@ export default function profile() {
             onClick={handleLoadMore}
             className={`text-gray-600 font-bold text-center my-2 cursor-pointer  ${
               loadingSongsFetch && "hidden/ opacity-0"
-            }`}
+            } ${styles.noHighLight} `}
           >
             Load more
           </button>
