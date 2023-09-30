@@ -141,7 +141,6 @@ export default function profile() {
         {recentSongs
           ?.filter((track) => track.preview_url !== null)
           .map(({ track }, i) => (
-            //<Song key={i} nr={i + 1} wideDesign track={track} />
             <Song key={i} nr={i + 1} wideDesign track={track} />
           ))}
       </div>

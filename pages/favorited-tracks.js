@@ -54,9 +54,9 @@ function favoritedTracks() {
       >
         favorited songs
       </h1>
-      <h3 className="text-base text-white text-center mx-2">
+      {/* <h3 className="text-base text-white text-center mx-2">
         Add tracks to your liked on Spotify or create a new playlist
-      </h3>
+      </h3> */}
 
       <Modal
         openNewPlaylistModal={openNewPlaylistModal}
@@ -82,7 +82,7 @@ function favoritedTracks() {
         data-tooltip-id="trash"
         className={` trash ${
           favoritedItems == 0 && "hidden"
-        } bottom-24 xxs:bottom-5   h-8 w-8 fixed cursor-pointer z-[55]  ml-4 text-white transform transition duration-200 ease-in hover:scale-105`}
+        }  bottom-24 xxs:bottom-5   h-8 w-8 fixed cursor-pointer z-[55]  ml-4 text-white transform transition duration-200 ease-in hover:scale-105`}
       />
       <Tooltip
         content="Clear all songs"

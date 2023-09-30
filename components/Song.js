@@ -22,8 +22,8 @@ function Song({ track, noPlay, wideDesign, nr }) {
   const [audio, setAudio] = useState(new Audio(track?.preview_url));
   const [playing, setPlaying] = useState(false);
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
-  const [triggerLikeEffect, setTriggerLikeEffect] = useState(false);
 
+  const [triggerLikeEffect, setTriggerLikeEffect] = useState(false);
   const [pauseTriggerEffect, setPauseTriggerEffect] = useState(false);
 
   const dispatch = useDispatch();
@@ -46,6 +46,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
     setPlaying(false);
   };
 
+  //be able to easily/instantly pause a song. Listen to click
   useEffect(() => {
     document.addEventListener("click", handleStopPlay, true);
     return () => {
@@ -72,7 +73,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <div className="text-white py-1.5 flex items-center justify-between ">
           <div className="flex items-center space-x-1.5 sm:space-x-2 mdlg:space-x-4 lg:space-x-5">
             {playing ? (
-              <div className={` mr-1`}>
+              <div className={`mr-1    w-2.5`}>
                 <AudioPlayAnimation
                   height="28"
                   width="10"
@@ -84,19 +85,20 @@ function Song({ track, noPlay, wideDesign, nr }) {
                 />
               </div>
             ) : (
-              <p className="mr-1 ">{nr}</p>
+              <p className="mr-1    w-2.5">{nr}</p>
             )}
 
             <img
-              className="h-9 w-9 rounded-lg/ object-contain"
+              className="      h-8 w-8 xxs:h-9 xxs:w-9 object-contain"
               src={track?.album?.images[0]?.url}
               alt=""
             />
+
             <div>
               <h1
                 className={`${
                   showAdditionalInfo && "!max-w-full "
-                } max-w-[14ch] sm:max-w-[15ch] mdlg:max-w-[22ch] lg:max-w-[35ch] ${
+                } max-w-[13ch] sm:max-w-[15ch] mdlg:max-w-[22ch] lg:max-w-[35ch] ${
                   !showAdditionalInfo && "truncate"
                 } /truncate font-semibold ${playing && "text-spotifyGreen"} `}
               >
@@ -109,31 +111,28 @@ function Song({ track, noPlay, wideDesign, nr }) {
                 Album: {track?.album?.name}
               </h3>
             </div>
+
             {playing ? (
-              <div
+              <button
                 onClick={() => setPlaying(false)}
-                className={`rounded-full bg-spotifyGreen  p-[5px] ${
+                className={`rounded-full bg-spotifyGreen cursor-pointer p-[6px] ${
                   pauseTriggerEffect && styles.playAnimate
                 }    ${styles.noHighLight} `}
               >
-                <PauseIcon
-                  className={`h-4 w-4 text-white/90 cursor-pointer    `}
-                />
-              </div>
+                <PauseIcon className={`h-4 w-4 text-white/90     `} />
+              </button>
             ) : (
-              <div
+              <button
                 onClick={() => {
                   setPlaying(true);
                   setPauseTriggerEffect(true);
                 }}
-                className={`rounded-full bg-spotifyGreen p-[5px]  ${
+                className={`rounded-full bg-spotifyGreen p-[6px] cursor-pointer ${
                   pauseTriggerEffect && styles.pauseAnimate
                 }   ${styles.noHighLight}`}
               >
-                <PlayIcon
-                  className={`h-4 w-4 text-white/90 cursor-pointer   `}
-                />
-              </div>
+                <PlayIcon className={`h-4 w-4 text-white/90    `} />
+              </button>
             )}
           </div>
 
