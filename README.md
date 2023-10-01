@@ -16,6 +16,7 @@ Link to site: https://tracktrends.vercel.app/
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Todo](#todo)
+- [Author](#author)
  
 
 ## Technologies
@@ -60,3 +61,6 @@ Link to site: https://tracktrends.vercel.app/
 
 
 ## Todo
+
+## Author
+Website: [Peter portfolio/resume](https://petere-portfolio-2.vercel.app/)
