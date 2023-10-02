@@ -13,14 +13,21 @@ import styles from "../styles/tooltip.module.css";
 function Header({ backArrow }) {
   const router = useRouter();
   return (
-    <header className="flex items-center justify-between  text-white py-2 mx-4   test:-> /z-50 /sticky /top-0    bg-bodyBackground  ">
-      <div className="flex flex-col items-center font-dancing/ /font-serif">
+    <header className="py-1.5 xxs:py-2  flex items-center justify-between  text-white mx-4  bg-bodyBackground  ">
+      <div className="flex flex-col items-center  ">
         <ArrowLeftIcon
           onClick={() => router.back()}
           className={`${
             !backArrow && "hidden"
           } cursor-pointer text-white mr-2 h-8 w-8 hover:opacity-70 transition duration-200 ease-in`}
         />
+        {
+          //show app Logo (TrackTrends) except for when user is in [artistId]-page -> ArrowLeftIcon displayed.
+          //remove backArrow prop.....
+          router.route !== "/artists/[artistId]" && (
+            <h1 className={`font-dancing/ text-xl xxs:hidden `}>TrackTrends</h1>
+          )
+        }
       </div>
 
       <div className="space-x-2 flex items-center">

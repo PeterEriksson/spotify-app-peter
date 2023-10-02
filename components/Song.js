@@ -73,7 +73,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <div className="text-white py-1.5 flex items-center justify-between ">
           <div className="flex items-center space-x-1.5 sm:space-x-2 mdlg:space-x-4 lg:space-x-5">
             {playing ? (
-              <div className={`mr-1    w-2.5`}>
+              <div className={`mr-1 xxs:-mr-1.5    w-2.5`}>
                 <AudioPlayAnimation
                   height="28"
                   width="10"
@@ -85,7 +85,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
                 />
               </div>
             ) : (
-              <p className="mr-1    w-2.5">{nr}</p>
+              <p className="mr-1 xxs:-mr-1.5   w-2.5">{nr}</p>
             )}
 
             <img
