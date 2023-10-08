@@ -11,6 +11,8 @@ import Song from "../components/Song";
 import useSpotify from "../hooks/useSpotify";
 import styles from "../styles/effects.module.css";
 
+import { useMotionValueEvent, useScroll } from "framer-motion";
+
 export default function discover() {
   const spotifyApi = useSpotify();
 
@@ -25,13 +27,12 @@ export default function discover() {
   const recommendationsContainerRef = useRef(null);
   const artistsContainerRef = useRef(null);
 
-  // const getArtists = () => {
-  //   spotifyApi
-  //     .getMyTopArtists({ limit: 14, time_range: "long_term" })
-  //     .then((data) => setTopArtists(data.body.items))
-  //     .then(() => setLoadingArtists(false))
-  //     .catch((err) => console.log(err));
-  // };
+  /* TEST TEMP ... scroll x not working...scroll y fine.  */
+  /*  const { scrollXProgress } = useScroll();
+  useMotionValueEvent(scrollXProgress, "change", (latest) => {
+    console.log("Page scroll: ", latest);
+  }); */
+
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       setLoadingArtists(true);
@@ -110,7 +111,7 @@ export default function discover() {
     <div
       className={`MobileScreenFix:->    ${
         (recommendations?.length == 0 || loadingRecommendations) && "h-screen"
-      }  `}
+      } pageMobileHeaderTempSol `}
     >
       <Head>
         <title> TrackTrends: Discover </title>
@@ -146,9 +147,9 @@ export default function discover() {
           <div className="relative  flex justify-end items-center ">
             <div
               ref={artistsContainerRef}
-              className={`     $//{styles.hideScrollbar} flex  overflow-x-scroll space-x-2   lg:mx-5 mx-5 lg:grid lg:grid-cols-7 lg:gap-1 lg:space-x-0          `}
+              className={` $//{styles.hideScrollbar} flex overflow-x-scroll space-x-2  lg:mx-5 mx-5 lg:grid lg:grid-cols-7 lg:gap-1 lg:space-x-0   `}
             >
-              {topArtists.map((artist, i) => (
+              {topArtists?.map((artist, i) => (
                 <Artist
                   key={i}
                   artist={artist}
@@ -157,8 +158,13 @@ export default function discover() {
                   setArtistsSelected={setArtistsSelected}
                 />
               ))}
-            </div>
 
+              <div
+                className={`${
+                  scrollX < 0.5 && "hidden"
+                } absolute h-full bg-gradient-to-r from-cardBackground/10 to-red-500 to-bodyBackground/  right-5 w-10 pointer-events-none z-[35]  `}
+              />
+            </div>
             {/* <ArrowRightCircleIcon
               onClick={() => handleArrowClick(250)}
               className="text-white lg:hidden absolute  h-8// w-8// h-5 w-5   z-10 mr-0.5 cursor-pointer "

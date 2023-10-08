@@ -72,16 +72,16 @@ export default function Home() {
   };
 
   return (
-    <div className={` h-screen//  ${loading && "h-screen"} `}>
+    <div className={`  ${loading && "h-screen"}   pageMobileHeaderTempSol `}>
       {/* <Sidebar /> */}
       {/*  <div className=" w-screen bg-bodyBackground overflow-y-scroll   "> */}
       {/* <Header /> */}
 
-      <h1 className="text-3xl text-white text-center uppercase tracking-wide">
-        Most Played Artists
+      <h1 className="text-3xl text-white text-center uppercase tracking-wide    -mb-3 xxs:-mb0">
+        most played artists
       </h1>
 
-      <div className="relative max-w-fit mx-auto">
+      <div className="relative max-w-fit mx-auto     xxs:sticky xxs:z-[36] xxs:top-2">
         <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
           {tabsData.map((tab, idx) => (
             <button

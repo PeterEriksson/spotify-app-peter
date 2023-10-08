@@ -71,7 +71,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
     return (
       <>
         <div className="text-white py-1.5 flex items-center justify-between ">
-          <div className="flex items-center space-x-1.5 sm:space-x-2 mdlg:space-x-4 lg:space-x-5">
+          <div className="flex items-center space-x-1.5 sm:space-x-3 mdlg:space-x-4 lg:space-x-5">
             {playing ? (
               <div className={`mr-1 xxs:-mr-1.5    w-2.5`}>
                 <AudioPlayAnimation
@@ -165,7 +165,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
             {/* SPOTIFY ICON */}
             <div
               aria-label="ignore-pause"
-              className=" ml-3 xxs:-mr-0 -mr-1  bg-spotifyBlack rounded-full z-50 xl:hidden"
+              className=" ml-3 xxs:-mr-0 -mr-1  bg-spotifyBlack rounded-full z-[34] xl:hidden"
             >
               <img
                 aria-label="ignore-pause"
@@ -227,7 +227,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
         />
         <div className=" relative// items-center// h-32// flex justify-center  mt-2   ">
           <Image
-            className={` z-50  object-contain    `}
+            className={` z-[35]  object-contain    `}
             src={track?.album?.images[0]?.url}
             alt="song-image"
             //layout="fill"

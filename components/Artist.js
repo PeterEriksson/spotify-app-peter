@@ -48,7 +48,7 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
         i
       </div>
       {/* SPOTIFY ICON */}
-      <div className=" bg-spotifyBlack rounded-full        absolute z-40 top-1.5 right-1.5 h-[21px] w-[21px] cursor-pointer ">
+      <div className=" bg-spotifyBlack rounded-full        absolute z-[34] top-1.5 right-1.5 h-[21px] w-[21px] cursor-pointer ">
         <img
           aria-label="ignore-pause"
           onClick={() => window.open(artist?.external_urls.spotify)}
@@ -59,7 +59,7 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
       </div>
       <div className=" relative// items-center// h-32// flex justify-center mt-2   ">
         <Image
-          className={` z-50  object-contain cursor-pointer    `}
+          className={` z-[34]  object-contain cursor-pointer    `}
           src={artist?.images[0]?.url}
           alt="artist-image"
           //layout="fill"

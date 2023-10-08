@@ -72,7 +72,7 @@ export default function profile() {
     <div
       className={`MobileUiFix-> ${
         loadingSongsFetch && recentSongs.length <= 5 && "h-screen"
-      } `}
+      } pageMobileHeaderTempSol `}
     >
       <Head>
         <title>TrackTrends | {session?.user?.name} </title>

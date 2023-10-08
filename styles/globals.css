@@ -14,4 +14,7 @@
   .hoverStyling {
     @apply group-hover:cursor-pointer transition duration-200 ease-in;
   }
+  .pageMobileHeaderTempSol {
+    @apply pt-[68px] xxs:pt-0;
+  }
 }
