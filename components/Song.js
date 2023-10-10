@@ -17,8 +17,11 @@ import Image from "next/image";
 import useSpotify from "../hooks/useSpotify";
 import { Audio as AudioPlayAnimation } from "react-loader-spinner";
 import { convertMsToMinuteSecond } from "../lib/timeUtils.js";
+import { useRouter } from "next/router";
 
 function Song({ track, noPlay, wideDesign, nr }) {
+  const router = useRouter();
+
   const [audio, setAudio] = useState(new Audio(track?.preview_url));
   const [playing, setPlaying] = useState(false);
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
@@ -225,7 +228,13 @@ function Song({ track, noPlay, wideDesign, nr }) {
             liked() && triggerLikeEffect && !noPlay && styles.animate
           } ${styles.noHighLight}   `}
         />
-        <div className=" relative// items-center// h-32// flex justify-center  mt-2   ">
+        <div
+          /* onClick={() => {
+            //console.log(track)
+            router.push("/artists/" + track.artists[0].id);
+          }} */
+          className="/cursor-pointer relative// items-center// h-32// flex justify-center  mt-2   "
+        >
           <Image
             className={` z-[35]  object-contain    `}
             src={track?.album?.images[0]?.url}
@@ -240,7 +249,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
 
         <div className="flex items-center   mx-3 space-x-1.5">
           <h1
-            className={`  text-smmd text-bold ${
+            className={`text-smmd text-bold ${
               playing ? "text-spotifyGreen" : "text-white"
             }  mt-1.5 mb-0.5 //mx-3      ${
               !showAdditionalInfo && "truncate"
@@ -266,7 +275,11 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <hr className={` my-1 border-gray-600  mx-3  `} />
 
         <h3
-          className={`text-sm px-3  text-white ${
+          onClick={() => {
+            //console.log(track)
+            router.push("/artists/" + track.artists[0].id);
+          }}
+          className={`w-fit cursor-pointer hover:underline  text-sm px-3  text-white ${
             !showAdditionalInfo && "truncate"
           } `}
         >

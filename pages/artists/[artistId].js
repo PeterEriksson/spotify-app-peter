@@ -82,7 +82,7 @@ export default function artistDetails({ artistId }) {
           <div className="mx-5 ">
             <div className="flex justify-between items-center w-full ">
               <img
-                onClick={() => console.log(artist)}
+                //onClick={() => console.log(artist)}
                 className="object-contain w-2/5   xl:w-1/3"
                 src={artist?.images[0]?.url}
                 alt=""

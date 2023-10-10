@@ -158,11 +158,9 @@ export default function discover() {
                   setArtistsSelected={setArtistsSelected}
                 />
               ))}
-
+              {/* fading edge testing */}
               <div
-                className={`${
-                  scrollX < 0.5 && "hidden"
-                } absolute h-full bg-gradient-to-r from-cardBackground/10 to-red-500 to-bodyBackground/  right-5 w-10 pointer-events-none z-[35]  `}
+                className={`hidden absolute h-full bg-gradient-to-r from-cardBackground/10 to-bodyBackground  right-5 w-10 pointer-events-none z-[35]  `}
               />
             </div>
             {/* <ArrowRightCircleIcon
