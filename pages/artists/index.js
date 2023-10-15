@@ -6,6 +6,7 @@ import Artist from "../../components/Artist";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import useSpotify from "../../hooks/useSpotify";
+import generalData from "../../data.json";
 
 export default function Home() {
   const spotifyApi = useSpotify();
@@ -50,21 +51,6 @@ export default function Home() {
     }
   }, [activeTabIndex]); //trigger when user changes timePeriod/tabIndex
 
-  const tabsData = [
-    {
-      text: "Short term",
-      label: "short_term",
-    },
-    {
-      text: "Medium term",
-      label: "medium_term",
-    },
-    {
-      text: "Long term",
-      label: "long_term",
-    },
-  ];
-
   const handleTimePeriodClick = (idx, tab) => {
     if (loading) return;
     setActiveTabIndex(idx);
@@ -83,7 +69,7 @@ export default function Home() {
 
       <div className="relative max-w-fit mx-auto     xxs:sticky xxs:z-[36] xxs:top-2">
         <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
-          {tabsData.map((tab, idx) => (
+          {generalData.tabsData.map((tab, idx) => (
             <button
               key={idx}
               ref={(el) => (tabsRef.current[idx] = el)}

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  items: [],
+  favoritedItems: [],
 };
 
 export const favoritesSlice = createSlice({
@@ -9,16 +9,16 @@ export const favoritesSlice = createSlice({
   initialState,
   reducers: {
     addToFavorites: (state, action) => {
-      state.items = [...state.items, action.payload];
+      state.favoritedItems = [...state.favoritedItems, action.payload];
     },
     removeFromFavorites: (state, action) => {
-      let newFavorites = state.items.filter(
+      let newFavorites = state.favoritedItems.filter(
         (favoriteItem) => favoriteItem.id !== action.payload
       );
-      state.items = newFavorites;
+      state.favoritedItems = newFavorites;
     },
     emptyFavorites: (state) => {
-      state.items = [];
+      state.favoritedItems = [];
     },
   },
 });
@@ -27,6 +27,6 @@ export const { addToFavorites, removeFromFavorites, emptyFavorites } =
   favoritesSlice.actions;
 
 // Selectors - This is how we pull information from the Global store slice
-export const selectItems = (state) => state.favorites.items;
+export const selectItems = (state) => state.favorites.favoritedItems;
 
 export default favoritesSlice.reducer;

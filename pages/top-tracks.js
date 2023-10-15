@@ -8,17 +8,34 @@ import { Waveform } from "@uiball/loaders";
 import Head from "next/head";
 import Header from "../components/Header";
 import Song from "../components/Song";
+import {
+  selectItems as selectSongsShortTerm,
+  setSongsShortTerm,
+} from "../slices/songsShortTermSlice";
+import {
+  selectItems as selectSongsMediumTerm,
+  setSongsMediumTerm,
+} from "../slices/songsMediumTermSlice";
+import {
+  selectItems as selectSongsLongTerm,
+  setSongsLongTerm,
+} from "../slices/songsLongTermSlice";
+import { useSelector, useDispatch } from "react-redux";
+import generalData from "../data.json";
 
 export default function tracks() {
   const spotifyApi = useSpotify();
-  const [topTracks, setTopTracks] = useState([]);
-  const [timePeriod, setTimePeriod] = useState("short_term");
-  const [loading, setLoading] = useState(false);
-
   const { data: session } = useSession();
 
-  //sliding tabs
-  //guide: https://www.seancdavis.com/posts/animated-sliding-tabs-with-react-and-tailwind/
+  const [topTracks, setTopTracks] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const songsShortTerm = useSelector(selectSongsShortTerm);
+  const songsMediumTerm = useSelector(selectSongsMediumTerm);
+  const songsLongTerm = useSelector(selectSongsLongTerm);
+  const dispatch = useDispatch();
+
+  //sliding tabs. guide: https://www.seancdavis.com/posts/animated-sliding-tabs-with-react-and-tailwind/
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
@@ -35,17 +52,69 @@ export default function tracks() {
     return () => window.removeEventListener("resize", setTabPosition);
   }, [activeTabIndex]);
 
-  //https://github.com/thelinmichael/spotify-web-api-node/issues/440
-  //getMyTopTracks({time_range: "short_term"}) - There are 3 time range options: short_term, long_term and medium_term.
-  //implement function for choosing short,medium or long_term
-
   const getTracks = () => {
-    spotifyApi
-      .getMyTopTracks({ limit: 10, time_range: timePeriod })
-      .then((data) => setTopTracks(data.body.items))
-      .then(() => setLoading(false))
-      .catch((err) => console.log(err));
+    if (activeTabIndex == 0 && songsShortTerm.length == 0) {
+      //short term songs aren't stored in global state -> make api call  ->
+      spotifyApi
+        .getMyTopTracks({ limit: 10, time_range: "short_term" })
+        .then((data) => {
+          dispatch(setSongsShortTerm(data.body.items));
+          setTopTracks(data.body.items);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          //console.log("songs api call test");
+          setLoading(false);
+        });
+    }
+    //we already have these songs stored in global state ->
+    else if (activeTabIndex == 0) {
+      setTopTracks(songsShortTerm);
+      setLoading(false);
+    }
+
+    if (activeTabIndex == 1 && songsMediumTerm.length == 0) {
+      //medium term songs aren't stored in global state -> make api call  ->
+      spotifyApi
+        .getMyTopTracks({ limit: 10, time_range: "medium_term" })
+        .then((data) => {
+          dispatch(setSongsMediumTerm(data.body.items));
+          setTopTracks(data.body.items);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          //console.log("songs api call test");
+          setLoading(false);
+        });
+    }
+    //we already have these songs stored in global state ->
+    else if (activeTabIndex == 1) {
+      setTopTracks(songsMediumTerm);
+      setLoading(false);
+    }
+
+    if (activeTabIndex == 2 && songsLongTerm.length == 0) {
+      //long term songs aren't stored in global state -> make api call  ->
+      spotifyApi
+        .getMyTopTracks({ limit: 10, time_range: "long_term" })
+        .then((data) => {
+          dispatch(setSongsLongTerm(data.body.items));
+          setTopTracks(data.body.items);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          //console.log("songs api call test");
+          setLoading(false);
+        });
+    }
+    //we already have these songs stored in global state ->
+    else if (activeTabIndex == 2) {
+      setTopTracks(songsLongTerm);
+      setLoading(false);
+    }
   };
+
+  //trigger getTracks when period is changed
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       setLoading(true);
@@ -54,32 +123,18 @@ export default function tracks() {
         getTracks();
       }, 500);
     }
-  }, [activeTabIndex]); //trigger when user changes timePeriod/tabIndex
+  }, [activeTabIndex]);
 
-  const tabsData = [
-    {
-      text: "Short term",
-      label: "short_term",
-    },
-    {
-      text: "Medium term",
-      label: "medium_term",
-    },
-    {
-      text: "Long term",
-      label: "long_term",
-    },
-  ];
-
-  const handleTimePeriodClick = (idx, tab) => {
+  const handleTimePeriodClick = (idx) => {
     if (loading) return;
     setActiveTabIndex(idx);
-    setTimePeriod(tab.label);
   };
 
   return (
     <div
-      className={`  overflow-y-auto//     h-screen//         pageMobileHeaderTempSol       `}
+      className={` pageMobileHeaderTempSol     ${
+        songsShortTerm.length == 0 && "h-screen"
+      }  `}
     >
       <Head>
         <title>TrackTrends | Top Tracks</title>
@@ -87,26 +142,19 @@ export default function tracks() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <Sidebar /> */}
-
-      {/* <div className=" w-screen bg-bodyBackground  overflow-y-auto"> */}
-      {/*  <Header /> */}
-
-      <h1
-        //onClick={() => console.log(topTracks)}
-        className="text-3xl text-white text-center uppercase tracking-wide   -mb-3 xxs:-mb0"
-      >
+      <h1 className="text-3xl text-white text-center uppercase tracking-wide   -mb-3 xxs:-mb0">
         most played songs
       </h1>
 
+      {/* TIME PERIOD TABS */}
       <div className="relative max-w-fit mx-auto        xxs:sticky xxs:z-[36] xxs:top-2">
         <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
-          {tabsData.map((tab, idx) => (
+          {generalData.tabsData.map((tab, idx) => (
             <button
               key={idx}
               ref={(el) => (tabsRef.current[idx] = el)}
               className="pt-2 pb-3"
-              onClick={() => handleTimePeriodClick(idx, tab)}
+              onClick={() => handleTimePeriodClick(idx)}
             >
               {tab.text}
             </button>
@@ -124,7 +172,7 @@ export default function tracks() {
           <Waveform color="white" speed={0.8} />
         </div>
       ) : (
-        <div className=" overflow-y-auto///        needAnywayOnMobile?-> pb-2.5/    !mx-4 my-3 gap-3 grid grid-cols-1  xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
+        <div className="  !mx-4 my-3 gap-3 grid grid-cols-1  xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
           {topTracks
             ?.filter((track) => track.preview_url !== null)
             .map((_track, i) => (
@@ -132,7 +180,6 @@ export default function tracks() {
             ))}
         </div>
       )}
-      {/* </div> */}
     </div>
   );
 }
