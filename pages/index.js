@@ -71,7 +71,7 @@ export default function profile() {
   return (
     <div
       className={`MobileUiFix-> ${
-        loadingSongsFetch && "h-screen"
+        loadingSongsFetch && recentSongs.length == 0 && "h-screen"
       } pageMobileHeaderTempSol `}
     >
       <Head>
