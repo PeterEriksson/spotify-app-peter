@@ -316,7 +316,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
               setPauseTriggerEffect(true);
             }}
             className={`
-            bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2   ${
+            bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2        transform transition duration-500 ease-in hover:scale-110 xxs:hover:scale-100    ${
               styles.noHighLight
             }  ${playing && styles.playAnimate} 
             ${!playing && pauseTriggerEffect && styles.pauseAnimate}

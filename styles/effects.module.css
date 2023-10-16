@@ -2,9 +2,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 /* ------------------- */
-.playAnimate {
-  animation-name: play-effect;
-  animation-duration: 0.65s;
+@media (min-width: 398px) {
+  .playAnimate {
+    animation-name: play-effect;
+    animation-duration: 0.65s;
+  }
 }
 @keyframes play-effect {
   0% {
