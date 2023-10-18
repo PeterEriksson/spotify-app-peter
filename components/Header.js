@@ -8,8 +8,9 @@ import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import styles from "../styles/tooltip.module.css";
 import useHeaderDisplay from "../hooks/useHeaderDisplay.js";
+
+import styles from "../styles/effects.module.css";
 
 function Header({ backArrow }) {
   const router = useRouter();
@@ -18,9 +19,10 @@ function Header({ backArrow }) {
 
   return (
     <header
-      className={`z-[36] top-0 fixed  transform transition duration-500 ease-in-out   ${
+      className={`bg-bodyBackground $//{styles.bodyBackground    z-[36] top-0 fixed  transform transition duration-500 ease-in-out   ${
         headerVisible ? "" : "translate-y-[-85%]"
-      } w-full xxs:sticky  test:-> border-b border-gray-500/60 xxs:border-0      py-1.5 xxs:py-2 shadow-2xl flex items-center justify-between  text-white px-4 bg-bodyBackground `}
+      } w-full xxs:sticky border-b border-gray-500/60 xxs:border-0  py-1.5 xxs:py-2 shadow-2xl flex items-center justify-between  text-white px-4 
+      } `}
     >
       <div className="flex flex-col items-center  ">
         {/* only show on artistId page */}

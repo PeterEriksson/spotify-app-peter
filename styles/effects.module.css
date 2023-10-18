@@ -1,3 +1,15 @@
+/* TEST different gradient backgrounds */
+.bodyBackground {
+  background-image: linear-gradient(to top right, #333333, #000000);
+}
+/* -------------------- */
+
+.header {
+  opacity: 100;
+  z-index: 30;
+}
+/* -------------------- */
+
 .noHighLight {
   -webkit-tap-highlight-color: transparent;
 }

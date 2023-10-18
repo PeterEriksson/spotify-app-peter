@@ -6,6 +6,8 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import { useRouter } from "next/router";
 
+import styles from "../styles/effects.module.css";
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
   const isArtistPage = router.route === "/artists/[artistId]";
@@ -19,7 +21,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             className={`flex  xxs:h-screen   flex-col-reverse xxs:flex-row  `}
           >
             <Sidebar />
-            <div className=" w-screen      overflow-scroll  bg-bodyBackground   ">
+            <div
+              className={` w-screen      overflow-scroll  bg-bodyBackground/ ${styles.bodyBackground}   `}
+            >
               <Header backArrow={isArtistPage} />
               <Component {...pageProps} />
             </div>
