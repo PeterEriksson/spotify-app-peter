@@ -25,11 +25,7 @@ function Sidebar() {
 
       <div className="flex flex-1 justify-evenly     xxs:inline xxs:w-[184px] xxs:space-y-3 ">
         <SidebarOption Icon={UserIcon} url={"/"} title={"Profile"} />
-        <SidebarOption
-          Icon={MusicalNoteIcon}
-          url={"/top-tracks"}
-          title={"Top Tracks"}
-        />
+        <SidebarOption Icon={GlobeAltIcon} url="/discover" title="Discover" />
         <SidebarOption
           Icon={HeartIcon}
           url={"/favorited-tracks"}
@@ -37,11 +33,15 @@ function Sidebar() {
           favoritedItems={favoritedItems}
         />
         <SidebarOption
+          Icon={MusicalNoteIcon}
+          url={"/top-tracks"}
+          title={"Top Tracks"}
+        />
+        <SidebarOption
           Icon={MicrophoneIcon}
           url="/artists"
           title="Top Artists"
         />
-        <SidebarOption Icon={GlobeAltIcon} url="/discover" title="Discover" />
       </div>
     </nav>
   );
