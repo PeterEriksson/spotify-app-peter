@@ -16,7 +16,7 @@ function SidebarOption({ Icon, title, url, favoritedItems }) {
         <p
           className={`${
             asPath === url ? "!text-spotifyGreen" : "text-gray-400"
-          }   hoverStyling  hidden xxs:inline`}
+          }      hidden xxs:inline`}
         >
           {title}
         </p>

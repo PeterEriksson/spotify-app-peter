@@ -19,7 +19,7 @@ function Header({ backArrow }) {
 
   return (
     <header
-      className={`bg-bodyBackground $//{styles.bodyBackground    z-[36] top-0 fixed  transform transition duration-500 ease-in-out   ${
+      className={`bg-[#191919]      z-[36] top-0 fixed  transform transition duration-500 ease-in-out   ${
         headerVisible ? "" : "translate-y-[-85%]"
       } w-full xxs:sticky border-b border-gray-500/60 xxs:border-0  py-1.5 xxs:py-2 shadow-2xl flex items-center justify-between  text-white px-4 
       } `}

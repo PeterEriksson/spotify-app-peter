@@ -85,10 +85,8 @@ export default function profile() {
       {/* <div className=" w-screen   overflow-y-scroll  !bg-bodyBackground"> */}
       {/*  <Header /> */}
 
-      <div className="flex justify-between mx-5 bg-r mt-6 text-white items-center   ">
-        <div
-          className={`flex items-center               bg-red-600/ /w-full /xs:w-fit /justify-between $/{styles.justifyUnset} `}
-        >
+      <div className="flex justify-between mx-5 mt-6 text-white items-center   ">
+        <div className={`flex items-center      `}>
           <div className="relative h-[140px] w-[140px]  xs:h-[200px] xs:w-[200px] rounded-full ">
             <Image
               layout="fill"
@@ -102,7 +100,9 @@ export default function profile() {
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold  //mt-4">
               {session?.user?.name}
             </h1>
-            <p className="mt-2.5 text-sm">{profile?.product} user</p>
+            <p className="mt-2.5 text-sm text-white/50">
+              {profile?.product} user
+            </p>
 
             <button
               className=" p-2 sm:p-2.5 flex items-center border border-spotifyGreen rounded-lg mt-3 group relative transform transition duration-200 ease-in hover:scale-105"

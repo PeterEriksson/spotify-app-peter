@@ -107,7 +107,14 @@ function Song({ track, noPlay, wideDesign, nr }) {
               >
                 {track?.name}
               </h1>
-              <h3 className={`text-sm  ${!showAdditionalInfo && "hidden"} `}>
+              <h3
+                onClick={() => {
+                  router.push("/artists/" + track?.artists[0].id);
+                }}
+                className={`text-sm cursor-pointer hover:underline w-fit ${
+                  !showAdditionalInfo && "hidden"
+                } `}
+              >
                 Artist: {track?.artists[0]?.name}
               </h3>
               <h3 className={`text-sm  ${!showAdditionalInfo && "hidden"} `}>
@@ -228,13 +235,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
             liked() && triggerLikeEffect && !noPlay && styles.animate
           } ${styles.noHighLight}   `}
         />
-        <div
-          /* onClick={() => {
-            //console.log(track)
-            router.push("/artists/" + track.artists[0].id);
-          }} */
-          className="/cursor-pointer relative// items-center// h-32// flex justify-center  mt-2   "
-        >
+        <div className="/cursor-pointer relative// items-center// h-32// flex justify-center  mt-2   ">
           <Image
             className={` z-[35]  object-contain    `}
             src={track?.album?.images[0]?.url}
@@ -276,7 +277,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
 
         <h3
           onClick={() => {
-            //console.log(track)
             router.push("/artists/" + track.artists[0].id);
           }}
           className={`w-fit cursor-pointer hover:underline  text-sm px-3  text-white ${

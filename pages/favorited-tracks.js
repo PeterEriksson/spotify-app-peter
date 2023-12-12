@@ -38,7 +38,7 @@ function favoritedTracks() {
 
       <h1
         onClick={() => console.log(favoritedItems)}
-        className="text-3xl text-white text-center uppercase tracking-wide"
+        className="text-xl xxs:text-2xl text-white/50 text-center uppercase tracking-tight"
       >
         favorited songs
       </h1>

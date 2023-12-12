@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           >
             <Sidebar />
             <div
-              className={` w-screen      overflow-scroll  bg-bodyBackground/ ${styles.bodyBackground}   `}
+              className={` w-screen      overflow-scroll bg-gradient-to-tr from-[#333333] to-[#000000]  $/{styles.bodyBackground}   `}
             >
               <Header backArrow={isArtistPage} />
               <Component {...pageProps} />

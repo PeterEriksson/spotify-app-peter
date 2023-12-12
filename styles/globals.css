@@ -6,14 +6,12 @@
 
 @layer components {
   .sidebarOption {
-    @apply flex items-center xxs:pl-8 py-2   xxs:hover:bg-gray-800 rounded-2xl mx-2 transition duration-150 ease-in          space-x-2 hover:cursor-pointer;
+    @apply flex items-center xxs:pl-8 xxs:py-3.5 py-1.5 xxs:hover:bg-gray-800 transition duration-150 ease-in space-x-2 hover:cursor-pointer;
   }
   .sidebarIcon {
-    @apply h-7 w-7 text-gray-400    group-hover:cursor-pointer;
+    @apply h-7 w-7 text-gray-400;
   }
-  .hoverStyling {
-    @apply group-hover:cursor-pointer transition duration-200 ease-in;
-  }
+
   .pageMobileHeaderTempSol {
     @apply pt-[68px] xxs:pt-0;
   }

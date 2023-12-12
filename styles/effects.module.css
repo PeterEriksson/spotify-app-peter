@@ -1,7 +1,7 @@
-/* TEST different gradient backgrounds */
-.bodyBackground {
+/* TEST different gradient backgrounds...not in use */
+/* .bodyBackground {
   background-image: linear-gradient(to top right, #333333, #000000);
-}
+} */
 /* -------------------- */
 
 .header {

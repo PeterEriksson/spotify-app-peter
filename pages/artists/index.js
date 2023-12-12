@@ -63,7 +63,7 @@ export default function Home() {
       {/*  <div className=" w-screen bg-bodyBackground overflow-y-scroll   "> */}
       {/* <Header /> */}
 
-      <h1 className="text-3xl text-white text-center uppercase tracking-wide    -mb-3 xxs:-mb0">
+      <h1 className="text-xl xxs:text-2xl text-white/50 text-center uppercase tracking-tight    -mb-3 xxs:-mb0">
         most played artists
       </h1>
 

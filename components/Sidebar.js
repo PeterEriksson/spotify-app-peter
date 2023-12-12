@@ -21,9 +21,9 @@ function Sidebar() {
         <h3 className={`font-extralight text-sm`}>by Peter</h3>
       </div>
 
-      <hr className="hidden xxs:inline    border-gray-600 w-full mt-2/ mb-3 " />
+      <hr className="hidden xxs:inline border-gray-600 w-full mt-2/ mb-3 " />
 
-      <div className="flex flex-1 justify-evenly     xxs:inline xxs:w-[184px] xxs:space-y-3 ">
+      <div className="flex justify-evenly xxs:inline xxs:w-[184px] xxs:cursor-pointer   flex-1 xxs:flex-initial ">
         <SidebarOption Icon={UserIcon} url={"/"} title={"Profile"} />
         <SidebarOption Icon={GlobeAltIcon} url="/discover" title="Discover" />
         <SidebarOption

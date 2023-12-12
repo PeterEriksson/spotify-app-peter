@@ -127,17 +127,17 @@ export default function discover() {
         <>
           <h1
             aria-label="ignore-pause"
-            className="text-3xl mt-1.5 text-white text-center uppercase tracking-wide"
+            className=" mt-1.5 text-2xl text-white text-center uppercase tracking-tight"
           >
             Discover
           </h1>
-          <h3 className="relative text-white w-fit mx-auto mb-1 text-base flex items-center ">
+          <h3 className="relative text-white/50 w-fit mx-auto mb-1 text-base flex items-center ">
             Select up to 3 artists{" "}
             {artistsSelected.length > 0 && (
               <div className="absolute -right-12 flex items-center ">
                 <p> ({artistsSelected.length}) </p>
                 <TrashIcon
-                  className="h-4 w-4 text-white/90 ml-0.5 cursor-pointer"
+                  className="h-4 w-4 text-white/50 ml-0.5 cursor-pointer"
                   onClick={() => setArtistsSelected([])}
                 />
               </div>
