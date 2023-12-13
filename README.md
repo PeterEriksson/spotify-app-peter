@@ -2,9 +2,9 @@
 
 TrackTrends is a webapp that gives insight about your Spotify experience.
 
-User can play previews of songs and select them as favorited. In the favorited-page the user can make an action with these favorited songs - either add them to liked songs on Spotify or create a new playlist on Spotify. 
+In the discover-page the user can explore new tracks based on the user's most played artists.
 
-In the  discover-page the user can explore new tracks based on the user's most played artists.
+User can play previews of songs and select them as favorited. In the favorited-page the user can make an action with these favorited songs - either add them to liked songs on Spotify or create a new playlist on Spotify. 
 
 Login using your Spotify credentials.
 
@@ -28,11 +28,14 @@ Website: [Peter portfolio/resume](https://petere-portfolio-2.vercel.app/)
 
 - React
 - Next.js
+- Next-auth
 - Tailwind CSS
 - Tailwind Modals
 - spotify-web-api
 - Redux
 - Hero icons
+
+Using next-auth with Spotify provider to log in. During the auth-flow keys are retrieved to be able to communicate with spotify-web-api.
 
 ## Features
 
