@@ -35,7 +35,7 @@ Website: [Peter portfolio/resume](https://petere-portfolio-2.vercel.app/)
 - Redux
 - Hero icons
 
-Using next-auth with Spotify provider to log in. During the auth-flow keys are retrieved to be able to communicate with spotify-web-api.
+Using next-auth with Spotify provider to log in. During the auth-flow keys are retrieved to be able to communicate with spotify-web-api. Next.js middleware utilized for handling protected routes and redirecting.
 
 ## Features
 
