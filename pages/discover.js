@@ -11,8 +11,6 @@ import Song from "../components/Song";
 import useSpotify from "../hooks/useSpotify";
 import styles from "../styles/effects.module.css";
 
-import { useMotionValueEvent, useScroll } from "framer-motion";
-
 export default function discover() {
   const spotifyApi = useSpotify();
 
@@ -26,12 +24,6 @@ export default function discover() {
 
   const recommendationsContainerRef = useRef(null);
   const artistsContainerRef = useRef(null);
-
-  /* TEST TEMP ... scroll x not working...scroll y fine.  */
-  /*  const { scrollXProgress } = useScroll();
-  useMotionValueEvent(scrollXProgress, "change", (latest) => {
-    console.log("Page scroll: ", latest);
-  }); */
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
