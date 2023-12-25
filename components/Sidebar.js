@@ -15,7 +15,7 @@ function Sidebar() {
   const favoritedItems = useSelector(selectFavoritedItmes);
 
   return (
-    <nav className="sticky         z-[60] bottom-0 ModalInterfere:-> xxs:z-0     flex xxs:flex-col xxs:h-screen py-3 xxs:py-0   border-t-2 xxs:border-t-0      bg-spotifyBlack items-center xxs:pt-4 xxs:border-r border-gray-600 ">
+    <nav className="sticky         z-[60] bottom-0 ModalInterfere:-> xxs:z-10     flex xxs:flex-col xxs:h-screen py-3 xxs:py-0   border-t-2 xxs:border-t-0      bg-spotifyBlack items-center xxs:pt-4 xxs:border-r border-gray-600 ">
       <div className="hidden xxs:flex     flex-col items-center  mb-7 text-white ">
         <h1 className={`text-lg font-bold`}>TrackTrends</h1>
         <h3 className={`font-extralight text-sm`}>by Peter</h3>
