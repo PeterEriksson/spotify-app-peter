@@ -6,12 +6,13 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import { useRouter } from "next/router";
 import styles from "../styles/effects.module.css";
+import NextNProgress from "nextjs-progressbar";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
   const isArtistPage = router.route === "/artists/[artistId]";
 
-  //(temp solution (see [artistId].js ) -> special render including Sidebar and Header)
+  //(fix bug in [artistId].js ) -> have to indlucde Sidebar and Header in render)
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
               className={` w-screen      overflow-scroll bg-gradient-to-tr from-[#333333] to-[#000000]  $/{styles.bodyBackground}   `}
             >
               <Header backArrow={isArtistPage} />
+              <NextNProgress options={{ showSpinner: false }} color="#ffffff" />
               <Component {...pageProps} />
             </div>
           </div>
