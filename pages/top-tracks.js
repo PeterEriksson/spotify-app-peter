@@ -147,13 +147,13 @@ export default function tracks() {
       </h1>
 
       {/* TIME PERIOD TABS */}
-      <div className="relative max-w-fit mx-auto        xxs:sticky xxs:z-[36] xxs:top-2">
+      <div className="relative max-w-fit mx-auto xxs:sticky xxs:z-[36] xxs:top-2  ">
         <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
           {generalData.tabsData.map((tab, idx) => (
             <button
               key={idx}
               ref={(el) => (tabsRef.current[idx] = el)}
-              className="pt-2 pb-3"
+              className="pt-2 pb-3       border-b-4 border-transparent  xxs:hover:border-white/20 transition-all duration-200 ease-in"
               onClick={() => handleTimePeriodClick(idx)}
             >
               {tab.text}
@@ -161,7 +161,7 @@ export default function tracks() {
           ))}
         </div>
         <span
-          className="absolute bottom-0 block h-1 bg-white/80 transition-all duration-300"
+          className="absolute bottom-0 block h-1 bg-white/80 transition-all duration-300 "
           style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
         />
       </div>

@@ -224,7 +224,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
         >
           i
         </div>
-
         {/* HEART ICON */}
         <div
           aria-label="ignore-pause"
@@ -247,7 +246,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
             width={140}
           />
         </div>
-
         <div className="flex items-center   mx-3 space-x-1.5">
           <h1
             className={`text-smmd text-bold ${
@@ -272,9 +270,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
             </div>
           )}
         </div>
-
         <hr className={` my-1 border-gray-600  mx-3  `} />
-
         <h3
           onClick={() => {
             router.push("/artists/" + track.artists[0].id);
@@ -292,7 +288,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
         >
           Album: {track?.album?.name}
         </h3>
-
         <h3
           className={`${
             !showAdditionalInfo && "hidden"
@@ -300,14 +295,12 @@ function Song({ track, noPlay, wideDesign, nr }) {
         >
           Release year: {track?.album?.release_date.substring(0, 4)}
         </h3>
-
         <img
           onClick={() => window.open(track?.external_urls.spotify)}
           className=" h-[22px] ml-2.5 mt-1 mb-2.5 cursor-pointer"
           src="../images/Spotify_Logo_CMYK_Green.png"
           alt="spotify logo/icon"
         />
-
         {!noPlay && (
           <button
             onClick={() => {

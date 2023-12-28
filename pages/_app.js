@@ -5,7 +5,6 @@ import { store } from "../store";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import { useRouter } from "next/router";
-import styles from "../styles/effects.module.css";
 import NextNProgress from "nextjs-progressbar";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
@@ -17,12 +16,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     <SessionProvider session={session}>
       <Provider store={store}>
         {session ? (
-          <div
-            className={`flex  xxs:h-screen   flex-col-reverse xxs:flex-row  `}
-          >
+          <div className={`flex xxs:h-screen flex-col-reverse xxs:flex-row `}>
             <Sidebar />
             <div
-              className={` w-screen      overflow-scroll bg-gradient-to-tr from-[#333333] to-[#000000]  $/{styles.bodyBackground}   `}
+              className={`w-screen overflow-scroll bg-gradient-to-tr from-[#333333] to-[#000000] `}
             >
               <Header backArrow={isArtistPage} />
               <NextNProgress options={{ showSpinner: false }} color="#ffffff" />

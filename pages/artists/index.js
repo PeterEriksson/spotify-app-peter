@@ -59,10 +59,6 @@ export default function Home() {
 
   return (
     <div className={`  ${loading && "h-screen"}   pageMobileHeaderTempSol `}>
-      {/* <Sidebar /> */}
-      {/*  <div className=" w-screen bg-bodyBackground overflow-y-scroll   "> */}
-      {/* <Header /> */}
-
       <h1 className="text-xl xxs:text-2xl text-white/50 text-center uppercase tracking-tight    -mb-3 xxs:-mb0">
         most played artists
       </h1>
@@ -73,7 +69,7 @@ export default function Home() {
             <button
               key={idx}
               ref={(el) => (tabsRef.current[idx] = el)}
-              className="pt-2 pb-3"
+              className={`pt-2 pb-3  border-b-4 border-transparent   xxs:hover:border-white/20 transition-all duration-200 ease-in `}
               onClick={() => handleTimePeriodClick(idx, tab)}
             >
               {tab.text}
@@ -81,7 +77,7 @@ export default function Home() {
           ))}
         </div>
         <span
-          className="absolute bottom-0 block h-1  bg-spotifyGreen/// bg-white/80 transition-all duration-300"
+          className="absolute bottom-0 block h-1 bg-white/80 transition-all duration-300"
           style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
         />
       </div>
@@ -93,12 +89,10 @@ export default function Home() {
       ) : (
         <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
           {topArtists?.map((_artist, i) => (
-            //<Artist key={i} artist={_artist} />
             <Artist key={i} artist={_artist} />
           ))}
         </div>
       )}
-      {/* </div> */}
     </div>
   );
 }
