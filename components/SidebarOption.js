@@ -1,22 +1,31 @@
 import { useRouter } from "next/router";
 import React from "react";
 import Link from "next/link";
+import styles from "../styles/effects.module.css";
 
 function SidebarOption({ Icon, title, url, favoritedItems }) {
   const { asPath } = useRouter();
+  const [iconPressed, setIconPressed] = React.useState(false);
 
   return (
     <Link href={url}>
-      <div className={`sidebarOption group  ${favoritedItems && "relative"}`}>
+      <div
+        onMouseDown={() => {
+          setIconPressed(true);
+        }}
+        onMouseUpCapture={() => setIconPressed(false)}
+        onMouseLeave={() => setIconPressed(false)}
+        className={`  sidebarOption group  ${favoritedItems && "relative"}`}
+      >
         <Icon
-          className={`sidebarIcon ${
+          className={`${iconPressed && styles.sidebarIconEffect}  sidebarIcon ${
             asPath === url ? "text-spotifyGreen" : "text-gray-400"
           }  `}
         />
         <p
           className={`${
             asPath === url ? "!text-spotifyGreen" : "text-gray-400"
-          }      hidden xxs:inline`}
+          }   hidden xxs:inline`}
         >
           {title}
         </p>

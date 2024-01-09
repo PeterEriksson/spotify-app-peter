@@ -1,7 +1,10 @@
-/* TEST different gradient backgrounds...not in use */
-/* .bodyBackground {
-  background-image: linear-gradient(to top right, #333333, #000000);
-} */
+.sidebarIconEffect {
+  @media (max-width: 4000px) {
+    transition: transform 0.15s ease-in;
+    transform: scale(1.2);
+  }
+}
+
 /* -------------------- */
 
 .header {

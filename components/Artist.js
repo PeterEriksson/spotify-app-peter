@@ -58,14 +58,25 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
         />
       </div>
       <div className=" relative// items-center// h-32// flex justify-center mt-2   ">
-        <Image
-          className={` z-[34]  object-contain cursor-pointer    `}
-          src={artist?.images[0]?.url}
-          alt="artist-image"
-          //layout="fill"
-          height={128}
-          width={128}
-        />
+        {artist?.images[0]?.url ? (
+          <Image
+            className={` z-[34]  object-contain cursor-pointer    `}
+            src={artist?.images[0]?.url}
+            alt="artist-image"
+            //layout="fill"
+            height={128}
+            width={128}
+          />
+        ) : (
+          <Image
+            className={` z-[34] //h-32 object-contain cursor-pointer    `}
+            src="/images/no-img-pic.png"
+            alt="no-img-pic"
+            //layout="fill"
+            height={128}
+            width={128}
+          />
+        )}
       </div>
 
       <h1

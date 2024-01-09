@@ -44,7 +44,7 @@ function Header({ backArrow }) {
           }}
           className={`${
             router.route == "/artists/[artistId]" && "hidden"
-          } text-2xl py-2 xxs:hidden `}
+          } text-xl py-2 xxs:hidden `}
         >
           TrackTrends
         </h1>

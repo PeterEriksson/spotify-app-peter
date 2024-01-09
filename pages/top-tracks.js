@@ -153,7 +153,9 @@ export default function tracks() {
             <button
               key={idx}
               ref={(el) => (tabsRef.current[idx] = el)}
-              className="pt-2 pb-3       border-b-4 border-transparent  xxs:hover:border-white/20 transition-all duration-200 ease-in"
+              className={`pt-2 pb-3     ${
+                activeTabIndex !== idx && "xxs:hover:border-white/20"
+              }  border-b-4 border-transparent  transition-all duration-200 ease-in`}
               onClick={() => handleTimePeriodClick(idx)}
             >
               {tab.text}

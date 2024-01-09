@@ -304,12 +304,11 @@ function Song({ track, noPlay, wideDesign, nr }) {
         {!noPlay && (
           <button
             onClick={() => {
-              //setPlaying(true);
               setPlaying((prev) => !prev);
               setPauseTriggerEffect(true);
             }}
             className={`
-            bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2      ${
+            bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2         ${
               styles.noHighLight
             }  ${playing && styles.playAnimate} 
             ${!playing && pauseTriggerEffect && styles.pauseAnimate}
