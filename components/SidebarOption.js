@@ -5,7 +5,6 @@ import styles from "../styles/effects.module.css";
 
 function SidebarOption({ Icon, title, url, favoritedItems }) {
   const { asPath } = useRouter();
-
   const [pressed, setPressed] = React.useState(false);
 
   return (
@@ -14,11 +13,13 @@ function SidebarOption({ Icon, title, url, favoritedItems }) {
         onMouseDown={() => setPressed(true)}
         onMouseUpCapture={() => setPressed(false)}
         onMouseLeave={() => setPressed(false)}
-        className={`   sidebarOption group  ${favoritedItems && "relative"}`}
+        className={` ${pressed && "!bg-gray-800/60"}  sidebarOption group  ${
+          favoritedItems && "relative"
+        }`}
       >
         <Icon
-          className={`${
-            pressed && "xxs:scale-90 transform transition duration-100 ease-in"
+          className={`xxs:group-hover:scale-105 transform transition duration-100 ease-in ${
+            pressed && "xxs:!scale-90 "
           } ${styles.iconMobile}  sidebarIcon ${
             asPath === url ? "text-spotifyGreen" : "text-gray-400"
           }  `}

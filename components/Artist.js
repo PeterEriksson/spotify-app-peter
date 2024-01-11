@@ -48,15 +48,19 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
         i
       </div>
       {/* SPOTIFY ICON */}
-      <div className=" bg-spotifyBlack rounded-full        absolute z-[34] top-1.5 right-1.5 h-[21px] w-[21px] cursor-pointer ">
+      <a
+        target="_blank"
+        href={artist?.external_urls.spotify}
+        className="inline-block bg-spotifyBlack rounded-full        absolute z-[34] top-1.5 right-1.5 h-[21px] w-[21px] cursor-pointer "
+      >
         <img
           aria-label="ignore-pause"
-          onClick={() => window.open(artist?.external_urls.spotify)}
+          //onClick={() => window.open(artist?.external_urls.spotify)}
           className={` `}
           src="../images/Spotify_Icon_CMYK_Green.png"
           alt="icon"
         />
-      </div>
+      </a>
       <div className=" relative// items-center// h-32// flex justify-center mt-2   ">
         {artist?.images[0]?.url ? (
           <Image

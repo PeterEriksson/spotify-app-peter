@@ -103,17 +103,19 @@ export default function profile() {
             <p className="mt-2.5 text-sm text-white/50">
               {profile?.product} user
             </p>
-
-            <button
-              className=" p-2 sm:p-2.5 flex items-center border border-spotifyGreen rounded-lg mt-3 group relative transform transition duration-200 ease-in hover:scale-105"
-              onClick={() => window.open(profile?.external_urls?.spotify)}
+            <a
+              className="inline-block"
+              target="_blank"
+              href={profile?.external_urls?.spotify}
             >
-              <img
-                className="h-[24px] "
-                src="/images/Spotify_Logo_CMYK_Green.png"
-                alt=""
-              />
-            </button>
+              <button className=" p-2 sm:p-2.5 border border-spotifyGreen rounded-lg mt-3 transform transition duration-200 ease-in hover:scale-105">
+                <img
+                  className="h-[24px] "
+                  src="/images/Spotify_Logo_CMYK_Green.png"
+                  alt=""
+                />
+              </button>
+            </a>
           </div>
         </div>
         <div className="text-sm font-semibold   hidden md:inline">

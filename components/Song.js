@@ -173,27 +173,29 @@ function Song({ track, noPlay, wideDesign, nr }) {
             </p>
 
             {/* SPOTIFY ICON */}
-            <div
+            <a
+              href={track?.external_urls.spotify}
+              target="_blank"
               aria-label="ignore-pause"
               className=" ml-3 xxs:-mr-0 -mr-1  bg-spotifyBlack rounded-full z-[34] xl:hidden"
             >
               <img
                 aria-label="ignore-pause"
-                onClick={() => window.open(track?.external_urls.spotify)}
                 className="h-[21px] w-[21px] cursor-pointer z-50"
                 src="../images/Spotify_Icon_CMYK_Green.png"
                 alt="icon"
               />
-            </div>
+            </a>
 
             {/* SPOTIFY LOGO (show on xl screens...) */}
-            <img
-              aria-label="ignore-pause"
-              onClick={() => window.open(track?.external_urls.spotify)}
-              className="h-[22px] cursor-pointer z-50 ml-3 xl:inline hidden"
-              src="../images/Spotify_Logo_CMYK_Green.png"
-              alt="logo"
-            />
+            <a target="_blank" href={track?.external_urls.spotify} className="">
+              <img
+                aria-label="ignore-pause"
+                className="h-[22px] cursor-pointer z-50 ml-3 xl:inline hidden"
+                src="../images/Spotify_Logo_CMYK_Green.png"
+                alt="logo"
+              />
+            </a>
 
             {/* HEART ICON (wide) */}
             <div
@@ -214,7 +216,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
     //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
       <div
-        className={`bg-cardBackground/40   rounded-xl border border-black/70 relative group  `}
+        className={`bg-cardBackground/40   rounded-md border border-black/70 relative group  `}
       >
         {/* INFORMATION ICON */}
         <div
@@ -240,8 +242,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
             src={track?.album?.images[0]?.url}
             alt="song-image"
             //layout="fill"
-            // height={128}
-            // width={128}
             height={140}
             width={140}
           />
@@ -250,9 +250,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
           <h1
             className={`text-smmd text-bold ${
               playing ? "text-spotifyGreen" : "text-white"
-            }  mt-1.5 mb-0.5 //mx-3      ${
-              !showAdditionalInfo && "truncate"
-            }  `}
+            }  mt-1.5 mb-0.5  ${!showAdditionalInfo && "truncate"}  `}
           >
             {track?.name}
           </h1>
@@ -295,29 +293,39 @@ function Song({ track, noPlay, wideDesign, nr }) {
         >
           Release year: {track?.album?.release_date.substring(0, 4)}
         </h3>
-        <img
-          onClick={() => window.open(track?.external_urls.spotify)}
-          className=" h-[22px] ml-2.5 mt-1 mb-2.5 cursor-pointer"
-          src="../images/Spotify_Logo_CMYK_Green.png"
-          alt="spotify logo/icon"
-        />
-        {!noPlay && (
+
+        <a
+          className="inline-block "
+          target="_blank"
+          href={track?.external_urls.spotify}
+        >
+          <img
+            aria-label="ignore-pause"
+            className="h-[22px] ml-2.5 my-1 cursor-pointer"
+            src="../images/Spotify_Logo_CMYK_Green.png"
+            alt="spotify logo"
+          />
+        </a>
+
+        {noPlay ? (
+          ""
+        ) : (
           <button
             onClick={() => {
               setPlaying((prev) => !prev);
               setPauseTriggerEffect(true);
             }}
             className={`
-            bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2         ${
-              styles.noHighLight
-            }  ${playing && styles.playAnimate} 
-            ${!playing && pauseTriggerEffect && styles.pauseAnimate}
-            `}
+        bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2  ${
+          styles.noHighLight
+        }  ${playing && styles.playAnimate} 
+        ${!playing && pauseTriggerEffect && styles.pauseAnimate}
+        `}
           >
             {playing ? (
-              <PauseIcon className={`h-5 w-5 text-white cursor-pointer    `} />
+              <PauseIcon className={`h-5 w-5 text-white cursor-pointer `} />
             ) : (
-              <PlayIcon className={`h-5 w-5 text-white cursor-pointer   `} />
+              <PlayIcon className={`h-5 w-5 text-white cursor-pointer `} />
             )}
           </button>
         )}

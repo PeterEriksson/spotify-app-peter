@@ -64,14 +64,16 @@ export default function Home() {
       </h1>
 
       <div className="relative max-w-fit mx-auto     xxs:sticky xxs:z-[36] xxs:top-2">
-        <div className="flex text-white uppercase tracking-wide justify-center space-x-4 mt-2.5 ">
+        <div className="flex tracking-wide justify-center space-x-4 mt-2.5 ">
           {generalData.tabsData.map((tab, idx) => (
             <button
               key={idx}
               ref={(el) => (tabsRef.current[idx] = el)}
-              className={`pt-2 pb-3     ${
-                activeTabIndex !== idx && "xxs:hover:border-white/20"
-              }  border-b-4 border-transparent   transition-all duration-200 ease-in `}
+              className={`pt-2 pb-3    ${
+                activeTabIndex !== idx
+                  ? "xxs:hover:border-white/40 text-white/40"
+                  : "text-white"
+              }   border-b-4 border-transparent   transition-all duration-200 ease-in `}
               onClick={() => handleTimePeriodClick(idx, tab)}
             >
               {tab.text}
