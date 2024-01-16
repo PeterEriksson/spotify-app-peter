@@ -9,7 +9,6 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
   const isArtistSelected = () => {
     return artistsSelected?.some((id) => id == artist.id);
   };
-
   const handleArtistClick = (e) => {
     //if we click information or spotify icon we let the onclick of those respective elements go ahead and perform their actions.
     if (e.target.getAttribute("aria-label") === "ignore-pause") return;
@@ -34,16 +33,21 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
   return (
     <div
       onClick={handleArtistClick}
-      className={`bg-cardBackground/40 rounded-xl border group cursor-pointer relative overflow-hidden text-white   ${
-        isArtistSelected() ? "border-spotifyGreen " : "border-black/70"
-      } ${discoverPage && "flex-shrink-0 pt-6 pb-2 px-2.5 "}  `}
+      className={`bg-cardBackground/40 rounded-xl border-[1.5px] group cursor-pointer relative overflow-hidden text-white   ${
+        isArtistSelected() ? "border-spotifyGreen" : "border-black/70"
+      } ${discoverPage && "flex-shrink-0 pt-6 pb-2 px-2.5    "}  ${
+        discoverPage &&
+        !isArtistSelected() &&
+        artistsSelected.length < 3 &&
+        " hover:border-spotifyGreen/50 "
+      }  transition duration-100 ease-in `}
     >
       {/* INFORMATION ICON */}
       <div
         aria-label="ignore-pause"
         onClick={() => setShowAdditionalInfo((prev) => !prev)}
         //onClick={() => console.log(artist)}
-        className="absolute top-1.5 left-2 flex items-center justify-center italic -rotate-6 w-[17px] h-[17px] cursor-pointer rounded-full border text-black/80 border-gray-600 bg-gray-300/90 text-sm"
+        className={`hover:border-gray-500 transition duration-100 ease-in  absolute top-1.5 left-2 flex items-center justify-center italic -rotate-6 w-[17px] h-[17px] cursor-pointer rounded-full border text-black/80 border-gray-800 bg-gray-300/90 text-sm`}
       >
         i
       </div>

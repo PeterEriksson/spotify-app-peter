@@ -151,8 +151,8 @@ function Song({ track, noPlay, wideDesign, nr }) {
             <div
               aria-label="ignore-pause"
               onClick={() => setShowAdditionalInfo((prev) => !prev)}
-              className="xxs:mr-2 flex items-center justify-center  italic -rotate-6 w-[18px] h-[18px]
-              cursor-pointer rounded-full border border-gray-600 bg-white/90 text-sm text-black/80"
+              className="hover:border-gray-500 transition duration-100 ease-in xxs:mr-2 flex items-center justify-center  italic -rotate-6 w-[18px] h-[18px]
+              cursor-pointer rounded-full border border-gray-800 bg-white/90 text-sm text-black/80"
             >
               i
             </div>
@@ -222,7 +222,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className="absolute top-2 left-2.5 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-600 bg-gray-300/90 text-sm"
+          className="hover:border-gray-500 transition duration-100 ease-in absolute top-2 left-2.5 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-800 bg-gray-300/90 text-sm"
         >
           i
         </div>
