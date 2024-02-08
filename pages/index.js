@@ -104,17 +104,15 @@ export default function profile() {
               {profile?.product} user
             </p>
             <a
-              className="inline-block"
+              className="inline-block p-2 sm:p-2.5 border border-spotifyGreen rounded-lg mt-3 "
               target="_blank"
               href={profile?.external_urls?.spotify}
             >
-              <button className=" p-2 sm:p-2.5 border border-spotifyGreen rounded-lg mt-3 transform transition duration-200 ease-in hover:scale-105">
-                <img
-                  className="h-[24px] "
-                  src="/images/Spotify_Logo_CMYK_Green.png"
-                  alt=""
-                />
-              </button>
+              <img
+                className="h-[24px] "
+                src="/images/Spotify_Logo_CMYK_Green.png"
+                alt=""
+              />
             </a>
           </div>
         </div>
