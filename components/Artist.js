@@ -7,22 +7,25 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
 
   const isArtistSelected = () => {
-    return artistsSelected?.some((id) => id == artist.id);
+    return artistsSelected?.some((id) => id == artist.name);
   };
   const handleArtistClick = (e) => {
+    //all ids -> Original StarKid Cast of Twisted.. do return for now. (13/2-24)
+    return;
+
     //if we click information or spotify icon we let the onclick of those respective elements go ahead and perform their actions.
     if (e.target.getAttribute("aria-label") === "ignore-pause") return;
 
     if (discoverPage) {
       if (isArtistSelected()) {
         setArtistsSelected((prevArtists) =>
-          prevArtists.filter((id) => id !== artist.id)
+          prevArtists.filter((id) => id !== artist.name)
         );
       } else {
         //only let the user select max 3 artists
         if (artistsSelected.length >= 3) return;
         //add artist to selected
-        setArtistsSelected((prev) => [...prev, artist.id]);
+        setArtistsSelected((prev) => [...prev, artist.name]);
       }
     } else {
       //user is not in discover page. Redirect to artist page.

@@ -118,6 +118,7 @@ export default function discover() {
       ) : (
         <>
           <h1
+            onClick={() => console.log(topArtists)}
             aria-label="ignore-pause"
             className=" mt-1.5 text-2xl text-white/50 text-center uppercase tracking-tight"
           >
