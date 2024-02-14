@@ -111,13 +111,17 @@ function Song({ track, noPlay, wideDesign, nr }) {
                 onClick={() => {
                   router.push("/artists/" + track?.artists[0].id);
                 }}
-                className={`text-sm cursor-pointer hover:underline w-fit ${
+                className={`text-sm cursor-pointer hover:underline w-fit text-white/70 ${
                   !showAdditionalInfo && "hidden"
                 } `}
               >
                 Artist: {track?.artists[0]?.name}
               </h3>
-              <h3 className={`text-sm  ${!showAdditionalInfo && "hidden"} `}>
+              <h3
+                className={`text-sm text-white/70 ${
+                  !showAdditionalInfo && "hidden"
+                } `}
+              >
                 Album: {track?.album?.name}
               </h3>
             </div>
@@ -152,23 +156,23 @@ function Song({ track, noPlay, wideDesign, nr }) {
               aria-label="ignore-pause"
               onClick={() => setShowAdditionalInfo((prev) => !prev)}
               className="hover:border-gray-500 transition duration-100 ease-in xxs:mr-2 flex items-center justify-center  italic -rotate-6 w-[18px] h-[18px]
-              cursor-pointer rounded-full border border-gray-800 bg-white/90 text-sm text-black/80"
+              cursor-pointer rounded-full border border-gray-800 bg-white/70 text-sm text-black/80"
             >
               i
             </div>
 
-            <CalendarDaysIcon className="h-5 w-5 text-gray-300 hidden md:inline mr-1.5" />
-            <p className="text-sm font-light mr-3  hidden md:inline">
+            <CalendarDaysIcon className="h-5 w-5 text-white/70 hidden md:inline mr-1.5" />
+            <p className="text-sm text-white/70 font-light mr-3  hidden md:inline">
               {track?.album?.release_date.substring(0, 4)}
             </p>
 
-            <ClockIcon className="h-5 w-5 mr-1.5 text-gray-300 hidden lg:inline" />
-            <p className="font-light text-sm mr-3 lg:inline hidden">
+            <ClockIcon className="h-5 w-5 mr-1.5 text-white/70 hidden lg:inline" />
+            <p className="font-light text-sm text-white/70 mr-3 lg:inline hidden">
               {convertMsToMinuteSecond(track?.duration_ms)}{" "}
             </p>
 
-            <SparklesIcon className="h-5 w-5 text-gray-200 mr-1.5 hidden /xs:inline md:inline" />
-            <p className="text-sm font-light hidden /xs:inline md:inline">
+            <SparklesIcon className="h-5 w-5 text-white/70 mr-1.5 hidden /xs:inline md:inline" />
+            <p className="text-sm text-white/70 font-light hidden /xs:inline md:inline">
               {track?.popularity}%
             </p>
 
@@ -273,14 +277,14 @@ function Song({ track, noPlay, wideDesign, nr }) {
           onClick={() => {
             router.push("/artists/" + track.artists[0].id);
           }}
-          className={`w-fit cursor-pointer hover:underline  text-sm px-3  text-white ${
+          className={`w-fit cursor-pointer hover:underline  text-sm px-3  text-white/70 ${
             !showAdditionalInfo && "truncate"
           } `}
         >
           Artist: {track?.artists[0]?.name}
         </h3>
         <h3
-          className={`text-sm mx-3 text-white  ${
+          className={`text-sm mx-3 text-white/70  ${
             !showAdditionalInfo && "truncate"
           } `}
         >
@@ -289,7 +293,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <h3
           className={`${
             !showAdditionalInfo && "hidden"
-          } mx-3 text-sm mr-3  text-white   `}
+          } mx-3 text-sm mr-3  text-white/70   `}
         >
           Release year: {track?.album?.release_date.substring(0, 4)}
         </h3>
