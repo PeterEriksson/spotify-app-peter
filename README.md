@@ -1,10 +1,8 @@
-# 🎶 TrackTrends - See your Spotify stats
+# 🎶 TrackTrends - Your Spotify stats
 
 TrackTrends is a webapp that gives insight about your Spotify experience.
 
-User can play previews of songs and select them as favorited. In the favorited-page the user can make an action with these favorited songs - either add them to liked songs on Spotify or create a new playlist on Spotify. 
-
-In the discover-page the user can explore new tracks based on the user's most played artists. 
+See your stats, discover new songs, play previews, create playlists. 
 
 Login using your Spotify credentials.
 
