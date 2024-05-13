@@ -80,11 +80,6 @@ export default function profile() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/*  <Sidebar /> */}
-
-      {/* <div className=" w-screen   overflow-y-scroll  !bg-bodyBackground"> */}
-      {/*  <Header /> */}
-
       <div className="flex justify-between mx-5 mt-6 text-white items-center   ">
         <div className={`flex items-center      `}>
           <div className="relative h-[140px] w-[140px]  xs:h-[200px] xs:w-[200px] rounded-full ">

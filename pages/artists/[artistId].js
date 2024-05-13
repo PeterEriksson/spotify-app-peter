@@ -9,6 +9,7 @@ import Song from "../../components/Song";
 import useSpotify from "../../hooks/useSpotify";
 
 import styles from "../../styles/effects.module.css";
+import { Toaster } from "react-hot-toast";
 
 export default function artistDetails({ artistId }) {
   const [artist, setArtist] = useState({});
@@ -73,6 +74,7 @@ export default function artistDetails({ artistId }) {
         className={`w-screen    h-screen   bg-gradient-to-tr from-[#333333] to-[#000000] overflow-y-scroll   `}
       >
         <Header backArrow />
+        <Toaster position="top-center" />
 
         {loading ? (
           <div className="flex justify-center   mt-32">

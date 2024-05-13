@@ -6,8 +6,10 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import { useRouter } from "next/router";
 import NextNProgress from "nextjs-progressbar";
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  //not in use now rn
   const router = useRouter();
   const isArtistPage = router.route === "/artists/[artistId]";
 
@@ -16,13 +18,16 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     <SessionProvider session={session}>
       <Provider store={store}>
         {session ? (
-          <div className={`flex xxs:h-screen flex-col-reverse xxs:flex-row `}>
+          <div className={`flex xxs:h-screen flex-col-reverse xxs:flex-row  `}>
             <Sidebar />
             <div
               className={`w-screen overflow-scroll bg-gradient-to-tr from-[#333333] to-[#000000] `}
             >
               <Header backArrow={isArtistPage} />
               <NextNProgress options={{ showSpinner: false }} color="#ffffff" />
+
+              <Toaster position="top-center" />
+
               <Component {...pageProps} />
             </div>
           </div>

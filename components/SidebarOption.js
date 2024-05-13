@@ -36,7 +36,7 @@ function SidebarOption({ Icon, title, url, favoritedItems }) {
           <div
             className={`${
               favoritedItems.length == 0 && "hidden"
-            } pointer-events-none  absolute top-0.5 left-2 xxs:left-10 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
+            } pointer-events-none  absolute -top-0.5 left-2 xxs:top-[6px] xxs:left-10 rounded-full bg-red-500 h-[22px] w-[22px] flex items-center justify-center  `}
           >
             <p className={`text-sm text-white/75  pointer-events-none`}>
               {favoritedItems.length}

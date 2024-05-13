@@ -1,11 +1,13 @@
-.bottomButton {
-  /* transition-duration: 300ms !important;
-  transition-timing-function: ease-in-out !important; */
-
+.tooltipFavoritesPage {
   opacity: 100;
   z-index: 30;
 
   @media (max-width: 400px) {
     display: none;
   }
+}
+
+.tooltipHeader {
+  opacity: 100;
+  z-index: 30;
 }

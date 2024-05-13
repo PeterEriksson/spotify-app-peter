@@ -10,7 +10,7 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import useHeaderDisplay from "../hooks/useHeaderDisplay.js";
 
-import styles from "../styles/effects.module.css";
+import styles from "../styles/tooltip.module.css";
 
 function Header({ backArrow }) {
   const router = useRouter();
@@ -60,7 +60,7 @@ function Header({ backArrow }) {
           className="github     !h-11 !w-11 transition duration-150 ease-in hover:opacity-50 hover:cursor-pointer    "
         />
         <Tooltip
-          className={styles.header}
+          className={styles.tooltipHeader}
           anchorSelect=".github"
           content="Github"
           delayShow={400}
@@ -76,7 +76,7 @@ function Header({ backArrow }) {
         </button>
         <Tooltip
           delayShow={400}
-          className={styles.header}
+          className={styles.tooltipHeader}
           anchorSelect=".logOut"
           content="Log out"
           noArrow

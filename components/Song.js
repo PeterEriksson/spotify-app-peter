@@ -18,6 +18,8 @@ import useSpotify from "../hooks/useSpotify";
 import { Audio as AudioPlayAnimation } from "react-loader-spinner";
 import { convertMsToMinuteSecond } from "../lib/timeUtils.js";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
+import { Tooltip } from "react-tooltip";
 
 function Song({ track, noPlay, wideDesign, nr }) {
   const router = useRouter();
@@ -58,6 +60,18 @@ function Song({ track, noPlay, wideDesign, nr }) {
   }, []);
 
   const handleLike = () => {
+    toast(`${track?.name} ${liked() ? "removed from" : "added to"} Favorited`, {
+      icon: liked() ? "🤍" : "❤️",
+      duration: 3000,
+      style: {
+        background: "#191414",
+        color: "#1DB954",
+        fontWeight: "normal",
+        fontSize: "14px",
+        padding: "12px",
+      },
+    });
+
     setTriggerLikeEffect(true);
     //if song isn't liked -> add. else -> remove
     favoritedItems.every((item) => item.id !== track.id)
@@ -69,7 +83,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
     return favoritedItems.some((item) => item.id === track.id);
   };
 
-  //return WIDE Song design (wideDesign/Profile:recentlyPlayed)
+  //return WIDE Song design
   if (wideDesign) {
     return (
       <>
@@ -133,7 +147,9 @@ function Song({ track, noPlay, wideDesign, nr }) {
                   pauseTriggerEffect && styles.playAnimate
                 }    ${styles.noHighLight} `}
               >
-                <PauseIcon className={`h-4 w-4 text-white/90     `} />
+                <PauseIcon
+                  className={`h-4 w-4 text-white/90   outline-none  `}
+                />
               </button>
             ) : (
               <button
@@ -141,40 +157,71 @@ function Song({ track, noPlay, wideDesign, nr }) {
                   setPlaying(true);
                   setPauseTriggerEffect(true);
                 }}
-                className={`rounded-full bg-spotifyGreen p-[6px] cursor-pointer ${
+                className={`  rounded-full bg-spotifyGreen p-[6px] cursor-pointer ${
                   pauseTriggerEffect && styles.pauseAnimate
                 }   ${styles.noHighLight}`}
               >
-                <PlayIcon className={`h-4 w-4 text-white/90    `} />
+                <PlayIcon
+                  className={`playTip  h-4 w-4 text-white/90  outline-none  `}
+                />
+                <Tooltip
+                  delayShow={400}
+                  className={`text-xs xs:inline hidden`}
+                  anchorSelect=".playTip"
+                  content="play preview"
+                  noArrow
+                />
               </button>
             )}
           </div>
 
           <div className={`flex  items-center`}>
-            {/* INFORMATION ICON */}
+            {/* INFORMATION ICON, 'i' on mobile, 'show more' on desktop */}
             <div
               aria-label="ignore-pause"
               onClick={() => setShowAdditionalInfo((prev) => !prev)}
-              className="hover:border-gray-500 transition duration-100 ease-in xxs:mr-2 flex items-center justify-center  italic -rotate-6 w-[18px] h-[18px]
+              className="xxs:hidden hover:border-gray-500 transition duration-100 ease-in xxs:mr-2 flex items-center justify-center  italic -rotate-6 w-[18px] h-[18px]
               cursor-pointer rounded-full border border-gray-800 bg-white/70 text-sm text-black/80"
             >
               i
             </div>
+            <p
+              aria-label="ignore-pause"
+              onClick={() => setShowAdditionalInfo((prev) => !prev)}
+              className="xxs:inline hidden transition duration-200 ease-in 
+            cursor-pointer rounded-xl  xxs:mr-3 text-xs font-bold text-gray-400/60 hover:bg-gray-700 p-1 w-[80px] text-center"
+            >
+              Show {showAdditionalInfo ? "less" : "more"}
+            </p>
 
-            <CalendarDaysIcon className="h-5 w-5 text-white/70 hidden md:inline mr-1.5" />
+            <CalendarDaysIcon className="releaseTip h-5 w-5 text-white/70 hidden md:inline mr-1.5" />
             <p className="text-sm text-white/70 font-light mr-3  hidden md:inline">
               {track?.album?.release_date.substring(0, 4)}
             </p>
+            <Tooltip
+              delayShow={400}
+              className={`text-xs md:inline hidden`}
+              anchorSelect=".releaseTip"
+              content="Release year"
+              noArrow
+            />
 
             <ClockIcon className="h-5 w-5 mr-1.5 text-white/70 hidden lg:inline" />
             <p className="font-light text-sm text-white/70 mr-3 lg:inline hidden">
               {convertMsToMinuteSecond(track?.duration_ms)}{" "}
             </p>
 
-            <SparklesIcon className="h-5 w-5 text-white/70 mr-1.5 hidden /xs:inline md:inline" />
-            <p className="text-sm text-white/70 font-light hidden /xs:inline md:inline">
+            <SparklesIcon className="popularityTip h-5 w-5 text-white/70 mr-1.5 hidden  md:inline" />
+            <p className="text-sm text-white/70 font-light hidden md:inline">
               {track?.popularity}%
             </p>
+            <Tooltip
+              delayShow={400}
+              className={`text-xs md:inline hidden`}
+              anchorSelect=".popularityTip"
+              content="Popularity"
+              noArrow
+            />
 
             {/* SPOTIFY ICON */}
             <a
@@ -226,20 +273,22 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className="hover:border-gray-500 transition duration-100 ease-in absolute top-2 left-2.5 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-800 bg-gray-300/90 text-sm"
+          className={`   hover:border-gray-500 transition duration-100 ease-in absolute top-2 left-2.5 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-800 bg-gray-300/90 text-sm`}
         >
           i
         </div>
+
         {/* HEART ICON */}
         <div
           aria-label="ignore-pause"
           onClick={handleLike}
-          className={` absolute z-30 -top-2.5 -right-2  ${
+          className={`   absolute z-30 -top-2.5 -right-2  ${
             liked() ? styles.heartRed : styles.heart
           }  ${!liked() && triggerLikeEffect && styles.animateUnlike}  ${
             liked() && triggerLikeEffect && !noPlay && styles.animate
           } ${styles.noHighLight}   `}
         />
+
         <div className="/cursor-pointer relative// items-center// h-32// flex justify-center  mt-2   ">
           <Image
             className={` z-[35]  object-contain    `}
@@ -277,14 +326,14 @@ function Song({ track, noPlay, wideDesign, nr }) {
           onClick={() => {
             router.push("/artists/" + track.artists[0].id);
           }}
-          className={`w-fit cursor-pointer hover:underline  text-sm px-3  text-white/70 ${
+          className={`w-fit cursor-pointer hover:underline  text-xs px-3  text-white/70 ${
             !showAdditionalInfo && "truncate"
           } `}
         >
           Artist: {track?.artists[0]?.name}
         </h3>
         <h3
-          className={`text-sm mx-3 text-white/70  ${
+          className={`text-xs mx-3 text-white/70  ${
             !showAdditionalInfo && "truncate"
           } `}
         >
@@ -320,16 +369,29 @@ function Song({ track, noPlay, wideDesign, nr }) {
               setPauseTriggerEffect(true);
             }}
             className={`
-        bg-spotifyGreen p-2.5 rounded-full  absolute bottom-2 right-2  ${
+        bg-spotifyGreen p-2.5 rounded-full   absolute bottom-2 right-2    ${
           styles.noHighLight
         }  ${playing && styles.playAnimate} 
         ${!playing && pauseTriggerEffect && styles.pauseAnimate}
         `}
           >
             {playing ? (
-              <PauseIcon className={`h-5 w-5 text-white cursor-pointer `} />
+              <PauseIcon
+                className={`h-5 w-5 text-white cursor-pointer outline-none`}
+              />
             ) : (
-              <PlayIcon className={`h-5 w-5 text-white cursor-pointer `} />
+              <>
+                <PlayIcon
+                  className={`playTip   h-5 w-5 text-white cursor-pointer  outline-none`}
+                />
+                <Tooltip
+                  delayShow={400}
+                  className={`text-xs xs:inline hidden`}
+                  anchorSelect=".playTip"
+                  content="play preview"
+                  noArrow
+                />
+              </>
             )}
           </button>
         )}
