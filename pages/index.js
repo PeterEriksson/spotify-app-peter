@@ -90,6 +90,7 @@ export default function profile() {
               alt="user-img"
             />
           </div>
+
           <div className="ml-6">
             <p className="text-sm  ">Profile</p>
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold  //mt-4">
