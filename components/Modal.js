@@ -215,7 +215,7 @@ function Modal({
                   as="h1"
                   className="text-lg text-center underline// leading-6 font-medium text-gray-900"
                 >
-                  Perform action with favorited song
+                  Manage favorited song
                   {(favoritedItems.length > 1 || favoritedItems.length == 0) &&
                     "s"}
                 </Dialog.Title>
