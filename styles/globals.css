@@ -15,4 +15,8 @@
   .pageMobileHeaderTempSol {
     @apply pt-[68px] xxs:pt-0;
   }
+
+  .pageHeader {
+    @apply tracking-widest xxs:tracking-wider font-semibold xxs:font-normal text-xl xxs:text-2xl text-white/50 text-center uppercase;
+  }
 }

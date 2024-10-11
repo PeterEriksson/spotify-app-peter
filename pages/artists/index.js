@@ -59,9 +59,7 @@ export default function Home() {
 
   return (
     <div className={`  ${loading && "h-screen"}   pageMobileHeaderTempSol `}>
-      <h1 className="text-xl xxs:text-2xl text-white/50 text-center uppercase tracking-tight    -mb-3 xxs:-mb0">
-        most played artists
-      </h1>
+      <h1 className="pageHeader    -mb-3 xxs:-mb0">most played artists</h1>
 
       <div className="relative max-w-fit mx-auto     xxs:sticky xxs:z-[36] xxs:top-2">
         <div className="flex tracking-wide justify-center space-x-4 mt-2.5 ">
@@ -73,7 +71,7 @@ export default function Home() {
                 activeTabIndex !== idx
                   ? "xxs:hover:border-white/40 text-white/40"
                   : "text-white"
-              }   border-b-4 border-transparent   transition-all duration-200 ease-in `}
+              }   border-b-4 border-transparent font-semibold xxs:font-normal tracking-wide xxs:tracking-normal  transition-all duration-200 ease-in `}
               onClick={() => handleTimePeriodClick(idx, tab)}
             >
               {tab.text}

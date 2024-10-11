@@ -112,16 +112,19 @@ export default function profile() {
             </a>
           </div>
         </div>
-        <div className="text-sm font-semibold   hidden md:inline">
-          <p className="text-sm ">{countries[profile?.country]?.name}</p>
-          <p className="">
+        <div className="text-sm font-semibold space-y-1 hidden md:inline">
+          {/* <p className="text-sm opacity-70">
+            {countries[profile?.country]?.name}
+          </p> */}
+          <p className="text-sm opacity-70">
             {profile?.followers?.total}{" "}
-            {profile?.followers?.total == 1 ? "follower" : "followers"}
+            <span className="text-xs ">
+              {" "}
+              {profile?.followers?.total == 1 ? "follower" : "followers"}
+            </span>
           </p>
-          <p
-          //onClick={() => console.log(playlists)}
-          >
-            {playlists?.length} playlists
+          <p className="text-sm opacity-70">
+            {playlists?.length} <span className="text-xs ">playlists</span>
           </p>
         </div>
       </div>

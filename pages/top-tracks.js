@@ -142,9 +142,7 @@ export default function tracks() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className="text-xl xxs:text-2xl text-white/50 text-center uppercase tracking-tight   -mb-3 xxs:-mb0">
-        most played songs
-      </h1>
+      <h1 className="pageHeader   -mb-3 xxs:-mb0">most played songs</h1>
 
       {/* TIME PERIOD TABS */}
       <div className="relative max-w-fit mx-auto xxs:sticky xxs:z-[36] xxs:top-2  ">
@@ -155,9 +153,9 @@ export default function tracks() {
               ref={(el) => (tabsRef.current[idx] = el)}
               className={`pt-2 pb-3     ${
                 activeTabIndex !== idx
-                  ? "xxs:hover:border-white/40 text-white/40"
+                  ? "xxs:hover:border-white/40 text-white/40 "
                   : "text-white"
-              }   border-b-4 border-transparent  transition-all duration-200 ease-in`}
+              }   border-b-4 border-transparent font-semibold xxs:font-normal tracking-wide xxs:tracking-normal transition-all duration-200 ease-in`}
               onClick={() => handleTimePeriodClick(idx)}
             >
               {tab.text}

@@ -267,7 +267,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
     //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
       <div
-        className={`bg-cardBackground/40   xxs:rounded-md border-y xxs:border border-black/70 relative group  `}
+        className={`bg-cardBackground/40   xxs:rounded-md xxs:border border-black/70 relative group  `}
       >
         {/* INFORMATION ICON */}
         <div

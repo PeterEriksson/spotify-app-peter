@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectItems as selectFavoritedItmes } from "../slices/favoritesSlice";
 import { getSession, useSession } from "next-auth/react";
 import { emptyFavorites } from "../slices/favoritesSlice";
-import { /* toast */ Toaster } from "react-hot-toast";
 import Song from "../components/Song";
 import Modal from "../components/Modal";
 import effectsStyles from "../styles/effects.module.css";
@@ -31,12 +30,7 @@ function favoritedTracks() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <Toaster position="top-center" /> */}
-
-      <h1
-        onClick={() => console.log(favoritedItems)}
-        className="text-xl xxs:text-2xl text-white/50 text-center uppercase tracking-tight"
-      >
+      <h1 onClick={() => console.log(favoritedItems)} className="pageHeader  ">
         favorited songs
       </h1>
 

@@ -120,11 +120,11 @@ export default function discover() {
           <h1
             onClick={() => console.log(topArtists)}
             aria-label="ignore-pause"
-            className=" mt-1.5 text-2xl text-white/50 text-center uppercase tracking-tight"
+            className=" mt-1.5 pageHeader"
           >
             Discover
           </h1>
-          <h3 className="relative text-white w-fit mx-auto mb-1 text-base flex items-center ">
+          <h3 className="relative text-white/80 w-fit mx-auto mb-1 font-semibold xxs:font-normal xxs:text-base flex items-center ">
             Select up to 3 artists{" "}
             {artistsSelected.length > 0 && (
               <div className="absolute -right-12 flex items-center text-white/50 ">
