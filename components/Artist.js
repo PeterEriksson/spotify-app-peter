@@ -35,8 +35,8 @@ function Artist({ artist, discoverPage, artistsSelected, setArtistsSelected }) {
       //handleArtistClick fcn handles whether user is in discover or artists
       onClick={handleArtistClick}
       className={`card group cursor-pointer overflow-hidden text-white   ${
-        isArtistSelected() ? "border-spotifyGreen" : "border-black/70"
-      } ${discoverPage && "flex-shrink-0 pt-6 pb-2 px-2.5    "}  ${
+        isArtistSelected() ? "border-spotifyGreen" : "border-transparent"
+      } ${discoverPage && "flex-shrink-0 pt-6 pb-2 px-2.5 border   "}  ${
         discoverPage &&
         !isArtistSelected() &&
         artistsSelected.length < 3 &&
