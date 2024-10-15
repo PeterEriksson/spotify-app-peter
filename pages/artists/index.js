@@ -89,7 +89,7 @@ export default function Home() {
           <RaceBy color="white" speed={1.2} size={150} lineWeight={4} />
         </div>
       ) : (
-        <div className="!mx-4 gap-3 my-3 grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 lg:!mx-auto lg:px-2 max-w-6xl  ">
+        <div className="galleryGrid ">
           {topArtists?.map((_artist, i) => (
             <Artist key={i} artist={_artist} />
           ))}

@@ -266,14 +266,12 @@ function Song({ track, noPlay, wideDesign, nr }) {
   } else {
     //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
-      <div
-        className={`bg-cardBackground/40   xxs:rounded-md xxs:border border-black/70 relative group  `}
-      >
+      <div className={`card group  `}>
         {/* INFORMATION ICON */}
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className={`   hover:border-gray-500 transition duration-100 ease-in absolute top-2 left-2.5 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-800 bg-gray-300/90 text-sm`}
+          className={`absolute hover:border-gray-500 transition duration-100 ease-in top-2 left-2.5 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-800 bg-gray-300/90 text-sm`}
         >
           i
         </div>
@@ -282,14 +280,14 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <div
           aria-label="ignore-pause"
           onClick={handleLike}
-          className={`   absolute z-30 -top-2.5 -right-2  ${
+          className={` absolute z-30 -top-2.5 -right-2  ${
             liked() ? styles.heartRed : styles.heart
           }  ${!liked() && triggerLikeEffect && styles.animateUnlike}  ${
             liked() && triggerLikeEffect && !noPlay && styles.animate
           } ${styles.noHighLight}   `}
         />
 
-        <div className="/cursor-pointer relative// items-center// h-32// flex justify-center  mt-2   ">
+        <div className="flex justify-center mt-2   ">
           <Image
             className={` z-[35]  object-contain    `}
             src={track?.album?.images[0]?.url}
@@ -299,7 +297,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
             width={140}
           />
         </div>
-        <div className="flex items-center   mx-3 space-x-1.5">
+        <div className="flex items-center mx-3 space-x-1.5">
           <h1
             className={`text-smmd text-bold ${
               playing ? "text-spotifyGreen" : "text-white"

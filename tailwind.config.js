@@ -24,7 +24,8 @@ module.exports = {
         artistTopTrack: "19ch",
       },
       screens: {
-        xxs: "398px",
+        //xxs: "398px",
+        xxs: "440px",
         xs: "585px",
         smmd: "700px",
         mdlg: "900px",
