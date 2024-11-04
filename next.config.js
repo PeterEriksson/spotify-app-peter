@@ -7,6 +7,7 @@ const nextConfig = {
       "e7.pngegg.com",
       "baypark.ca",
       "links.papareact.com",
+      "i.pinimg.com",
     ],
   },
 };

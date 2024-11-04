@@ -9,11 +9,10 @@ import NextNProgress from "nextjs-progressbar";
 import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  //not in use now rn
   const router = useRouter();
   const isArtistPage = router.route === "/artists/[artistId]";
 
-  //(fix bug in [artistId].js ) -> have to indlucde Sidebar and Header in render)
+  //(fix bug in [artistId].js ) -> have to there inclucde Sidebar and Header )
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
