@@ -91,15 +91,15 @@ export default function profile() {
             />
           </div>
 
-          <div className="ml-6">
+          <div className="ml-6   -mt-6">
             <p className="text-sm  ">Profile</p>
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold  //mt-4">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold ">
               {session?.user?.name}
             </h1>
             <p className="mt-2.5 text-sm text-white/50">
               {profile?.product} user
             </p>
-            <a
+            {/* <a
               className="inline-block p-2 sm:p-2.5 border border-spotifyGreen rounded-lg mt-3 "
               target="_blank"
               href={profile?.external_urls?.spotify}
@@ -109,7 +109,7 @@ export default function profile() {
                 src="/images/Spotify_Logo_CMYK_Green.png"
                 alt=""
               />
-            </a>
+            </a> */}
           </div>
         </div>
         <div className="text-sm font-semibold space-y-1 hidden md:inline">
