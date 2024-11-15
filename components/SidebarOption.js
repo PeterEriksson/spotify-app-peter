@@ -13,9 +13,9 @@ function SidebarOption({ Icon, title, url, favoritedItems }) {
         onMouseDown={() => setPressed(true)}
         onMouseUpCapture={() => setPressed(false)}
         onMouseLeave={() => setPressed(false)}
-        className={` ${pressed && "!bg-gray-800/60"}  sidebarOption group  ${
-          favoritedItems && "relative"
-        }`}
+        className={` ${
+          pressed && "!bg-sidebarHover/60"
+        }  sidebarOption group  ${favoritedItems && "relative"}`}
       >
         <Icon
           className={`xxs:group-hover:scale-105 transform transition duration-100 ease-in ${

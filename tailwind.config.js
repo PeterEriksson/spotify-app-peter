@@ -13,10 +13,8 @@ module.exports = {
       colors: {
         spotifyGreen: "#1DB954",
         spotifyBlack: "#191414",
-
+        sidebarHover: "#232020",
         bodyBackground: "#191919",
-        //bg-gray-800: "#333333"
-        //bg-gray-900: "#111827"
         cardBackground: "#3c3d3c",
       },
       maxWidth: {

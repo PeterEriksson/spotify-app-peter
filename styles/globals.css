@@ -6,7 +6,7 @@
 
 @layer components {
   .sidebarOption {
-    @apply flex items-center xxs:pl-8 xxs:py-[16px] py-1.5 xxs:hover:bg-gray-800 transition duration-150 ease-in space-x-2 hover:cursor-pointer;
+    @apply flex items-center xxs:pl-8 xxs:py-[16px] py-1.5 xxs:hover:bg-sidebarHover transition duration-150 ease-in space-x-2 hover:cursor-pointer;
   }
   .sidebarIcon {
     @apply h-7 w-7 text-gray-400;
