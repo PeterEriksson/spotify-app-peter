@@ -215,9 +215,10 @@ function Modal({
                   as="h1"
                   className="text-lg text-center underline// leading-6 font-medium text-gray-900"
                 >
-                  Manage favorited song
+                  Add song
                   {(favoritedItems.length > 1 || favoritedItems.length == 0) &&
-                    "s"}
+                    "s"}{" "}
+                  to your Spotify
                 </Dialog.Title>
 
                 <div className="flex flex-col  mt-1.5  ">

@@ -2,7 +2,7 @@ import { getProviders, signIn } from "next-auth/react";
 
 function Login({ providers }) {
   return (
-    <div className="flex flex-col bg-spotifyBlack// bg-gradient-to-tr from-[#333333] to-[#000000] min-h-screen justify-center items-center">
+    <div className="flex flex-col bg-gradient-to-tr from-[#333333] to-[#000000] min-h-screen justify-center items-center">
       {Object.values(providers).map((provider, i) => (
         <div
           className="flex flex-col items-center space-y-1.5"
@@ -15,7 +15,6 @@ function Login({ providers }) {
             Personal <span className="text-spotifyGreen">spotify stats</span>,
             discover tracks, play previews, create playlists.
           </p>
-
           <button
             class="relative inline-flex  group cursor-pointer"
             onClick={() => signIn(provider.id, { callbackUrl: "/" })}
@@ -41,6 +40,7 @@ function Login({ providers }) {
           </h3>
         </div>
       ))}
+      <img className="h-[24px] " src="/icons/green.png" alt="" />
     </div>
   );
 }
