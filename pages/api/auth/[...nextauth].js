@@ -1,5 +1,6 @@
 //Check https://authjs.dev/guides/basics/refresh-token-rotation
 
+//[...nextauth].js
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 import spotifyApi, { LOGIN_URL } from "../../../lib/spotify";
@@ -10,7 +11,7 @@ async function refreshAccessToken(token) {
     spotifyApi.setRefreshToken(token.refreshToken);
 
     const { body: refreshedToken } = await spotifyApi.refreshAccessToken();
-    /* console.log("REFRESHED TOKEN IS", refreshedToken); */
+    // console.log("REFRESHED TOKEN IS", refreshedToken);
 
     return {
       ...token,
@@ -32,7 +33,8 @@ export default NextAuth({
   providers: [
     SpotifyProvider({
       clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
-      clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+      //clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
       authorization: LOGIN_URL,
     }),
   ],
