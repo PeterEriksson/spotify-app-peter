@@ -87,7 +87,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
   if (wideDesign) {
     return (
       <>
-        <div className="text-white py-1.5 flex items-center justify-between ">
+        <div className="text-white py-1.5 flex items-center justify-between  group">
           <div className="flex items-center space-x-1.5 sm:space-x-3 mdlg:space-x-4 lg:space-x-5">
             {playing ? (
               <div className={`mr-1 xxs:-mr-1.5    w-2.5`}>
@@ -117,7 +117,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
                   showAdditionalInfo && "!max-w-full "
                 } max-w-[13ch] sm:max-w-[15ch] mdlg:max-w-[22ch] lg:max-w-[35ch] ${
                   !showAdditionalInfo && "truncate"
-                } /truncate font-semibold ${playing && "text-spotifyGreen"} `}
+                } font-semibold ${playing && "text-spotifyGreen"} `}
               >
                 {track?.name}
               </h1>
@@ -143,7 +143,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
             {playing ? (
               <button
                 onClick={() => setPlaying(false)}
-                className={`rounded-full bg-spotifyGreen cursor-pointer p-[6px] ${
+                className={`rounded-full bg-spotifyGreen cursor-pointer p-[6px]     ${
                   pauseTriggerEffect && styles.playAnimate
                 }    ${styles.noHighLight} `}
               >
@@ -157,7 +157,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
                   setPlaying(true);
                   setPauseTriggerEffect(true);
                 }}
-                className={`  rounded-full bg-spotifyGreen p-[6px] cursor-pointer ${
+                className={`  rounded-full bg-spotifyGreen p-[6px] cursor-pointer playButtonGroupHover  ${
                   pauseTriggerEffect && styles.pauseAnimate
                 }   ${styles.noHighLight}`}
               >
@@ -306,7 +306,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
             {track?.name}
           </h1>
           {playing && (
-            <div className="ml-1/ overflow-hidden">
+            <div className="overflow-hidden">
               <AudioPlayAnimation
                 height="18"
                 width="18"
@@ -368,8 +368,8 @@ function Song({ track, noPlay, wideDesign, nr }) {
             }}
             className={`
         bg-spotifyGreen p-2.5 rounded-full   absolute bottom-2 right-2    ${
-          styles.noHighLight
-        }  ${playing && styles.playAnimate} 
+          !playing && "playButtonGroupHover z-50"
+        }       ${styles.noHighLight}  ${playing && styles.playAnimate} 
         ${!playing && pauseTriggerEffect && styles.pauseAnimate}
         `}
           >
