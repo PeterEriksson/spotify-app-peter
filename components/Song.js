@@ -102,7 +102,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
                 />
               </div>
             ) : (
-              <p className="mr-1 xxs:-mr-1.5   w-2.5">{nr}</p>
+              <p className="mr-1 xxs:-mr-1.5 w-2.5 opacity-65">{nr}</p>
             )}
 
             <img
