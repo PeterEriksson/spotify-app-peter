@@ -32,6 +32,13 @@ module.exports = {
         dancing: ["Dancing Script", "cursive"],
       },
       fontSize: {
+        xxs: [
+          "0.625rem",
+          {
+            lineHeight: "0.875rem",
+          },
+        ],
+
         smmd: ["1rem"],
       },
     },
