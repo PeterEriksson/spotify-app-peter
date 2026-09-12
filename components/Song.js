@@ -278,7 +278,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className={`absolute top-1.5 left-2.5 cursor-pointer text-gray-400 font-semibold text-xxs`}
+          className={`absolute top-1.5 left-2.5 cursor-pointer text-gray-400 font-semibold text-xs`}
         >
           ℹ
         </div>
