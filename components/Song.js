@@ -342,7 +342,11 @@ function Song({ track, noPlay, wideDesign, nr }) {
             </div>
           )}
         </div>
-        <hr className={` my-1 border-gray-600  mx-3  `} />
+        <hr
+          className={`border-gray-600 my-1 mx-3 ${
+            !showAdditionalInfo && "hidden"
+          } `}
+        />
         <h3
           onClick={() => {
             router.push("/artists/" + track.artists[0].id);
