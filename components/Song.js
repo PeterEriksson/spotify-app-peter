@@ -194,8 +194,16 @@ function Song({ track, noPlay, wideDesign, nr }) {
               Show {showAdditionalInfo ? "less" : "more"}
             </p>
 
-            <CalendarDaysIcon className="releaseTip h-5 w-5 text-white/70 hidden md:inline mr-1.5" />
-            <p className="text-sm text-white/70 font-light mr-3  hidden md:inline">
+            <CalendarDaysIcon
+              className={`releaseTip h-5 w-5 text-white/70 hidden md:inline mr-1.5 ${
+                !showAdditionalInfo && "hidden"
+              } `}
+            />
+            <p
+              className={`text-sm text-white/70 font-light mr-3  hidden md:inline ${
+                !showAdditionalInfo && "hidden"
+              } `}
+            >
               {track?.album?.release_date.substring(0, 4)}
             </p>
             <Tooltip
@@ -206,13 +214,29 @@ function Song({ track, noPlay, wideDesign, nr }) {
               noArrow
             />
 
-            <ClockIcon className="h-5 w-5 mr-1.5 text-white/70 hidden lg:inline" />
-            <p className="font-light text-sm text-white/70 mr-3 lg:inline hidden">
+            <ClockIcon
+              className={`h-5 w-5 mr-1.5 text-white/70 hidden lg:inline ${
+                !showAdditionalInfo && "hidden"
+              } `}
+            />
+            <p
+              className={`font-light text-sm text-white/70 mr-3 lg:inline hidden ${
+                !showAdditionalInfo && "hidden"
+              }  `}
+            >
               {convertMsToMinuteSecond(track?.duration_ms)}{" "}
             </p>
 
-            <SparklesIcon className="popularityTip h-5 w-5 text-white/70 mr-1.5 hidden  md:inline" />
-            <p className="text-sm text-white/70 font-light hidden md:inline">
+            <SparklesIcon
+              className={`popularityTip h-5 w-5 text-white/70 mr-1.5 hidden  md:inline ${
+                !showAdditionalInfo && "hidden"
+              } `}
+            />
+            <p
+              className={`text-sm text-white/70 font-light hidden md:inline ${
+                !showAdditionalInfo && "hidden"
+              } `}
+            >
               {track?.popularity}%
             </p>
             <Tooltip
@@ -267,14 +291,6 @@ function Song({ track, noPlay, wideDesign, nr }) {
     //return NORMAL Song design, (we don't recieve wideDesign in props)
     return (
       <div className={`card group  `}>
-        {/* INFORMATION ICON */}
-        {/* <div
-          aria-label="ignore-pause"
-          onClick={() => setShowAdditionalInfo((prev) => !prev)}
-          className={`absolute hover:border-gray-500 transition duration-100 ease-in top-2 left-2.5 flex items-center justify-center italic -rotate-6 w-[18px] h-[18px] cursor-pointer rounded-full border text-black/80 border-gray-800 bg-gray-300/90 text-sm`}
-        >
-          i
-        </div> */}
         <div
           aria-label="ignore-pause"
           onClick={() => setShowAdditionalInfo((prev) => !prev)}
@@ -332,14 +348,14 @@ function Song({ track, noPlay, wideDesign, nr }) {
             router.push("/artists/" + track.artists[0].id);
           }}
           className={`w-fit cursor-pointer hover:underline  text-xs px-3  text-white/70 ${
-            !showAdditionalInfo && "truncate"
+            !showAdditionalInfo && "hidden"
           } `}
         >
           Artist: {track?.artists[0]?.name}
         </h3>
         <h3
           className={`text-xs mx-3 text-white/70  ${
-            !showAdditionalInfo && "truncate"
+            !showAdditionalInfo && "hidden"
           } `}
         >
           Album: {track?.album?.name}
@@ -347,7 +363,7 @@ function Song({ track, noPlay, wideDesign, nr }) {
         <h3
           className={`${
             !showAdditionalInfo && "hidden"
-          } mx-3 text-sm mr-3  text-white/70   `}
+          } mx-3 text-xs mr-3  text-white/70   `}
         >
           Release year: {track?.album?.release_date.substring(0, 4)}
         </h3>
